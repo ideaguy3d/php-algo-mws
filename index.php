@@ -45,20 +45,27 @@ function scrapeOne() {
     $columnNames = $explode2[0];
     $explode2b = explode('  ', $explode1[1]);
 
+
     // ---------- $rows does work ----------
     $rows = explode("\n", $explode2b[0]);
+    // echo "\n ~ The Rows ~ \n";
+    // print_r($rows);
+
 
     //$columnCellsRow1 = explode('/\t/', $rows[1]);
     $columnCellsRow1 = preg_replace('/\t/', '|', $rows[1]);
+    $columnCellsRowVals1 = explode('|', $columnCellsRow1);
+    $columnCellsRowClean1 = array_map(
+        function ($elem) {
+            foreach (count_chars($elem, 1) as $i => $val) {
+                return "there are $val instances of " . chr($i) . " in the string";
+            }
+        },
+        $columnCellsRowVals1
+    );
 
-    echo "\n ~ column cells row 1 ~ \n";
-    print_r($columnCellsRow1);
-
-    echo "\n ~ The Rows ~ \n";
-    print_r($rows);
-
-    // echo "\n - array length = ". count($rows) . "\n";
-    // return $columnCellsRow1;
+    echo "\n ~ The Column Cells Row 1 ~ \n";
+    print_r($columnCellsRowClean1);
 }
 
 
