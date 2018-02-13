@@ -55,17 +55,20 @@ function scrapeOne() {
     //$columnCellsRow1 = explode('/\t/', $rows[1]);
     $columnCellsRow1 = preg_replace('/\t/', '|', $rows[1]);
     $columnCellsRowVals1 = explode('|', $columnCellsRow1);
-    $columnCellsRowClean1 = array_map(
-        function ($elem) {
-            foreach (count_chars($elem, 1) as $i => $val) {
-                return "there are $val instances of " . chr($i) . " in the string";
-            }
-        },
-        $columnCellsRowVals1
-    );
+    $count = 0;
+    $columnCellsRowClean1 = [];
+    foreach ($columnCellsRowVals1 as $item) {
+        if(str_word_count($item) > 0) {
+            $columnCellsRowClean1[$count] = $item;
+        }
+        $count++;
+    }
 
-    echo "\n ~ The Column Cells Row 1 ~ \n";
+
+    echo "\n ~ The Column Cells Row 1 ~ <br> \n";
     print_r($columnCellsRowClean1);
+    echo "<br><br>";
+    // echo "7th idx = " . str_word_count($columnCellsRowClean1[7]);
 }
 
 
