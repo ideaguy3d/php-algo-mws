@@ -48,27 +48,45 @@ function scrapeOne() {
 
     // ---------- $rows does work ----------
     $rows = explode("\n", $explode2b[0]);
-    // echo "\n ~ The Rows ~ \n";
-    // print_r($rows);
+//    echo "\n ~ The Rows ~ \n";
+//    print_r($rows);
 
+    $amazonRowsFba = [];
+    for ($i=1; $i<count($rows); $i++) {
+        $row = preg_replace('/\t/', '|', $rows[$i]);
+        $rowArray = explode('|', $row);
+        $amazonRowsFba[$i-1] = $rowArray;
+    }
 
-    //$columnCellsRow1 = explode('/\t/', $rows[1]);
+    $amazonRowsFbaClean = []; $idx = 0;
+    for ($i = 0; $i<count($amazonRowsFba); $i++) {
+        $tempA = array();
+        foreach ($amazonRowsFba[$i] as $record) {
+            if(str_word_count($record) > 0) {
+                $tempA[$idx] = $record;
+            }
+            $idx++;
+        }
+        $amazonRowsFbaClean[$i] = $tempA;
+        $idx = 0;
+    }
+
+    echo "\n ~ Amazon Fba Rows cleaned: ~ \n";
+    print_r($amazonRowsFbaClean);
+
     $columnCellsRow1 = preg_replace('/\t/', '|', $rows[1]);
     $columnCellsRowVals1 = explode('|', $columnCellsRow1);
     $count = 0;
     $columnCellsRowClean1 = [];
     foreach ($columnCellsRowVals1 as $item) {
-        if(str_word_count($item) > 0) {
+        if (str_word_count($item) > 0) {
             $columnCellsRowClean1[$count] = $item;
         }
         $count++;
     }
 
-
-    echo "\n ~ The Column Cells Row 1 ~ <br> \n";
-    print_r($columnCellsRowClean1);
-    echo "<br><br>";
-    // echo "7th idx = " . str_word_count($columnCellsRowClean1[7]);
+//    echo "\n ~ The Column Cells Row 1 ~ <br> \n";
+//    print_r($columnCellsRowClean1);
 }
 
 
