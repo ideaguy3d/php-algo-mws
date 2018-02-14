@@ -23,7 +23,6 @@ function labConversion1() {
     ];
 
     $labMapF = function ($colDef) {
-        // echo "<br> In labMap function, colDef = " . $colDef . "<br>";
         return explode(' ', $colDef)[0];
     };
 
@@ -36,26 +35,21 @@ function labConversion1() {
     return $colNames;
 }
 
-// print_r(scrapeOne());
+
 scrapeOne();
 function scrapeOne() {
     $ad1 = file_get_contents("http://lab916.wpengine.com/mws/src/MarketplaceWebService/api/report1.php");
     $explode1 = explode('<h2>Report Contents</h2>', $ad1);
-    $explode2 = explode(' ', $explode1[1]);
-    $columnNames = $explode2[0];
     $explode2b = explode('  ', $explode1[1]);
-
 
     // ---------- $rows does work ----------
     $rows = explode("\n", $explode2b[0]);
-//    echo "\n ~ The Rows ~ \n";
-//    print_r($rows);
 
     $amazonRowsFba = [];
-    for ($i=1; $i<count($rows); $i++) {
+    for ($i=0; $i<count($rows); $i++) {
         $row = preg_replace('/\t/', '|', $rows[$i]);
         $rowArray = explode('|', $row);
-        $amazonRowsFba[$i-1] = $rowArray;
+        $amazonRowsFba[$i] = $rowArray;
     }
 
     $amazonRowsFbaClean = []; $idx = 0;
@@ -71,8 +65,9 @@ function scrapeOne() {
         $idx = 0;
     }
 
-    echo "\n ~ Amazon Fba Rows cleaned: ~ \n";
+    echo "\n\n Cleaned up Amazon rows\n";
     print_r($amazonRowsFbaClean);
+
 
     $columnCellsRow1 = preg_replace('/\t/', '|', $rows[1]);
     $columnCellsRowVals1 = explode('|', $columnCellsRow1);
@@ -84,9 +79,4 @@ function scrapeOne() {
         }
         $count++;
     }
-
-//    echo "\n ~ The Column Cells Row 1 ~ <br> \n";
-//    print_r($columnCellsRowClean1);
 }
-
-
