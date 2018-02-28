@@ -45,7 +45,6 @@ function scrapeOne() {
     $columnNames = $explode2[0];
     $explode2b = explode('  ', $explode1[1]);
 
-
     // ---------- $rows does work ----------
     $rows = explode("\n", $explode2b[0]);
     // echo "\n ~ The Rows ~ \n";
@@ -58,7 +57,7 @@ function scrapeOne() {
     $count = 0;
     $columnCellsRowClean1 = [];
     foreach ($columnCellsRowVals1 as $item) {
-        if(str_word_count($item) > 0) {
+        if (str_word_count($item) > 0) {
             $columnCellsRowClean1[$count] = $item;
         }
         $count++;
