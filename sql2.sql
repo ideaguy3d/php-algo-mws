@@ -17,7 +17,7 @@ WHERE movie_name LIKE '%man%';
 
 
 /* "IS NULL" prac */
-SELECT name FROM movies
+SELECT `name` FROM movies
 WHERE imdb_rating IS NULL;
 
 
@@ -85,12 +85,12 @@ FROM movies;
 
 SELECT
 	`amazon_order_id`,
-    `product_name`,
+  `product_name`,
 	CASE
     	WHEN `item_price` > 10 THEN 'Expensive'
-        WHEN `item_price` > 1 THEN 'Affordable'
-        ELSE 'unknown'
-    END AS 'economics'
+      WHEN `item_price` > 1 THEN 'Affordable'
+      ELSE 'unknown'
+  END AS 'economics'
 FROM `majide_test1`;
 
 
