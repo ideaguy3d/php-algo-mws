@@ -39,6 +39,35 @@ FROM startups;
 SELECT ROUND(AVG(valuation)) AS 'average of all startups'
 FROM startups;
 
+SELECT category,
+  ROUND(AVG(valuation), 2)
+FROM startups
+GROUP BY category
+HAVING category NOT NULL
+ORDER BY 2 DESC;
+
+SELECT category
+  COUNT(*) AS 'total',
+FROM startups
+GROUP BY category
+HAVING COUNT(*) > 3
+ORDER BY COUNT(*) DESC
+LIMIT 30;
+
+SELECT category,
+	COUNT(*) AS 'total'
+FROM startups
+GROUP BY category
+HAVING COUNT(*) > 3
+ORDER BY COUNT(*) DESC;
+
+SELECT location
+  ROUND(AVG(employees)) AS 'average size'
+FROM startups
+GROUP BY location
+ORDER BY AVG(employees) DESC; 
+
+
 
 
 
