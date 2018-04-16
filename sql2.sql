@@ -101,7 +101,7 @@ DELETE FROM celebs_table
 WHERE age > 30;
 
 SELECT * FROM movies_table
-WHERE movie_title BETWEEN 'A' AND 'J'; 
+WHERE movie_title BETWEEN 'A' AND 'J';
 
 
 
