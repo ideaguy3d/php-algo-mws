@@ -38,3 +38,13 @@ DELETE FROM friends
 WHERE id = 1;
 
 SELECT * FROM friends;
+
+UPDATE celebs_table
+SET age = 29
+WHERE id = 9;
+
+DELETE FROM celebs_table
+WHERE twitter_handle IS NULL;
+
+SELECT * FROM movies_table
+WHERE `year` BETWEEN 1990 AND 1999;

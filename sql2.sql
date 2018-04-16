@@ -93,11 +93,15 @@ SELECT
   END AS 'economics'
 FROM `majide_test1`;
 
+UPDATE celebs_table
+SET twitter_handle = '@realDonaldTrump'
+WHERE id = 9825;
 
+DELETE FROM celebs_table
+WHERE age > 30;
 
-
-
-
+SELECT * FROM movies_table
+WHERE movie_title BETWEEN 'A' AND 'J'; 
 
 
 

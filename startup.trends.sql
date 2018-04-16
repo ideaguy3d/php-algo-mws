@@ -61,11 +61,12 @@ GROUP BY category
 HAVING COUNT(*) > 3
 ORDER BY COUNT(*) DESC;
 
-SELECT location
+SELECT location,
   ROUND(AVG(employees)) AS 'average size'
 FROM startups
 GROUP BY location
-ORDER BY AVG(employees) DESC; 
+HAVING AVG(employees) > 500
+ORDER BY AVG(employees) DESC;
 
 
 
