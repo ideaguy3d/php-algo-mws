@@ -48,3 +48,28 @@ WHERE twitter_handle IS NULL;
 
 SELECT * FROM movies_table
 WHERE `year` BETWEEN 1990 AND 1999;
+
+
+/* ----------------------
+   ---- commit point ----
+   ---------------------- */
+
+SELECT * FROM orders
+JOIN subscriptions
+  ON orders.subscriptions_id = subscriptions.subscription_id;
+
+SELECT * FROM orders
+JOIN subscriptions
+  ON orders.subscription_id = subscriptions.subscription_id
+WHERE subscriptions.description = 'Fashion Magazine';
+
+SELECT COUNT(*) AS 'total_newspaper_describers'
+FROM newspaper;
+
+SELECT COUNT(*) AS 'total_online_subscribers'
+FROM online;
+
+SELECT COUNT(*) AS 'combined newspaper&online subscribers'
+FROM newspaper
+JOIN online
+  ON newspaper.id = online.id;
