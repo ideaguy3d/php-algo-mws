@@ -1,82 +1,111 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Lab916
+ * User: Julius Alvarado
  * Date: 2/8/2018
  * Time: 4:47 PM
  */
 
-echo "<h1>Lab916</h1><hr>";
+//some settings
+$random_images = array(
+    'http://icons.iconarchive.com/icons/zairaam/bumpy-planets/256/07-jupiter-icon.png',
+    'http://www.princeton.edu/~willman/planetary_systems/Sol/Saturn/Saturn.gif',
+    'http://www.solstation.com/stars/venus.gif',
+    'http://quest.nasa.gov/mars/background/images/mars.gif'
+);
 
-// print_r(labConversion1());
-function labConversion1() {
-    $columns = [
-        'id serial PRIMARY KEY ',
-        'title VARCHAR(255)',
-        'author VARCHAR(255)',
-        'published_date VARCHAR(255)',
-        'image_url VARCHAR(255)',
-        'description VARCHAR(255)',
-        'created_by VARCHAR(255)',
-        'created_by_id VARCHAR(255)',
-        'currently_selling VARCHAR(255)'
-    ];
+$cover_image = 'http://www.lovethispic.com/uploaded_images/20521-Rocky-Beach-Sunset.jpg';
 
-    $labMapF = function ($colDef) {
-        return explode(' ', $colDef)[0];
-    };
+//php code here
 
-    $colNames = array_map($labMapF, $columns);
+?>
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Three29 Test</title>
+    <style>
 
-    $colText = implode(", ", $columns);
-
-    echo "<br><br> column text = <br> $colText <br><br>";
-
-    return $colNames;
-}
-
-
-scrapeOne();
-function scrapeOne() {
-    $ad1 = file_get_contents("http://lab916.wpengine.com/mws/src/MarketplaceWebService/api/report1.php");
-    $explode1 = explode('<h2>Report Contents</h2>', $ad1);
-    $explode2b = explode('  ', $explode1[1]);
-
-    // ---------- $rows does work ----------
-    $rows = explode("\n", $explode2b[0]);
-
-    $amazonRowsFba = [];
-    for ($i=0; $i<count($rows); $i++) {
-        $row = preg_replace('/\t/', '|', $rows[$i]);
-        $rowArray = explode('|', $row);
-        $amazonRowsFba[$i] = $rowArray;
-    }
-
-    $amazonRowsFbaClean = []; $idx = 0;
-    for ($i = 0; $i<count($amazonRowsFba); $i++) {
-        $tempA = array();
-        foreach ($amazonRowsFba[$i] as $record) {
-            if(str_word_count($record) > 0) {
-                $tempA[$idx] = $record;
-            }
-            $idx++;
+        /* http://meyerweb.com/eric/tools/css/reset/
+           v2.0 | 20110126
+           License: none (public domain)
+        */
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
         }
-        $amazonRowsFbaClean[$i] = $tempA;
-        $idx = 0;
-    }
 
-    echo "\n\n Cleaned up Amazon rows\n";
-    print_r($amazonRowsFbaClean);
-
-
-    $columnCellsRow1 = preg_replace('/\t/', '|', $rows[1]);
-    $columnCellsRowVals1 = explode('|', $columnCellsRow1);
-    $count = 0;
-    $columnCellsRowClean1 = [];
-    foreach ($columnCellsRowVals1 as $item) {
-        if (str_word_count($item) > 0) {
-            $columnCellsRowClean1[$count] = $item;
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+            display: block;
         }
-        $count++;
-    }
-}
+
+        body {
+            line-height: 1;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        blockquote, q {
+            quotes: none;
+        }
+
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+    </style>
+    <style>
+
+        /* css here */
+
+    </style>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+
+        //javascript code here
+
+    </script>
+</head>
+
+
+<body>
+
+<h1>Hello World ^_^/</h1>
+
+<div id="wrapper">
+    <div id="div1" class="divitem">
+    </div>
+    <div id="div2" class="divitem">
+    </div>
+    <div id="div3" class="divitem">
+    </div>
+    <div id="div4" class="divitem">
+    </div>
+</div>
+</body>
+</html>
