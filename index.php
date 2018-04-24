@@ -1,30 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Julius Alvarado
- * Date: 2/8/2018
- * Time: 4:47 PM
- */
 
-//some settings
-$random_images = array(
-    'http://icons.iconarchive.com/icons/zairaam/bumpy-planets/256/07-jupiter-icon.png',
-    'http://www.princeton.edu/~willman/planetary_systems/Sol/Saturn/Saturn.gif',
-    'http://www.solstation.com/stars/venus.gif',
-    'http://quest.nasa.gov/mars/background/images/mars.gif'
-);
-
-$cover_image = 'http://www.lovethispic.com/uploaded_images/20521-Rocky-Beach-Sunset.jpg';
-
-//php code here
+$cookie_name = "julius";
+setcookie($cookie_name);
 
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
     <title>Three29 Test</title>
-    <style>
 
+    <style>
         /* http://meyerweb.com/eric/tools/css/reset/
            v2.0 | 20110126
            License: none (public domain)
@@ -83,58 +69,373 @@ $cover_image = 'http://www.lovethispic.com/uploaded_images/20521-Rocky-Beach-Sun
 
     <style>
         #div1 {
-            width: 25%;
             height: 140px;
-            background: #fff url("http://www.lovethispic.com/uploaded_images/20521-Rocky-Beach-Sunset.jpg") center/cover no-repeat;
+            background: #434343 url("http://www.lovethispic.com/uploaded_images/20521-Rocky-Beach-Sunset.jpg") center/cover no-repeat;
         }
 
         #div2 {
-            width: 75%;
             background-color: orange;
             height: 140px;
         }
 
+        #div2inner {
+            width: 80px;
+            height: 80px;
+            margin: auto;
+        }
+
         #div3 {
-            width: 50%;
             background-color: blue;
             height: 140px;
         }
 
         #div4 {
-            width: 90%;
             background-color: yellow;
             height: 140px;
         }
+
+        #div4inner {
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        @media screen and (max-width: 600px) {
+            #div4 {
+                display: none;
+            }
+
+            #div3 {
+                display: none;
+            }
+        }
+
+        #div1.w100 {
+            width: 100%;
+            -webkit-transition: all 0.7s linear;
+            -moz-transition: all 0.7s linear;
+            -ms-transition: all 0.7s linear;
+            -o-transition: all 0.7s linear;
+            transition: all 0.7s linear;
+        }
+
+        #div1.w25 {
+            width: 25%;
+            -webkit-transition: all 0.7s linear;
+            -moz-transition: all 0.7s linear;
+            -ms-transition: all 0.7s linear;
+            -o-transition: all 0.7s linear;
+            transition: all 0.7s linear;
+        }
+
+        #div2.w100 {
+            width: 100%;
+            -webkit-transition: all 0.3s linear;
+            -moz-transition: all 0.3s linear;
+            -ms-transition: all 0.3s linear;
+            -o-transition: all 0.3s linear;
+            transition: all 0.3s linear;
+        }
+
+        #div2.w75 {
+            width: 75%;
+            -webkit-transition: all 0.3s linear;
+            -moz-transition: all 0.3s linear;
+            -ms-transition: all 0.3s linear;
+            -o-transition: all 0.3s linear;
+            transition: all 0.3s linear;
+        }
+
+        #div3.w100 {
+            width: 100%;
+            -webkit-transition: all 0.5s linear;
+            -moz-transition: all 0.5s linear;
+            -ms-transition: all 0.5s linear;
+            -o-transition: all 0.5s linear;
+            transition: all 0.5s linear;
+        }
+
+        #div3.w50 {
+            width: 50%;
+            -webkit-transition: all 0.5s linear;
+            -moz-transition: all 0.5s linear;
+            -ms-transition: all 0.5s linear;
+            -o-transition: all 0.5s linear;
+            transition: all 0.5s linear;
+        }
+
+        #div4.w100 {
+            width: 100%;
+            -webkit-transition: all 0.2s linear;
+            -moz-transition: all 0.2s linear;
+            -ms-transition: all 0.2s linear;
+            -o-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+        }
+
+        #div4.w90 {
+            width: 90%;
+            -webkit-transition: all 0.2s linear;
+            -moz-transition: all 0.2s linear;
+            -ms-transition: all 0.2s linear;
+            -o-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+        }
+
     </style>
 </head>
 
 
 <body>
 
-<br><br>
-
-<h1>Hello World ^_^/</h1>
-
-<br><br>
-
 <div id="wrapper">
-    <div id="div1" class="divitem">
-    </div>
+    <div id="div1" class="divitem"></div>
+
     <div id="div2" class="divitem">
+        <div id="div2inner"></div>
     </div>
-    <div id="div3" class="divitem">
-    </div>
+
+    <div id="div3" class="divitem"></div>
+
     <div id="div4" class="divitem">
+        <div id="div4inner"></div>
     </div>
 </div>
+
+<br><br>
+
+<div>
+    <?php
+    if (isset($_COOKIE[$cookie_name])) {
+        echo "Cookie '$cookie_name' is set.<br>";
+        echo $_COOKIE[$cookie_name];
+    } else {
+        echo "<br>~ Cookie is not set :(";
+    }
+    ?>
+</div>
+
 
 <!-- Vendor JS -->
 <!--<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>-->
 
 <!-- Custom JS -->
 <script>
-    //javascript code here
-    
+
+    const div1 = document.getElementById('div1');
+    const div2 = document.getElementById('div2');
+    const div2inner = document.getElementById('div2inner');
+    const div3 = document.getElementById('div3');
+    const div4 = document.getElementById('div4');
+    const div4inner = document.getElementById('div4inner');
+
+    // add a '|' to easily .explode() in php
+    let divStates = ["25|", "75|", "50|", "90|"];
+
+    jInitState();
+
+    function jInitState() {
+        // init the numbers
+        for (let i = 0; i < 10; i++) {
+            if (i % 2 !== 0) div4inner.innerHTML += " " + i + " ";
+        }
+        div4inner.innerText = div4inner.innerText
+            + div4inner.innerText.split(" ").reverse().join(" ");
+        div4inner.innerText = div4inner.innerText.replace("99", "9");
+
+        // init state from cookie
+        let initReq = new XMLHttpRequest();
+        initReq.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                console.log("the initReq = " + this.responseText);
+                let strAR = this.responseText.split(" | ");
+
+                // for some unknown reason "no suggestion" is getting suffixed
+                strAR[4] = strAR[4].replace("no suggestion", "");
+                console.log(strAR);
+
+                // set the random image
+                strAR[0] = strAR[0].replace("randomImage=", "");
+                div2inner.style.background = '#434343 url(' + strAR[0] + ') center/cover no-repeat';
+
+                // start the width state initialization
+                if (strAR[1] === "div1=100") {
+                    div1.setAttribute("class", "divitem w100");
+                } else if (strAR[1] === "div1=25") {
+                    div1.setAttribute("class", "divitem w25");
+                }
+
+                if (strAR[2] === "div2=100") {
+                    div2.setAttribute("class", "divitem w100");
+                } else if (strAR[2] === "div2=75") {
+                    div2.setAttribute("class", "divitem w75");
+                }
+
+                if (strAR[3] === "div3=100") {
+                    div3.setAttribute("class", "divitem w100");
+                } else if (strAR[3] === "div3=50") {
+                    div3.setAttribute("class", "divitem w50");
+                }
+
+                if (strAR[4] === "div4=100") {
+                    div4.setAttribute("class", "divitem w100");
+                } else if (strAR[4] === "div4=90") {
+                    div4.setAttribute("class", "divitem w90");
+                }
+            }
+        };
+        initReq.open("GET", "api.php?q=init");
+        initReq.send();
+
+        console.log("< jInitState has been invoked >");
+    }
+
+    function div1state() {
+        // width transition code
+        let div1width = div1.getAttribute("class");
+        switch (div1width) {
+            case "divitem w100":
+                div1.setAttribute("class", "divitem w25");
+                divStates[0] = "25|";
+                break;
+            case "divitem w25":
+                div1.setAttribute("class", "divitem w100");
+                divStates[0] = "100|";
+                break;
+            default:
+                console.error("div1 width - something went wrong :/");
+        }
+
+        // maintain the current state of the other divs
+        let divitemAR = document.getElementsByClassName("divitem");
+        divStates[1] = divitemAR[1].className === "divitem w75" ? "75|" : "100|";
+        divStates[2] = divitemAR[2].className === "divitem w50" ? "50|" : "100|";
+        divStates[3] = divitemAR[3].className === "divitem w90" ? "90|" : "100|";
+        console.log("jha - divStates =");
+        console.log(divStates);
+
+        let stateStr = "";
+        divStates.forEach(e => stateStr += e);
+
+        // cookie state code
+        let jreq = new XMLHttpRequest();
+
+        jreq.open("GET", "api.php?q=" + stateStr, true);
+        jreq.send();
+
+        console.log("jha - div1 clicked");
+    }
+
+    function div2state() {
+        // width transition code
+        let div2width = div2.getAttribute("class");
+        switch (div2width) {
+            case "divitem w75":
+                div2.setAttribute("class", "divitem w100");
+                divStates[1] = "100|";
+                break;
+            case "divitem w100":
+                div2.setAttribute("class", "divitem w75");
+                divStates[1] = "75|";
+                break;
+            default:
+                console.error("div2 width - something went wrong :/");
+        }
+
+        // maintain the current state of the other divs
+        let divitemAR = document.getElementsByClassName("divitem");
+        divStates[0] = divitemAR[0].className === "divitem w25" ? "25|" : "100|";
+        divStates[2] = divitemAR[2].className === "divitem w50" ? "50|" : "100|";
+        divStates[3] = divitemAR[3].className === "divitem w90" ? "90|" : "100|";
+        console.log("jha - divStates=");
+        console.log(divStates);
+
+        let stateStr = "";
+        divStates.forEach(e => stateStr += e);
+
+        // cookie state code
+        let jreq = new XMLHttpRequest();
+        jreq.open("GET", "api.php?q=" + stateStr, true);
+        jreq.send();
+
+        console.log("jha - div2 clicked");
+    }
+
+    function div3state() {
+        // width transition code
+        let div3width = div3.getAttribute("class");
+        switch (div3width) {
+            case "divitem w100":
+                div3.setAttribute("class", "divitem w50");
+                divStates[2] = "50|";
+                break;
+            case "divitem w50":
+                div3.setAttribute("class", "divitem w100");
+                divStates[2] = "100|";
+                break;
+            default:
+                console.error("div3 width - something went wrong :/");
+        }
+
+        // maintain the current state of the other divs
+        let divitemAR = document.getElementsByClassName("divitem");
+        divStates[0] = divitemAR[0].className === "divitem w25" ? "25|" : "100|";
+        divStates[1] = divitemAR[1].className === "divitem w75" ? "75|" : "100|";
+        divStates[3] = divitemAR[3].className === "divitem w90" ? "90|" : "100|";
+        console.log("jha - divStates=");
+        console.log(divStates);
+
+        let stateStr = "";
+        divStates.forEach(e => stateStr += e);
+
+        // cookie state code
+        let jreq = new XMLHttpRequest();
+        jreq.open("GET", "api.php?q=" + stateStr, true);
+        jreq.send();
+
+        console.log("jha - div3 clicked");
+    }
+
+    function div4state() {
+        // width transition code
+        let div4width = div4.getAttribute("class");
+        switch (div4width) {
+            case "divitem w100":
+                div4.setAttribute("class", "divitem w90");
+                divStates[3] = "90|";
+                break;
+            case "divitem w90":
+                div4.setAttribute("class", "divitem w100");
+                divStates[3] = "100|";
+                break;
+            default:
+                console.error("div4 width - something went wrong :/");
+        }
+
+        // maintain the current state of the other divs
+        let divitemAR = document.getElementsByClassName("divitem");
+        divStates[0] = divitemAR[0].className === "divitem w25" ? "25|" : "100|";
+        divStates[2] = divitemAR[2].className === "divitem w50" ? "75|" : "100|";
+        divStates[1] = divitemAR[1].className === "divitem w75" ? "75|" : "100|";
+        console.log("jha - divStates=");
+        console.log(divStates);
+
+        let stateStr = "";
+        divStates.forEach(e => stateStr += e);
+
+        // cookie state code
+        let jreq = new XMLHttpRequest();
+
+        jreq.open("GET", "api.php?q=" + stateStr, true);
+        jreq.send();
+
+        console.log("jha - div4 clicked");
+    }
+
+    div1.onclick = div1state;
+    div2.onclick = div2state;
+    div3.onclick = div3state;
+    div4.onclick = div4state;
+
 </script>
 
 </body>
