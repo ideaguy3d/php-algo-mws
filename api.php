@@ -31,12 +31,18 @@ $q = isset($_GET["q"]) ? $_GET["q"] : "blank";
 $cookie_value = "";
 
 if($q === "blank") {
-    $cookie_value = "randomImage=$randImg | div1=25 | div2=75 | div3=50  | div4=90";
+    $cookie_value = "randomImage=$randImg | div1=25 | div2=75 | div3=50 | div4=90";
     setcookie($cookie_name, $cookie_value, time() + (86400 * 60), "/");
     echo $cookie_value;
 }
 else if ($q === "init") {
-    echo $_COOKIE[$cookie_name];
+    if(isset($_COOKIE[$cookie_name])) {
+        echo "$_COOKIE[$cookie_name]";
+    } else {
+        $cookie_value = "randomImage=$randImg | div1=25 | div2=75 | div3=50 | div4=90";
+        setcookie($cookie_name, $cookie_value, time() + (86400 * 60), "/", "julius3d.com");
+        echo "$_COOKIE[$cookie_name]";
+    }
 }
 else {
     $q = explode("|", $q);

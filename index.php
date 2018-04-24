@@ -1,7 +1,7 @@
 <?php
 
-$cookie_name = "julius";
-setcookie($cookie_name);
+// $cookie_name = "julius";
+// setcookie($cookie_name);
 
 ?>
 
@@ -201,22 +201,6 @@ setcookie($cookie_name);
     </div>
 </div>
 
-<br><br>
-
-<div>
-    <?php
-    if (isset($_COOKIE[$cookie_name])) {
-        echo "Cookie '$cookie_name' is set.<br>";
-        echo $_COOKIE[$cookie_name];
-    } else {
-        echo "<br>~ Cookie is not set :(";
-    }
-    ?>
-</div>
-
-
-<!-- Vendor JS -->
-<!--<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>-->
 
 <!-- Custom JS -->
 <script>
@@ -248,10 +232,12 @@ setcookie($cookie_name);
             if (this.readyState === 4 && this.status === 200) {
                 console.log("the initReq = " + this.responseText);
                 let strAR = this.responseText.split(" | ");
+                console.log(strAR);
 
                 // for some unknown reason "no suggestion" is getting suffixed
-                strAR[4] = strAR[4].replace("no suggestion", "");
-                console.log(strAR);
+                if(strAR[4].indexOf("no suggestion") > -1) {
+                    strAR[4] = strAR[4].replace("no suggestion", "");
+                }
 
                 // set the random image
                 strAR[0] = strAR[0].replace("randomImage=", "");
@@ -318,11 +304,17 @@ setcookie($cookie_name);
 
         // cookie state code
         let jreq = new XMLHttpRequest();
-
+        jreq.onreadystatechange = function() {
+            if(this.readyState === 4 && this.status === 200) {
+                console.log("jha - The server response =");
+                console.log(this.responseText);
+            }
+        };
         jreq.open("GET", "api.php?q=" + stateStr, true);
         jreq.send();
 
         console.log("jha - div1 clicked");
+        console.log("stateStr = "+stateStr);
     }
 
     function div2state() {
@@ -354,10 +346,17 @@ setcookie($cookie_name);
 
         // cookie state code
         let jreq = new XMLHttpRequest();
+        jreq.onreadystatechange = function() {
+            if(this.readyState === 4 && this.status === 200) {
+                console.log("jha - The server response =");
+                console.log(this.responseText);
+            }
+        };
         jreq.open("GET", "api.php?q=" + stateStr, true);
         jreq.send();
 
         console.log("jha - div2 clicked");
+        console.log("stateStr = "+stateStr);
     }
 
     function div3state() {
@@ -389,10 +388,17 @@ setcookie($cookie_name);
 
         // cookie state code
         let jreq = new XMLHttpRequest();
+        jreq.onreadystatechange = function() {
+            if(this.readyState === 4 && this.status === 200) {
+                console.log("jha - The server response =");
+                console.log(this.responseText);
+            }
+        };
         jreq.open("GET", "api.php?q=" + stateStr, true);
         jreq.send();
 
         console.log("jha - div3 clicked");
+        console.log("stateStr = "+stateStr);
     }
 
     function div4state() {
@@ -414,8 +420,9 @@ setcookie($cookie_name);
         // maintain the current state of the other divs
         let divitemAR = document.getElementsByClassName("divitem");
         divStates[0] = divitemAR[0].className === "divitem w25" ? "25|" : "100|";
-        divStates[2] = divitemAR[2].className === "divitem w50" ? "75|" : "100|";
         divStates[1] = divitemAR[1].className === "divitem w75" ? "75|" : "100|";
+        divStates[2] = divitemAR[2].className === "divitem w50" ? "50|" : "100|";
+
         console.log("jha - divStates=");
         console.log(divStates);
 
@@ -424,11 +431,17 @@ setcookie($cookie_name);
 
         // cookie state code
         let jreq = new XMLHttpRequest();
-
+        jreq.onreadystatechange = function() {
+            if(this.readyState === 4 && this.status === 200) {
+                console.log("jha - The server response =");
+                console.log(this.responseText);
+            }
+        };
         jreq.open("GET", "api.php?q=" + stateStr, true);
         jreq.send();
 
         console.log("jha - div4 clicked");
+        console.log("stateStr = "+stateStr);
     }
 
     div1.onclick = div1state;
