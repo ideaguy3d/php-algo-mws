@@ -58,6 +58,7 @@ $cover_image = 'http://www.lovethispic.com/uploaded_images/20521-Rocky-Beach-Sun
 
         body {
             line-height: 1;
+            font-family: sans-serif;
         }
 
         ol, ul {
@@ -79,23 +80,42 @@ $cover_image = 'http://www.lovethispic.com/uploaded_images/20521-Rocky-Beach-Sun
             border-spacing: 0;
         }
     </style>
+
     <style>
+        #div1 {
+            width: 25%;
+            height: 140px;
+            background: #fff url("http://www.lovethispic.com/uploaded_images/20521-Rocky-Beach-Sunset.jpg") center/cover no-repeat;
+        }
 
-        /* css here */
+        #div2 {
+            width: 75%;
+            background-color: orange;
+            height: 140px;
+        }
 
+        #div3 {
+            width: 50%;
+            background-color: blue;
+            height: 140px;
+        }
+
+        #div4 {
+            width: 90%;
+            background-color: yellow;
+            height: 140px;
+        }
     </style>
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script>
-
-        //javascript code here
-
-    </script>
 </head>
 
 
 <body>
 
+<br><br>
+
 <h1>Hello World ^_^/</h1>
+
+<br><br>
 
 <div id="wrapper">
     <div id="div1" class="divitem">
@@ -107,5 +127,15 @@ $cover_image = 'http://www.lovethispic.com/uploaded_images/20521-Rocky-Beach-Sun
     <div id="div4" class="divitem">
     </div>
 </div>
+
+<!-- Vendor JS -->
+<!--<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>-->
+
+<!-- Custom JS -->
+<script>
+    //javascript code here
+    
+</script>
+
 </body>
 </html>
