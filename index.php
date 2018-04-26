@@ -1,10 +1,6 @@
 <?php
-
-// $cookie_name = "julius";
-// setcookie($cookie_name);
-
+    setcookie("julius", $_COOKIE["julius"], time() + time() + (86400 * 60), "/", "julius3d.com")
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -188,15 +184,15 @@
 <body>
 
 <div id="wrapper">
-    <div id="div1" class="divitem"></div>
+    <div id="div1" class="divitem w25"></div>
 
-    <div id="div2" class="divitem">
+    <div id="div2" class="divitem w75">
         <div id="div2inner"></div>
     </div>
 
-    <div id="div3" class="divitem"></div>
+    <div id="div3" class="divitem w50"></div>
 
-    <div id="div4" class="divitem">
+    <div id="div4" class="divitem w90">
         <div id="div4inner"></div>
     </div>
 </div>

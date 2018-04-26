@@ -31,15 +31,16 @@ $q = isset($_GET["q"]) ? $_GET["q"] : "blank";
 $cookie_value = "";
 
 if($q === "blank") {
-    $cookie_value = "randomImage=$randImg | div1=25 | div2=75 | div3=50 | div4=90";
-    setcookie($cookie_name, $cookie_value, time() + (86400 * 60), "/");
+    $cookie_value = "randomImage=$randImg | div1=99 | div2=75 | div3=50 | div4=90";
+    setcookie($cookie_name, $cookie_value, time() + (86400 * 60), "/", "julius3d.com");
     echo $cookie_value;
 }
 else if ($q === "init") {
     if(isset($_COOKIE[$cookie_name])) {
-        echo "$_COOKIE[$cookie_name]";
+        $cValue = (string)$_COOKIE[$cookie_name];
+        echo "$cValue";
     } else {
-        $cookie_value = "randomImage=$randImg | div1=25 | div2=75 | div3=50 | div4=90";
+        $cookie_value = "randomImage=$randImg | div1=25 | div2=75 | div3=99 | div4=90";
         setcookie($cookie_name, $cookie_value, time() + (86400 * 60), "/", "julius3d.com");
         echo "$_COOKIE[$cookie_name]";
     }
@@ -47,6 +48,6 @@ else if ($q === "init") {
 else {
     $q = explode("|", $q);
     $cookie_value = "randomImage=$randImg | div1=$q[0] | div2=$q[1] | div3=$q[2] | div4=$q[3]";
-    setcookie($cookie_name, $cookie_value, time() + (86400 * 60), "/");
-    echo $cookie_value;
+    setcookie($cookie_name, $cookie_value, time() + (86400 * 60), "/", "julius3d.com");
+    echo $_COOKIE[$cookie_name];
 }
