@@ -77,6 +77,27 @@ WHERE months_table.month > newspaper_table.start_month
   AND months_table.month < newspaper_table.end_month
 GROUP BY `month`;
 
+/* 8. UNION */
+SELECT *
+FROM newspaper_subscriptions_table
+UNION
+SELECT *
+FROM online_subscriptions_table;
+
+/* 9. WITH */
+WITH subscription_totals AS (
+  SELECT
+    customer_id,
+    COUNT(subscription_id) as subscriptions
+  FROM orders
+  GROUP BY customer_id
+)
+SELECT
+  customers_table.customer_name,
+  subscription_totals.subscriptions
+FROM subscription_totals
+JOIN customers_table
+  ON subscription_totals.customer_id = customers_table.customer_id; 
 
 
 
