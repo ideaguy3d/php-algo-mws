@@ -73,3 +73,13 @@ SELECT COUNT(*) AS 'combined newspaper&online subscribers'
 FROM newspaper
 JOIN online
   ON newspaper.id = online.id;
+
+
+
+
+
+
+
+
+
+/* end of this SQL file */
