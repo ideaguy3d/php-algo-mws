@@ -48,14 +48,34 @@ FROM classes
 JOIN students
   ON classes.id = students.class_id;
 
+
+/* 7. Cross Join */
 /* This will get all the users from the month of march
  The 'WHERE' clause uses counter intuitive syntax to
- get only month '3' e.g. < >*/
+ get only month '3' e.g. < > */
 SELECT COUNT(*) as 'Total subscribers in March'
 FROM newspaper
 WHERE month_start < 3 AND month_end > 3;
 
+SELECT *
+FROM newspaper
+CROSS JOIN months;
 
+SELECT *
+FROM newspaper
+CROSS JOIN months
+WHERE months.month > newspaper.start_month
+  AND months.month < newspaper.end_month;
+
+/* find how many subscribers there were per month */
+SELECT
+  `month`,
+  COUNT(*) as subscribers
+FROM newspaper_table
+CROSS JOIN months_table
+WHERE months_table.month > newspaper_table.start_month
+  AND months_table.month < newspaper_table.end_month
+GROUP BY `month`;
 
 
 
