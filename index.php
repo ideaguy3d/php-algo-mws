@@ -102,6 +102,7 @@
 
             #div3 {
                 display: none;
+
             }
         }
 
@@ -182,6 +183,8 @@
 
 
 <body>
+
+<?php //phpinfo(); ?>
 
 <div id="wrapper">
     <div id="div1" class="divitem w25"></div>

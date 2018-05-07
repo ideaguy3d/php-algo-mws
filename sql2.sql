@@ -103,6 +103,10 @@ WHERE age > 30;
 SELECT * FROM movies_table
 WHERE movie_title BETWEEN 'A' AND 'J';
 
+SELECT * FROM orders
+JOIN customers
+ON orders.customer_id = customers.customer_id;
+
 
 
 
