@@ -76,15 +76,37 @@ group by 1
 order by 1;
 
 SELECT
-  order_items.name as 'Name',
-  date(orders.ordered_at) as 'Date',
-  round(sum(order_items.amount_paid), 2) as 'Sales'
+  order_items.name as Name,
+  date(orders.ordered_at) as OrderDate,
+  round(sum(order_items.amount_paid), 2) as Sales
 FROM orders
 INNER JOIN order_items
   ON orders.id = order_items.order_id
 WHERE order_items.name = 'kale-smoothie'
-GROUP BY 'Date'
-ORDER BY 'Date';
+GROUP BY OrderDate
+ORDER BY OrderDate;
+
+/* basically how many orders each product had */
+select
+	name,
+  count(*) as TableTotal
+from order_items
+group by name;
+
+select count(*) as 'Total Kale Smoothies sold'
+from order_items
+where name = 'kale-smoothie';
+
+/* Advanced Aggregate  */
+/* Sub Query prac */
+SELECT `name`,
+  round(sum(amount_paid) /
+  (SELECT sum(amount_paid) FROM order_items) * 100.0, 2) as pct
+FROM order_items
+GROUP BY 1
+ORDER BY pct DESC;
+
+
 
 
 
@@ -94,6 +116,3 @@ ORDER BY 'Date';
 
 
 /* end of this SQL file */
-
-
-
