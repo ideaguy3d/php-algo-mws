@@ -97,7 +97,7 @@ SELECT
   subscription_totals.subscriptions
 FROM subscription_totals
 JOIN customers_table
-  ON subscription_totals.customer_id = customers_table.customer_id; 
+  ON subscription_totals.customer_id = customers_table.customer_id;
 
 
 
