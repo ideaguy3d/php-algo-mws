@@ -40,3 +40,60 @@ JOIN order_items
   ON orders.id = order_items.order_id
 GROUP BY 1
 ORDER BY 1;
+
+select date(timestamp) as 'the date',
+	merchant_order_id as 'Merchant Order ID'
+from majide_fba_sales_v1
+limit 20;
+
+/* find the total sales by day */
+select
+	date(timestamp) as 'the date',
+	round(sum(item_price),2) as 'total sales'
+from majide_fba_sales_v1
+group by 1
+order by 1 desc;
+
+/* 3. daily count 2 */
+/* group the date column by the same
+  date and count how many orders there
+  were on that date */
+select date(ordered_at), count(1)
+from orders_table
+group by 1
+order by 1;
+
+/* same query as above, but with
+  a where clause */
+select
+  date(ordered_at),
+  round(sum(amount_paid), 2)
+from orders
+join order_items
+	on orders.id = order_items.order_id
+where name = 'kale-smoothie'
+group by 1
+order by 1;
+
+SELECT
+  order_items.name as 'Name',
+  date(orders.ordered_at) as 'Date',
+  round(sum(order_items.amount_paid), 2) as 'Sales'
+FROM orders
+INNER JOIN order_items
+  ON orders.id = order_items.order_id
+WHERE order_items.name = 'kale-smoothie'
+GROUP BY 'Date'
+ORDER BY 'Date';
+
+
+
+
+
+
+
+
+/* end of this SQL file */
+
+
+
