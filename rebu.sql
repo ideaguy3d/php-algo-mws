@@ -60,6 +60,16 @@ group by category
 order by pct desc;
 
 
+select name,
+	round(1.0 * count(distinct order_id) /
+        count(distinct delivered_to), 2) as reorder_rate
+from order_items
+join orders
+	on orders.id = order_items.order_id
+group by name
+order by reorder_rate desc;
+
+
 
 
 

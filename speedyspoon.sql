@@ -149,6 +149,16 @@ from order_items
 group by category
 order by pct desc;
 
+/* creating a metric called 'reorder rate'
+  'reorder rate' is a ratio */
+select name,
+  round(1.0 * COUNT(DISTINCT order_id) /
+    COUNT(DISTINCT delivered_to), 2) as reorder_rate
+from orders
+  inner join order_items on orders.id = order_items.order_id
+group by name
+order by reorder_rate DESC;
+
 
 
 
