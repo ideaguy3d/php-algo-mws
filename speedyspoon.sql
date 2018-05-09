@@ -106,6 +106,48 @@ FROM order_items
 GROUP BY 1
 ORDER BY pct DESC;
 
+SELECT
+  product_name,
+  round(sum(product_price) /
+    (select sum(product_price) from item_orders) * 100.0, 2) as pct
+FROM order_items
+GROUP BY product_name
+ORDER BY pct DESC;
+
+/* case prac */
+select *,
+  case name
+  	when 'kale-smoothie'    then 'smoothie'
+    when 'banana-smoothie'  then 'smoothie'
+    when 'orange-juice'     then 'drink'
+    when 'soda'             then 'drink'
+    when 'blt'              then 'sandwich'
+    when 'grilled-cheese'   then 'sandwich'
+    when 'tikka-masala'     then 'dinner'
+    when 'chicken-parm'     then 'dinner'
+    else 'other'
+  end as category
+from order_items
+order by id
+limit 100;
+
+select
+  case `name`
+  	when 'kale-smoothie'    then 'smoothie'
+    when 'banana-smoothie'  then 'smoothie'
+    when 'orange-juice'     then 'drink'
+    when 'soda'             then 'drink'
+    when 'blt'              then 'sandwich'
+    when 'grilled-cheese'   then 'sandwich'
+    when 'tikka-masala'     then 'dinner'
+    when 'chicken-parm'     then 'dinner'
+    else 'other'
+  end as category,
+  round(1.0 * sum(amount_paid) /
+    (select sum(amount_paid) from order_items) * 100.0, 2) as pct
+from order_items
+group by category
+order by pct desc;
 
 
 

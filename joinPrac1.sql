@@ -99,6 +99,27 @@ FROM subscription_totals
 JOIN customers_table
   ON subscription_totals.customer_id = customers_table.customer_id;
 
+/* other random SQL prac */
+select *,
+  case product_name
+  	when 'kale-smoothie'    then 'smoothie'
+    when 'banana-smoothie'  then 'smoothie'
+    when 'orange-juice'     then 'drink'
+    when 'soda'             then 'drink'
+    when 'blt'              then 'sandwich'
+    when 'grilled-cheese'   then 'sandwich'
+    when 'tikka-masala'     then 'dinner'
+    when 'chicken-parm'     then 'dinner'
+    else 'other'
+  end as category
+from order_items
+order by id
+limit 100;
+
+
+
+
+
 
 
 
