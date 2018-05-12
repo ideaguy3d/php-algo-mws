@@ -36,6 +36,7 @@ select
   date(created_at) as date_played,
   platform,
   count(distinct user_id) as dau
+from the_table
 group by 1, 2
 order by 1, 2
 
@@ -48,6 +49,16 @@ where refunded_at is null
 group by 1
 order by 1;
 
+
+with daily_revenue as (
+  select
+    date(created_at) as dt,
+    round(sum(price), 2) as rev
+  from purchases
+  where refunded_at is null
+  group by 1
+)
+select * daily_revenue order by dt;
 
 
 

@@ -108,6 +108,56 @@ JOIN customers
 ON orders.customer_id = customers.customer_id;
 
 
+/*
+  mine blocks project random prac
+*/
+
+/* get the daily revenue & daily players
+  from 2 different tables */
+with daily_revenue as (
+	select
+  	date(created_at) as dt,
+    round(sum(price), 2) as rev
+  from purchases
+  where refunded_at is null
+  group by 1
+),
+daily_players as (
+	select
+  	date(created_at) as dt,
+  	count(distinct user_id) as players
+  from gameplays
+  group by 1
+)
+select * from daily_players order by dt;
+
+/* TODO: rewrite entire query a few times
+  to fully grok it */
+with daily_revenue as (
+	select
+  	date(created_at) as dt,
+    round(sum(price), 2) as rev
+  from purchases
+  where refunded_at is null
+  group by 1
+),
+daily_players as (
+	select
+  	date(created_at) as dt,
+  	count(distinct user_id) as players
+  from gameplays
+  group by 1
+)
+select
+	daily_revenue.dt,
+  daily_revenue.rev / daily_players.players
+from daily_revenue
+	join daily_players using (dt);
+
+
+
+
+
 
 
 
