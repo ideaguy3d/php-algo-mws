@@ -39,6 +39,22 @@ select
 group by 1, 2
 order by 1, 2
 
+/* get the 'average revenue per purchasing user */
+select
+  date(created_at) as the_date,
+  round(sum(price) / count(distinct user_id), 2) as the_arppu
+from purchases
+where refunded_at is null
+group by 1
+order by 1;
+
+
+
+
+
+
+
+
 
 
 
