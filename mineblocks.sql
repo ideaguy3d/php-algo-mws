@@ -49,7 +49,6 @@ where refunded_at is null
 group by 1
 order by 1;
 
-
 with daily_revenue as (
   select
     date(created_at) as dt,
@@ -59,6 +58,31 @@ with daily_revenue as (
   group by 1
 )
 select * daily_revenue order by dt;
+
+/* query for average daily revenue of all players */
+with daily_revenue as (
+  select
+    date(created_at) as zdate,
+    round(sum(price), 2) as rev
+  from purchases
+  where refunded_at is null
+  group by 1
+),
+daily_players as (
+  select
+    date(created_at) as zdate,
+    count(distinct user_id) as players
+  from gameplays
+  group by 1
+)
+select
+  daily_revenue.zdate as z_date_played,
+  round(daily_revenue.rev / daily_players.players, 2) as z_arpu
+from daily_revenue
+  inner join daily_players using (zdate);
+
+
+
 
 
 

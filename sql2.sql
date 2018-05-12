@@ -133,6 +133,9 @@ select * from daily_players order by dt;
 
 /* TODO: rewrite entire query a few times
   to fully grok it */
+
+/* extract the 'daily revenue per player' metric
+  each with clause is querying a different table */
 with daily_revenue as (
 	select
   	date(created_at) as dt,
