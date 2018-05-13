@@ -88,5 +88,43 @@
                 $('.slide-image').slideToggle(200); // will default to 400ms
             });
         };
+
+        const triviaCard = function() {
+            $('.hint-box').on('click', ()=>{
+                $('.hint').slideToggle(200);
+            });
+
+            $('.wrong-answer-one').on('click', ()=>{
+
+                $('.wrong-text-one').fadeOut(200);
+                $('.frown').show();
+
+            });
+
+            $('.wrong-answer-two').on('click', ()=>{
+
+                $('.wrong-text-two').fadeOut(200);
+                $('.frown').show();
+
+            });
+
+            $('.wrong-answer-three').on('click', ()=>{
+
+                $('.wrong-text-three').fadeOut(200);
+                $('.frown').show();
+
+            });
+
+            $('.correct-answer').on('click', ()=>{
+
+                $('.frown').hide();
+                $('.smiley').show();
+                $('.wrong-text-one').fadeOut(200);
+                $('.wrong-text-two').fadeOut(200);
+                $('.wrong-text-three').fadeOut(200);
+
+            });
+        };
+
     });
 }(jQuery));
