@@ -82,16 +82,19 @@ from daily_revenue
   inner join daily_players using (zdate);
 
 /*
-  // self join practice to find 1 Day metric
+  ~ self join practice to find '1 Day Retention' metric
 */
 
 select
-  date(g1.created_at) as z_date,
-  g1.user_id
+  date(g1.created_at) as dt,
+  round(100 * count(distinct g2.user_id) /
+    count(distinct g1.user_id), 2) as retention
 from gameplays as g1
-  join gameplays as g2
+  left join gameplays as g2
   on g1.user_id = g2.user_id
-order by 1
+  and date(g1.created_at) = date(datetime(g2.created_at, '-1 day'))
+group by 1
+order by 1 asc
 limit 100;
 
 
