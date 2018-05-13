@@ -74,8 +74,17 @@ FROM newspaper
 JOIN online
   ON newspaper.id = online.id;
 
-
-
+/* more sql self-join prac */
+select
+  date(g1.created_at) as dt,
+  g1.user_id as user_day1,
+  g2.user_id as user_day2
+from gameplays as g1
+  join gameplays as g2
+  on g1.user_id = g2.user_id
+  and date(g1.created_at) = date(datetime(g2.created_at), '-1 day')
+order by 1
+limit 100;
 
 
 
