@@ -23,13 +23,10 @@ GROUP BY 1
 ORDER BY 1
 LIMIT 10;
 
-
 /* look at data real quick */
-SELECT *
-FROM orders
+SELECT * FROM orders
 LIMIT 10;
-SELECT *
-FROM order_items
+SELECT * FROM order_items
 LIMIT 10;
 
 
