@@ -75,3 +75,26 @@ FROM order_items
 GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 100;
+
+/*
+  commit point
+ */
+
+/* count the distinct orders relative to name */
+SELECT
+	`name`,
+  COUNT(DISTINCT order_id) AS total_orders
+FROM order_items
+GROUP BY 1
+ORDER BY 1;
+
+/* get the number of people making the order
+  for the re order rate per person, I think */
+SELECT
+	`name` AS product_name,
+  ROUND(1.0 * COUNT(DISTINCT order_id) /
+        COUNT(DISTINCT delivered_to), 2) AS reorder_rate
+FROM order_items
+	JOIN orders ON orders.id = order_items.order_id
+GROUP BY 1
+ORDER BY 2 DESC;
