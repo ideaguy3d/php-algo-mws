@@ -9,6 +9,7 @@
 
         const $menuButton = $('.menu-button');
         const $navDropdown = $('#nav-dropdown');
+        let position = {};
 
         $menuButton.on('click', () => {
             $navDropdown.show();
@@ -127,26 +128,53 @@
             });
         };
 
-        let position = {};
-        geocodeOne();
+        $('#find-postcode').on('click', (e) => {
+            e.preventDefault();
+            geocodeOne();
+        });
+
         function geocodeOne() {
             $.ajax({
                 url: "https://maps.googleapis.com/maps/api/geocode/json?"
-                + "address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&"
+                + "address=" + encodeURIComponent($('#address').val())
                 + "key=AIzaSyCJP1aQSw46-1QlDq8V_Tt7ZtYWyM6jTW4",
                 type: "GET",
-                success: function(data) {
+                success: function (data) {
                     console.log("\njha - geocode data = ", data.results);
+                    const $message = $('#message');
 
                     // iterative
-                    const results = data["results"][0];
-                    for(let key in results) {
-                        if(results.hasOwnProperty(key)) {
-                            let val = results[key];
-                            console.log("key = "+key);
-                            console.log("value =", val);
+                    const results = data["results"][0] ? data["results"][0] : null;
+                    if(results) {
+                        for (let key in results) {
+                            if (results.hasOwnProperty(key)) {
+                                let val = results[key];
+                                // console.log("key = "+key);
+                                // console.log("value =", val);
+                            }
                         }
+
+                        const addressComponents = results["address_components"]
+                            ? results["address_components"] : null;
+
+                        if(addressComponents) {
+                            addressComponents.forEach(function (e) {
+                                // console.log("jha - e = ", e);
+                                if (e["types"][0] === "postal_code") {
+                                    let zipCode = e["long_name"];
+
+                                    // console.log("jha - postal code = ", e["long_name"]);
+                                    if (zipCode) {
+                                        $message.html(zipCode);
+                                    }
+                                }
+                            });
+                        }
+                    } else {
+                        $message.html("couldn't find zip code =/");
                     }
+
+
                 }
             });
         }

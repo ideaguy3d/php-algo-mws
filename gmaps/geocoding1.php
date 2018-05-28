@@ -7,15 +7,13 @@
  */
 
 $sample1 = "https://maps.googleapis.com/maps/api/geocode/"
-    ."json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA"
-    ."&key=AIzaSyCJP1aQSw46-1QlDq8V_Tt7ZtYWyM6jTW4";
+    . "json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA"
+    . "&key=AIzaSyCJP1aQSw46-1QlDq8V_Tt7ZtYWyM6jTW4";
 
 // echo $sample1;
 
-echo file_get_contents($sample1);
+// echo file_get_contents($sample1);
 
-
-echo "<br><br>";
 ?>
 
 <!DOCTYPE html>
@@ -31,8 +29,7 @@ echo "<br><br>";
 <!-- Navigation -->
 <nav>
     <div class='container'>
-        <object type='image/svg+xml'
-                data='https://s3.amazonaws.com/codecademy-content/courses/jquery/audit/images/sole-logo.svg'></object>
+        <h2>Postcode</h2>
         <div>
             <span class='menu-button'>Menu</span>
             <span class='login-button'>Login</span>
@@ -73,16 +70,19 @@ echo "<br><br>";
     </div>
 </div>
 
-
-
-<!-- Product Card 1 -->
+<!-- Postcode finder input card -->
 <div class='container'>
     <div class='product-card'>
-        <div class='product-photo sole-air-ii'></div>
+        <div class='product-photo sole-air-ii'>
+            <h1 class="text-center">Postcode Finder</h1>
+            <p class="text-center">Enter an address to get the postcode.</p>
+        </div>
         <div class='product-details'>
-            <h4>Sole Air II</h4>
-            <div>
-                <p>$35</p>
+            <p class="text-center w100">
+                <input id="address" class="w100" type="text" placeholder="Address to lookup">
+            </p>
+            <div id="find-postcode">
+                <p>GO</p>
                 <div class='more-details-button'>
                     <img src='https://s3.amazonaws.com/codecademy-content/courses/jquery/audit/images/right-arrow.svg'/>
                 </div>
@@ -107,10 +107,12 @@ echo "<br><br>";
         </div>
     </div>
 </div>
-<!-- Product Card 2 -->
+<!-- Postcode output -->
 <div class='container'>
     <div class='product-card'>
-        <div class='product-photo tidal-x'></div>
+        <div class='product-photo tidal-x'>
+            <h1 id="message" class="text-center"></h1>
+        </div>
         <div class='product-details'>
             <h4>Tidal X</h4>
             <div>
