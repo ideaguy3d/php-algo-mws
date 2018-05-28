@@ -2,15 +2,24 @@
 /**
  * Created by PhpStorm.
  * User: Julius Alvarado
- * Date: 5/12/2018
- * Time: 7:48 PM
+ * Date: 5/27/2018
+ * Time: 1:56 PM
  */
 
+$sample1 = "https://maps.googleapis.com/maps/api/geocode/"
+    ."json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA"
+    ."&key=AIzaSyCJP1aQSw46-1QlDq8V_Tt7ZtYWyM6jTW4";
+
+// echo $sample1;
+
+echo file_get_contents($sample1);
+
+
+echo "<br><br>";
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Sole Shoes</title>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet'>
@@ -19,7 +28,6 @@
 </head>
 
 <body>
-
 <!-- Navigation -->
 <nav>
     <div class='container'>
@@ -65,7 +73,9 @@
     </div>
 </div>
 
-<!-- Product Cards -->
+
+
+<!-- Product Card 1 -->
 <div class='container'>
     <div class='product-card'>
         <div class='product-photo sole-air-ii'></div>
@@ -97,7 +107,7 @@
         </div>
     </div>
 </div>
-
+<!-- Product Card 2 -->
 <div class='container'>
     <div class='product-card'>
         <div class='product-photo tidal-x'></div>
@@ -132,6 +142,7 @@
     </div>
 </div>
 
+<!-- Product Card 3 -->
 <div class='container'>
     <div class='product-card'>
         <div class='product-photo dark-sole-original'></div>
@@ -194,3 +205,4 @@
 </body>
 
 </html>
+

@@ -2,8 +2,9 @@
  * Created by Julius Alvarado on 5/12/2018.
  */
 
-(function($){
+(function ($) {
     $(document).ready(() => {
+
         console.log("Ello World ! ^_^/ jQuery is ready!!");
 
         const $menuButton = $('.menu-button');
@@ -17,7 +18,7 @@
             $navDropdown.hide();
         });
 
-        const madisonMarket = function() {
+        const madisonMarket = function () {
             const $cart = $('#cart');
             const $cartDrop = $('#cart .dropdown-menu');
             const $account = $('#account');
@@ -25,32 +26,32 @@
             const $help = $('#help');
             const $helpDrop = $('#help .dropdown-menu');
 
-            $cart.on('click', ()=>{
+            $cart.on('click', () => {
                 $cartDrop.show();
             });
 
-            $cartDrop.on('mouseleave', ()=>{
+            $cartDrop.on('mouseleave', () => {
                 $cartDrop.hide();
             });
 
-            $account.on('click', ()=>{
+            $account.on('click', () => {
                 $accountDrop.show();
             });
 
-            $accountDrop.on('mouseleave', ()=>{
+            $accountDrop.on('mouseleave', () => {
                 $accountDrop.hide();
             });
 
-            $help.on('click', ()=>{
+            $help.on('click', () => {
                 $helpDrop.show();
             });
 
-            $helpDrop.on('mouseleave', ()=>{
+            $helpDrop.on('mouseleave', () => {
                 $helpDrop.hide();
             });
         };
 
-        const effectPrac = function() {
+        const effectPrac = function () {
 
             $('.hide-button').on('click', () => {
                 $('.first-image').hide();
@@ -89,33 +90,33 @@
             });
         };
 
-        const triviaCard = function() {
-            $('.hint-box').on('click', ()=>{
+        const triviaCard = function () {
+            $('.hint-box').on('click', () => {
                 $('.hint').slideToggle(200);
             });
 
-            $('.wrong-answer-one').on('click', ()=>{
+            $('.wrong-answer-one').on('click', () => {
 
                 $('.wrong-text-one').fadeOut(200);
                 $('.frown').show();
 
             });
 
-            $('.wrong-answer-two').on('click', ()=>{
+            $('.wrong-answer-two').on('click', () => {
 
                 $('.wrong-text-two').fadeOut(200);
                 $('.frown').show();
 
             });
 
-            $('.wrong-answer-three').on('click', ()=>{
+            $('.wrong-answer-three').on('click', () => {
 
                 $('.wrong-text-three').fadeOut(200);
                 $('.frown').show();
 
             });
 
-            $('.correct-answer').on('click', ()=>{
+            $('.correct-answer').on('click', () => {
 
                 $('.frown').hide();
                 $('.smiley').show();
@@ -126,5 +127,28 @@
             });
         };
 
+        let position = {};
+        geocodeOne();
+        function geocodeOne() {
+            $.ajax({
+                url: "https://maps.googleapis.com/maps/api/geocode/json?"
+                + "address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&"
+                + "key=AIzaSyCJP1aQSw46-1QlDq8V_Tt7ZtYWyM6jTW4",
+                type: "GET",
+                success: function(data) {
+                    console.log("\njha - geocode data = ", data.results);
+
+                    // iterative
+                    const results = data["results"][0];
+                    for(let key in results) {
+                        if(results.hasOwnProperty(key)) {
+                            let val = results[key];
+                            console.log("key = "+key);
+                            console.log("value =", val);
+                        }
+                    }
+                }
+            });
+        }
     });
 }(jQuery));
