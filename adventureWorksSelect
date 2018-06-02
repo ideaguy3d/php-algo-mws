@@ -1,0 +1,52 @@
+/****** Script for SelectTopNRows command from SSMS  ******/
+--SELECT TOP (1000) *
+--FROM [TutorialDB].[dbo].[mailing_list2]
+
+--CREATE TABLE Names (
+--	fname varchar(30),
+--	lname varchar(30),
+--	city varchar(30),
+--	state char(3)
+--);
+
+USE TutorialDB
+GO
+
+--ALTER TABLE Names ADD salary int; 
+
+--ALTER TABLE Names 
+--ALTER COLUMN salary money; 
+
+INSERT INTO Names VALUES ('Michelle', 'Tran', 'Sacramento', 'ca', 59000);
+
+UPDATE Names SET fname = 'Josh' WHERE fname = 'JULIUS';
+
+SELECT * FROM [TutorialDB].[dbo].[Names];
+
+--Make a copy of the db
+--SELECT * INTO [TutorialDB].[dbo].[Mailing_List1_Copy]
+--FROM [TutorialDB].[dbo].[Mailing_list1]
+
+--ALTER TABLE [TutorialDB].[dbo].[mailing_list2] ADD quantity int
+
+--"Use an expression in the UPDATE table SET field WHERE condition operator"
+--UPDATE [TutorialDB].[dbo].[mailing_list2] SET [quantity] = [quantity]+4 WHERE [city] = 'Coppell'
+
+SELECT TOP(30) first, address, city, st, quantity FROM [TutorialDB].[dbo].[mailing_list2]
+ORDER BY [quantity] DESC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- end of sql file --
