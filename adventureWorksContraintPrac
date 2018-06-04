@@ -43,6 +43,42 @@ CREATE TABLE BridgeBuilders (
 );
 
 -- "CHECK contraint"
+ALTER TABLE Customer
+ADD Check (CustomerId > 0);
+
+INSERT INTO Customer VALUES (-4, 'Nathan', 'Chellous');
+INSERT INTO Customer VALUES (5, 'Natalie', 'Shaffer');
+
+-- DELETE FROM Customer WHERE CustomerId < 0;
+
+SELECT * FROM Customer;
+
+-- "more CHECK practice"
+ALTER TABLE Student
+ADD CHECK (Score > 0 AND Score < 100);
+
+--INSERT INTO Student VALUES ('Jessica', 'Garcia', 110);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
