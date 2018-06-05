@@ -98,7 +98,8 @@ VALUES
 
 Select * from dbo.Supplier;
 
-SELECT 
+-- "UNION will only select distinct data"
+SELECT
 	[TutorialDB].[dbo].[Supplier].[SuppFname],
 	[TutorialDB].[dbo].[Supplier].[SuppLname]
 FROM [TutorialDB].[dbo].[Supplier]
@@ -106,12 +107,41 @@ UNION
 SELECT
 	[TutorialDB].[dbo].[Buyer].[BuyFname],
 	[TutorialDB].[dbo].[Buyer].[BuyLname]
-FROM [TutorialDB].[dbo].[Buyer]; 
+FROM [TutorialDB].[dbo].[Buyer];
+
+-- "UNION ALL prac"
+SELECT
+	[TutorialDB].[dbo].[Supplier].[SuppFname],
+	[TutorialDB].[dbo].[Supplier].[SuppLname]
+FROM [TutorialDB].[dbo].[Supplier]
+UNION ALL
+SELECT
+	[TutorialDB].[dbo].[Buyer].[BuyFname],
+	[TutorialDB].[dbo].[Buyer].[BuyLname]
+FROM [TutorialDB].[dbo].[Buyer];
+
+-- "EXCEPT prac, if data exists in both tables, exclude it"
+SELECT
+	[TutorialDB].[dbo].[Supplier].[SuppFname],
+	[TutorialDB].[dbo].[Supplier].[SuppLname]
+FROM [TutorialDB].[dbo].[Supplier]
+EXCEPT
+SELECT
+	[TutorialDB].[dbo].[Buyer].[BuyFname],
+	[TutorialDB].[dbo].[Buyer].[BuyLname]
+FROM [TutorialDB].[dbo].[Buyer];
 
 
-
-
-
+-- "INTERSECT prac, only include data that is in both tables"
+SELECT
+	[TutorialDB].[dbo].[Supplier].[SuppFname],
+	[TutorialDB].[dbo].[Supplier].[SuppLname]
+FROM [TutorialDB].[dbo].[Supplier]
+INTERSECT
+SELECT
+	[TutorialDB].[dbo].[Buyer].[BuyFname],
+	[TutorialDB].[dbo].[Buyer].[BuyLname]
+FROM [TutorialDB].[dbo].[Buyer];
 
 
 
