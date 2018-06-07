@@ -42,7 +42,66 @@ FROM Books
 WHERE SoldDate = '2011-02-10 00:00:00.000'
 GROUP BY SoldDate; -- Any column that is NOT being aggregated must be grouped by
 
-	 
+SELECT
+	max(BookQuantity) AS MaxQuantity,
+	SoldDate
+FROM Books
+WHERE SoldDate = '2011-02-10 00:00:00.000'
+GROUP BY SoldDate;
+
+
+SELECT
+	BookAuthor,
+	SUM(BookQuantity) AS TotalSales
+FROM Books
+WHERE BookAuthor LIKE 'j%'
+GROUP BY BookAuthor;
+
+
+CREATE TABLE EmpSalary(
+	EmpSalaryID int Identity (1,1) Not Null Primary Key,
+	Fname varchar (20) Null,
+	Lname varchar (20) Null,
+	Salary Money Null,
+	Sales Money Null,
+	Commission varchar (10) Null
+);
+
+Insert Into EmpSalary
+values
+('Tom','Smith','35000',453000,'2'),
+('Stan','Brimes','34055',7686,'10'),
+('Roger','Fuller','23045',34834,'3'),
+('Ralph','Knowes','76034',96675,'7'),
+('Andy','Mattews','86076',21193,'10')
+
+
+-- What is the bonus of each rep? (using 2 columns in SUM())
+SELECT Fname, Lname, Sales, Commission,
+	SUM(Sales * Commission) AS TotalBonus
+FROM EmpSalary
+GROUP BY Fname, Lname, Sales, Commission;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
