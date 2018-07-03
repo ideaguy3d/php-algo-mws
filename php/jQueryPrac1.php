@@ -42,6 +42,7 @@
             <li>Shoe Accessories</li>
             <li>Wholesale</li>
         </ul>
+
         <ul>
             <li>Contact</li>
             <li>Twitter</li>
