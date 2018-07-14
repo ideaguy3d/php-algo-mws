@@ -9,7 +9,12 @@
 // Given an array of integers representing the color of each object
 // Determine how many pairs of objects with matching colors there are.
 
-$arr1 = [10, 20, 20, 10, 10, 30, 50, 10, 20];
+$strArr = "6 5 2 3 5 2 2 1 1 5 1 3 3 3 5";
+
+$arr1 = explode(" ", $strArr);
+$arr1 = array_map(function ($rec) {
+    return (int)$rec;
+}, $arr1);
 $testCase1 = [
     count($arr1),
     $arr1
@@ -24,7 +29,7 @@ function sockMerchant($n, $ar) {
     $totalMatches = 0;
     for ($i = 0; $i < $n; $i++) {
         $item = $arCopy[$i];
-        $pos = ++$i;
+        $pos = $i + 1;
         $tempArray = array_slice($arCopy, $pos);
         if ($k = array_search($item, $tempArray)) {
             $matches = array_keys($ar, $tempArray[$k]);
@@ -34,3 +39,5 @@ function sockMerchant($n, $ar) {
     }
     return $totalMatches;
 }
+
+// echo phpinfo();

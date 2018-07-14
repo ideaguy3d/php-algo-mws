@@ -27,7 +27,7 @@ WHERE imdb_rating IS NULL;
 
 /* 'BETWEEN' and 'AND' prac */
 SELECT * FROM movies
-WHERE name BETWEEN 'D' AND 'G';
+WHERE `name` BETWEEN 'D' AND 'G';
 
 SELECT * FROM movies
 WHERE year BETWEEN 1970 AND 1979;
