@@ -6,6 +6,21 @@
  * Time: 12:43 PM
  */
 
+$s1 = "Hello, I am a sentence, that is what I am";
+
+$s2 = "Hello, world!";
+$s2array = [
+    substr($s2, -5, -1),
+    strstr($s2, 'wor'),
+    strstr($s2, 'wor', true),
+    
+];
+
+echo "\n\n";
+//echo "\n\n Sentence 1 has ".str_word_count($s1)." words \n\n";
+echo " ---------- s2 answers ---------- \n";
+var_dump($s2array);
+
 //------------------------------------------
 // heredoc prac, heredoc does have parsing
 //------------------------------------------
@@ -23,7 +38,7 @@ $myNowdocStr = <<< 'MY_NOWDOC_PRAC'
 MY_NOWDOC_PRAC;
 
 
-echo $myHeredocStr;
-echo "\n\n";
-echo $myNowdocStr;
+//echo $myHeredocStr;
+
+//echo $myNowdocStr;
 echo "\n\n";
