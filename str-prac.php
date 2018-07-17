@@ -6,14 +6,29 @@
  * Time: 12:43 PM
  */
 
-$s1 = "Hello, I am a sentence, that is what I am";
+// -- General --
+//  1. strlen()
+//  2. str_word_count()
+//  3. substr()
+// -- Searching Strings --
+//  4. strstr()
+//  5. strpos()
+//  6. strrpos()
+//  7. substr_count()
+//  8. strpbrk()
+//  9. str_replace()
+// 10. substr_replace()
+// 11.
 
+$s1 = "Hello, I am a sentence, that is what I am";
 $s2 = "Hello, world!";
+$s3 = "It was the best of times, it was the worst of times";
+
 $s2array = [
     substr($s2, -5, -1),
     strstr($s2, 'wor'),
     strstr($s2, 'wor', true),
-    
+
 ];
 
 echo "\n\n";
