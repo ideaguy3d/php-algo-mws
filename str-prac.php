@@ -28,7 +28,6 @@ $s2array = [
     substr($s2, -5, -1),
     strstr($s2, 'wor'),
     strstr($s2, 'wor', true),
-
 ];
 
 echo "\n\n";
