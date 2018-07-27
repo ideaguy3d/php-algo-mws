@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TEC>
+    <User>
+
+        <Username>xxxx</Username>
+
+        <Password>wsadmin!</Password>
+
+        <UserDB>xxxx</UserDB>
+
+    </User>
+
+    <EmailCommunication>
+
+        <ReceiveJob>brian@tecmailing.com</ReceiveJob>
+
+        <CompleteJob>brian@tecmailing.com</CompleteJob>
+
+        <Error>brian@tecmailing.com</Error>
+
+    </EmailCommunication>
+
+    <Environment>CTE</Environment>
+
+    <Job>
+
+        <Name>CTE Test NCOA18</Name>
+
+        <Description>CTE Test Integrated-12/22/2017 5:11:18 PM</Description>
+
+        <Reference>123456</Reference>
+
+    </Job>
+
+    <File>
+
+        <Type>Delimited (CSV)</Type>
+
+        <IsFirstRecordFields>YES</IsFirstRecordFields>
+
+        <RecordDelimiter>CarriageReturnLineFeed</RecordDelimiter>
+
+        <FieldDelimiter>Comma</FieldDelimiter>
+
+        <FramingCharacter>DoubleQuote</FramingCharacter>
+
+        <ColumnNames>
+            FULLNAME,Company,ADDRESS1,ADDRESS2,City,State,zip,S1,S2,S3,height,width,thickness,ver_name,weight,MID,SERIAL
+        </ColumnNames>
+
+        <ColumnLengths>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</ColumnLengths>
+
+        <RecordLength>0</RecordLength>
+
+        <WorkingTable/>
+
+        <Mapping>
+
+            <ManualFieldMapping>YES</ManualFieldMapping>
+
+            <Name>DB.FULLNAME</Name>
+
+            <Company>DB.COMPANY</Company>
+
+            <Address1>DB.ADDRESS1</Address1>
+
+            <Address2>DB.ADDRESS2</Address2>
+
+            <Address3></Address3>
+
+            <City>DB.CITY</City>
+
+            <State>DB.STATE</State>
+
+            <ZIP>DB.ZIP</ZIP>
+
+            <ZIP4></ZIP4>
+
+            <Height>DB.HEIGHT</Height>
+
+            <Width>DB.WIDTH</Width>
+
+            <Thickness>DB.THICKNESS</Thickness>
+
+            <Weight>DB.WEIGHT</Weight>
+
+            <Version>DB.VER_NAME</Version>
+
+            <DeliverPoint></DeliverPoint>
+
+            <CarrierRoute></CarrierRoute>
+
+            <LOT></LOT>
+
+            <LOTORD></LOTORD>
+
+            <Subscriber></Subscriber>
+
+            <ACS_CODE></ACS_CODE>
+
+            <ACS_KEY></ACS_KEY>
+
+        </Mapping>
+
+        <AddressCleansing>
+
+            <Active>YES</Active>
+
+            <TYPE>NCOA</TYPE>
+
+            <Casing>Upper</Casing>
+
+            <PAFID>1e43896d-6aa5-4e5b-8650-f104b66a98dc</PAFID>
+
+        </AddressCleansing>
+
+    </File>
+
+    <Match>
+
+        <Active>YES</Active>
+
+        <EventName>Dedupe</EventName>
+
+        <ListName>List 001</ListName>
+
+        <Template>OnePerIndividualAtAddress</Template>
+
+        <SuppressDNM>NO</SuppressDNM>
+
+        <SuppressPrison>NO</SuppressPrison>
+
+        <SuppressDeceased>NO</SuppressDeceased>
+
+        <DuplicateSearchWithin>YES</DuplicateSearchWithin>
+
+    </Match>
+
+    <Presort>
+
+        <Active>YES</Active>
+
+        <Maildate>default</Maildate>
+
+        <MailClass>FirstClass</MailClass>
+
+        <TraySizeForLetters>OneAndTwoFtTrays</TraySizeForLetters>
+
+        <SackType>NumberOneSack</SackType>
+
+        <PackagesOnPallets>NO</PackagesOnPallets>
+
+        <TraysSacksOnPallets>NO</TraysSacksOnPallets>
+
+        <MaxPalletWeight>2000</MaxPalletWeight>
+
+        <MaxSackWeight>70</MaxSackWeight>
+
+        <MinLinearFtTraysOnPallets>12</MinLinearFtTraysOnPallets>
+
+        <MaxLinearFtTraysOnPallets>36</MaxLinearFtTraysOnPallets>
+
+        <MinPalletWeightMdxNDC>1</MinPalletWeightMdxNDC>
+
+        <EntryPoints>
+
+            <Origin>de10ab9c-15b5-4333-9f43-0453839fdf30</Origin>
+
+            <DropShip>00000000-0000-0000-0000-000000000000</DropShip>
+
+        </EntryPoints>
+
+        <ContainerUniqueCoding>
+
+            <Method>Automatic</Method>
+
+            <TraySackUSPSMID>222222</TraySackUSPSMID>
+
+            <TraySackManStartNo>1</TraySackManStartNo>
+
+            <PalletUSPSMID>222222</PalletUSPSMID>
+
+            <PalletManStartNo>1</PalletManStartNo>
+
+        </ContainerUniqueCoding>
+
+        <FlatsInTraysTubs>NO</FlatsInTraysTubs>
+
+        <RetainWalkSeq>NO</RetainWalkSeq>
+
+        <SuppressNonDPVRecords>NO</SuppressNonDPVRecords>
+
+        <MoveUpdateMethod>NCOALink</MoveUpdateMethod>
+
+        <MoveUpdateDate>Default</MoveUpdateDate>
+
+        <MailPiece>
+
+            <Machinable>YES</Machinable>
+
+            <AutomationBarcodeType>FullServiceIntelligentMail</AutomationBarcodeType>
+
+            <RateCategory>Regular</RateCategory>
+
+            <ShapeOfPiece>Letter</ShapeOfPiece>
+
+            <Barcode>
+
+                <MailPieceUSPSMID>222222</MailPieceUSPSMID>
+
+                <MailPieceUniqueCodingMethod>Automatic</MailPieceUniqueCodingMethod>
+
+                <MailPieceManStartNo>1</MailPieceManStartNo>
+
+                <PerformTracking>NO</PerformTracking>
+
+                <USPSIMBServiceTypeCode>270</USPSIMBServiceTypeCode>
+
+            </Barcode>
+
+            <Dimensions>
+
+                <EnableAutoDimension>NO</EnableAutoDimension>
+
+                <PieceHeight>6.0</PieceHeight>
+
+                <PieceWidth>9.0</PieceWidth>
+
+                <PieceThickness>0.09</PieceThickness>
+
+                <PieceWeight>0.9</PieceWeight>
+
+                <PieceWeightSource>Agent</PieceWeightSource>
+
+                <PieceWeightStatus>Final</PieceWeightStatus>
+
+            </Dimensions>
+
+            <Payment>
+
+                <PaymentOption>PVDS</PaymentOption>
+
+                <PostagePaymentMethod>PERMIT</PostagePaymentMethod>
+
+                <StampsPostage>0</StampsPostage>
+
+            </Payment>
+
+        </MailPiece>
+
+        <MailPreparer>
+
+            <CompanyName>TEC Mailing Solutions LLC</CompanyName>
+
+            <ContactName></ContactName>
+
+            <Address1></Address1>
+
+            <Address2></Address2>
+
+            <CityStateZip></CityStateZip>
+
+            <Email></Email>
+
+            <Phone></Phone>
+
+            <DUNS>608305392</DUNS>
+
+            <NonProfitAuthorization></NonProfitAuthorization>
+
+            <USPSCRID>5692060</USPSCRID>
+
+            <USPSMID>100625</USPSMID>
+
+            <PermitNo>506</PermitNo>
+
+        </MailPreparer>
+
+        <PermitHolder>
+
+            <CompanyName>Somebody</CompanyName>
+
+            <ContactName></ContactName>
+
+            <Address1></Address1>
+
+            <Address2></Address2>
+
+            <CityStateZip></CityStateZip>
+
+            <Email></Email>
+
+            <Phone></Phone>
+
+            <DUNS></DUNS>
+
+            <NonProfitAuthorization></NonProfitAuthorization>
+
+            <USPSCRID></USPSCRID>
+
+            <USPSMID></USPSMID>
+
+            <PermitNo>123</PermitNo>
+
+        </PermitHolder>
+
+        <MailOwner>
+
+            <CompanyName>Somebody</CompanyName>
+
+            <ContactName></ContactName>
+
+            <Address1></Address1>
+
+            <Address2></Address2>
+
+            <CityStateZip></CityStateZip>
+
+            <Email></Email>
+
+            <Phone></Phone>
+
+            <DUNS></DUNS>
+
+            <NonProfitAuthorization></NonProfitAuthorization>
+
+            <USPSCRID></USPSCRID>
+
+            <USPSMID></USPSMID>
+
+            <PermitNo></PermitNo>
+
+        </MailOwner>
+
+    </Presort>
+
+    <Commingle>
+
+        <Active>YES</Active>
+
+        <SiteID>741F0E99-4F83-430E-B3D4-52B8E00A08E7</SiteID>
+
+        <Maildate>default</Maildate>
+
+        <CommingleComparison>
+
+            <Active>YES</Active>
+
+            <CommingleAdditionalCostParms>2A5B4787-E6C3-49E3-8510-10CACF5F67F1</CommingleAdditionalCostParms>
+
+            <DirectPresentAdditionalCostParms>AEC63335-10AD-4D01-A429-C4D2E623FD2B</DirectPresentAdditionalCostParms>
+
+            <SelectionBusinessRule>SelectLowestCost</SelectionBusinessRule>
+
+        </CommingleComparison>
+
+    </Commingle>
+
+    <OutputFileType>Delimited</OutputFileType>
+
+    <CompressOutputFiles>NO</CompressOutputFiles>
+
+    <OutputZipName>12345</OutputZipName>
+</TEC>
