@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Mike
- * Date: 6/21/2018
- * Time: 10:42 AM
+ * Date: 8/3/2018
+ * Time: 4:03 PM
  */
 
 require __DIR__ . "/vendor/autoload.php";
@@ -27,7 +27,3 @@ $r1 = json_decode($r1->getBody()->getContents());
 
 echo "\n response 1 = \n";
 var_dump($r1);
-
-
-
-//
