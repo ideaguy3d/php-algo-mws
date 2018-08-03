@@ -9,15 +9,11 @@
  * successfully use guzzle
  */
 
-
 require __DIR__ . "/vendor/autoload.php";
 
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Pool;
-use GuzzleHttp\Promise;
 
 // >getAsync()
 // >requestAsync()
