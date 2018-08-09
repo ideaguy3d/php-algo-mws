@@ -7,8 +7,8 @@
  */
 
 require __DIR__ . "/vendor/autoload.php";
-
 use GuzzleHttp\Client;
+
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
@@ -47,15 +47,28 @@ $response1 = $p1->then(function (ResponseInterface $response) {
 
 $p1->wait();
 
+
 $mockData1 = [
     ["name", "city", "state"],
     ["michael", "roseville", "ca"],
     ["julius", "sacramento", "ca"]
 ];
 
-echo "\n response1 = $response1 \n";
+
+$r1 = $postOne->request('POST', 'ascii/check2', [
+    'json' => $mockData1
+]);
+
+$r2 = $postOne->request('POST', 'ascii/check2', [
+    'body' => $handle
+]);
+
+$r1 = json_decode($r1->getBody()->getContents());
+
+echo "\n response 1 = \n";
+var_dump($r1);
 
 
-$jsonMockData1 = json_encode($mockData1);
 
-echo "<h1>Guzzle API client</h1>";
+
+//
