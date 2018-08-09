@@ -1,0 +1,17 @@
+
+~ 8-2-2018@10:15am
+Everything in this "scripts" folder are quick procedural scripts to
+get simple stuff done fast.
+
+Eventually anything that is seriously getting used should be converted
+to Object Oriented Programming and integrated into ninja.
+
+
+
+
+
+
+
+
+
+//
