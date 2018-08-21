@@ -6,7 +6,13 @@
  * Time: 7:53 AM
  */
 require __DIR__ . '\vendor\autoload.php';
+
 use GuzzleHttp\Client;
-$client = new Client(['base_uri' => 'http://jsonplaceholder.typicode.com/']);
-$response = $client->request('GET', 'posts/1');
-echo $response->getBody();
+
+
+
+function jphGetPosts1() {
+    $client = new Client(['base_uri' => 'http://jsonplaceholder.typicode.com/']);
+    $response = $client->request('GET', 'posts/1');
+    echo $response->getBody();
+}
