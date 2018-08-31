@@ -4,7 +4,7 @@ namespace TDD;
 
 class Receipt
 {
-    public function total(array $items, float $coupon): float {
+    public function total(array $items, $coupon) {
         $sum = array_sum($items);
         if(!is_null($coupon)) {
             return $sum - ($sum * $coupon);
@@ -12,7 +12,7 @@ class Receipt
         return $sum;
     }
 
-    public function tax(int $amount, float $tax): float {
+    public function tax($amount,$tax) {
         return ($amount * $tax);
     }
 }
