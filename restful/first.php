@@ -9,8 +9,6 @@ require __DIR__ . '\vendor\autoload.php';
 
 use GuzzleHttp\Client;
 
-
-
 function jphGetPosts1() {
     $client = new Client(['base_uri' => 'http://jsonplaceholder.typicode.com/']);
     $response = $client->request('GET', 'posts/1');
