@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Julius Alvarado
@@ -18,21 +19,38 @@ class ReceiptTest extends TestCase
         $this->Receipt = new Receipt();
     }
 
+    
     public function tearDown() {
         unset($this->Receipt);
     }
-
-    public function testTax() {
-        $inputAmount = 10.00;
-        $inputTax = 0.10;
-        $output = $this->Receipt->tax($inputAmount, $inputTax);
-        $this->assertEquals(1.00, $output, 'The tax calculation should equal 1.00');
-    }
-
+    
     public function testTotal() {
-        $inputItems = [0, 2, 5, 8];
+        $input = [0, 2, 5, 8];
         $coupon = null;
-        $output = $this->Receipt->total($inputItems, $coupon);
-        $this->assertEquals(15, $output, 'total should be 15 given inupt');
+        $output = $this->Receipt->total($input, $coupon);
+        $this->assertEquals(
+            15,
+            $output,
+            "When summing the total with out coupon, should equal 15"
+        );
+    }
+    
+    public function testTotalAndCoupon() {
+        $input = [0, 2, 5, 8];
+        $coupon = 0.20;
+        $output = $this->Receipt->total($input, $coupon);
+        $this->assertEquals(
+            12,
+            $output,
+            "When summing the total with coupon, should equal 12"
+        );
+    }
+    
+    public function testTax() {
+        $amount = 10;
+        $tax = 0.2;
+        $output = $this->Receipt->tax($amount, $tax);
+        $this->assertEquals(2, $output, 'should equal 12 when testing tax');
     }
 }
+
