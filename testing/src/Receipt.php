@@ -6,12 +6,12 @@ class Receipt
 {
     /**
      * @param array $items
-     * @param $coupon
+     * @param float $coupon
      * @return float|int
      */
     public function total(array $items, $coupon) {
         $sum = array_sum($items);
-        if(!is_null($coupon)) {
+        if (!is_null($coupon)) {
             return $sum - ($sum * $coupon);
         }
         return $sum;
@@ -22,7 +22,7 @@ class Receipt
      * @param float $tax
      * @return float|int
      */
-    public function tax($amount,$tax) {
+    public function tax($amount, $tax) {
         return ($amount * $tax);
     }
 
@@ -37,3 +37,8 @@ class Receipt
         return $subtotal + $this->tax($subtotal, $tax);
     }
 }
+
+$r = new Receipt();
+echo "\r\npostTaxTotal =\n\r";
+echo $r->postTaxTotal([1, 2, 5, 8], 0.20, null);
+echo "\n\rarray_sum() = " . array_sum([1, 2, 5, 8]);
