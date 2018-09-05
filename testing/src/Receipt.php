@@ -31,6 +31,10 @@ class Receipt
         return ($amount * $tax);
     }
 
+    public function currencyAmount($input) {
+        return round($input, 2);
+    }
+
     /**
      * @param array $items
      * @param float $tax

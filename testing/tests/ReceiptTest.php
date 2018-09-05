@@ -55,6 +55,7 @@ class ReceiptTest extends TestCase
             "When summing the total with coupon, should equal 12"
         );
     }
+
     public function testTotalException() {
         $input = [0, 2, 5, 8];
         $coupon = 1.20;
@@ -91,6 +92,27 @@ class ReceiptTest extends TestCase
         $tax = 0.2;
         $output = $this->Receipt->tax($amount, $tax);
         $this->assertEquals(2, $output, 'should equal 12 when testing tax');
+    }
+
+    /**
+     * @dataProvider provideCurrencyAmount
+     */
+    public function testCurrencyAmount($input, $expected, $msg) {
+        $this->assertSame(
+            $expected,
+            $this->Receipt->currencyAmount($input),
+            $msg
+        );
+
+    }
+
+    public function provideCurrencyAmount() {
+        return [
+            [1, 1.00, '1 should be transformed to 1.00'],
+            [1.1, 1.10, '1.1 should be transformed to 1.10'],
+            [1.11, 1.00, '1.11 should stay as 1.11'],
+            [1.111, 1.00, '1.111 should become 1.11']
+        ];
     }
 }
 
