@@ -32,6 +32,7 @@ class Receipt
     }
 
     public function currencyAmount($input) {
+        // do additional processing
         return round($input, 2);
     }
 
@@ -47,7 +48,7 @@ class Receipt
     }
 }
 
-$r = new Receipt();
-echo "\r\npostTaxTotal =\n\r";
-echo $r->postTaxTotal([1, 2, 5, 8], 0.20, null);
-echo "\n\rarray_sum() = " . array_sum([1, 2, 5, 8]);
+//$r = new Receipt();
+//echo "\r\npostTaxTotal =\n\r";
+//echo $r->postTaxTotal([1, 2, 5, 8], 0.20, null);
+//echo "\n\rarray_sum() = " . array_sum([1, 2, 5, 8]);
