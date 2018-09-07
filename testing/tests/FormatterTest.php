@@ -20,7 +20,7 @@ class FormatterTest extends TestCase
     }
     
     public function tearDown() {
-        unset($this->Receipt);
+        unset($this->Formatter);
     }
     
     /**
@@ -33,7 +33,7 @@ class FormatterTest extends TestCase
     public function testCurrencyAmount($input, $expected, $msg) {
         $this->assertSame(
             $expected,
-            $this->Receipt->currencyAmount($input),
+            $this->Formatter->currencyAmount($input),
             $msg
         );
     }

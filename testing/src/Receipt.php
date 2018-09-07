@@ -3,10 +3,16 @@
 namespace TDD;
 
 use \BadMethodCallException;
+use \TDD\Formatter;
 
 class Receipt
 {
     public $tax = 0.10;
+    public $Formatter;
+    
+    public function __construct($formatter) {
+        $this->Formatter = $formatter;
+    }
     
     /**
      * @param array $items
@@ -29,17 +35,11 @@ class Receipt
      * @return float|int
      */
     public function tax($amount) {
-        return ($amount * $this->tax);
-    }
-
-    public function currencyAmount($input) {
-        // do additional processing then round
-        return round($input, 2);
+        return $this->Formatter->currencyAmount($amount * $this->tax);
     }
 
     /**
      * @param array $items
-     * @param float $tax
      * @param float $coupon
      * @return float|int
      */
