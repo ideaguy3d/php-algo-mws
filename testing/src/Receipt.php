@@ -6,12 +6,14 @@ use \BadMethodCallException;
 
 class Receipt
 {
+    public $tax = 0.10;
+    
     /**
      * @param array $items
      * @param float $coupon
      * @return float|int
      */
-    public function total(array $items, $coupon) {
+    public function subtotal(array $items, $coupon) {
         if($coupon > 1.00) {
             throw new BadMethodCallException('Coupon must be < 1.00');
         }
@@ -24,11 +26,10 @@ class Receipt
 
     /**
      * @param float $amount
-     * @param float $tax
      * @return float|int
      */
-    public function tax($amount, $tax) {
-        return ($amount * $tax);
+    public function tax($amount) {
+        return ($amount * $this->tax);
     }
 
     public function currencyAmount($input) {
@@ -42,9 +43,9 @@ class Receipt
      * @param float $coupon
      * @return float|int
      */
-    public function postTaxTotal($items, $tax, $coupon) {
-        $subtotal = $this->total($items, $coupon);
-        return $subtotal + $this->tax($subtotal, $tax);
+    public function postTaxTotal($items, $coupon) {
+        $subtotal = $this->subtotal($items, $coupon);
+        return $subtotal + $this->tax($subtotal);
     }
 }
 
