@@ -25,11 +25,13 @@ class ReceiptTest extends TestCase
     }
 
     /**
-     * @dataProvider provideTotal
+     * @dataProvider provideSubtotal
+     * @param array $items
+     * @param int $expected
      */
-    public function testTotal($items, $expected) {
+    public function testSubtotal($items, $expected) {
         $coupon = null;
-        $output = $this->Receipt->total($items, $coupon);
+        $output = $this->Receipt->subtotal($items, $coupon);
         $this->assertEquals(
             $expected,
             $output,
@@ -37,7 +39,7 @@ class ReceiptTest extends TestCase
         );
     }
 
-    public function provideTotal() {
+    public function provideSubtotal() {
         return [
             "ints totaling 16" => [[1, 2, 5, 8], 16],
             "negative int" => [[-1, 2, 5, 8], 14],
@@ -45,10 +47,10 @@ class ReceiptTest extends TestCase
         ];
     }
 
-    public function testTotalAndCoupon() {
+    public function testSubtotalAndCoupon() {
         $input = [0, 2, 5, 8];
         $coupon = 0.20;
-        $output = $this->Receipt->total($input, $coupon);
+        $output = $this->Receipt->subtotal($input, $coupon);
         $this->assertEquals(
             12,
             $output,
@@ -56,32 +58,36 @@ class ReceiptTest extends TestCase
         );
     }
 
-    public function testTotalException() {
+    public function testSubtotalException() {
         $input = [0, 2, 5, 8];
         $coupon = 1.20;
         $this->expectException('BadMethodCallException');
-        $this->Receipt->total($input, $coupon);
+        $this->Receipt->subtotal($input, $coupon);
     }
     
+    // this is a mock
     public function testPostTaxTotal() {
         $items = [1, 2, 5, 8];
         $tax = 0.20;
         $coupon = null;
-        // setup the mock
+        
+        // Setup the Mock
         $Receipt = $this->getMockBuilder('TDD\Receipt')
-            ->setMethods(['tax', 'total'])
+            ->setMethods(['tax', 'subtotal'])
             ->getMock();
-        // invoke the total method
+        
+        // Invoke the total method
         $Receipt->expects($this->once())
-            ->method('total')
+            ->method('subtotal')
             ->with($items, $coupon)
             ->will($this->returnValue(16.00));
-        // invoke the tax method
+        // Invoke the tax method
         $Receipt->expects($this->once())
             ->method('tax')
             ->with(16.00, $tax)
             ->will($this->returnValue(3.20));
-        // this method invokes the prior 2 methods
+        
+        // This method invokes the prior 2 methods in the actual class
         $result = $Receipt->postTaxTotal([1, 2, 5, 8], 0.20, null);
         $this->assertEquals(19.20, $result);
     }

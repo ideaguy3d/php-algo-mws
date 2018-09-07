@@ -32,7 +32,7 @@ class Receipt
     }
 
     public function currencyAmount($input) {
-        // do additional processing
+        // do additional processing then round
         return round($input, 2);
     }
 
