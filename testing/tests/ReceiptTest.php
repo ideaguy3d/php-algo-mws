@@ -86,37 +86,37 @@ class ReceiptTest extends TestCase
     // mock
     public function testPostTaxTotal() {
         $items = [1, 2, 5, 8];
-        $tax = 0.20;
+        $this->Receipt->tax = 0.20;
         $coupon = null;
-        // Setup the Mock
-        $Receipt = $this->getMockBuilder('TDD\Receipt')
-                        ->setMethods(['tax', 'subtotal'])
-                        ->setConstructorArgs([$this->Formatter])
-                        ->getMock();
-        // Invoke the total method
-        $Receipt->expects($this->once())
-                ->method('subtotal')
-                ->with($items, $coupon)
-                ->will($this->returnValue(16.00));
-        // Invoke the tax method
-        $Receipt->expects($this->once())
-                ->method('tax')
-                ->with(16.00)
-                ->will($this->returnValue(3.20));
+//        // Setup the Mock
+//        $Receipt = $this->getMockBuilder('TDD\Receipt')
+//                        ->setMethods(['tax', 'subtotal'])
+//                        ->setConstructorArgs([$this->Formatter])
+//                        ->getMock();
+//        // Invoke the total method
+//        $Receipt->expects($this->once())
+//                ->method('subtotal')
+//                ->with($items, $coupon)
+//                ->will($this->returnValue(16.00));
+//        // Invoke the tax method
+//        $Receipt->expects($this->once())
+//                ->method('tax')
+//                ->with(16.00)
+//                ->will($this->returnValue(3.20));
         // This method invokes the prior 2 methods in the actual class
-        $result = $Receipt->postTaxTotal([1, 2, 5, 8], null);
+        $result = $this->Receipt->postTaxTotal([1, 2, 5, 8], null);
         $this->assertEquals(19.20, $result);
     }
     
-    public function testTax() {
-        $amount = 10;
-        $this->Receipt->tax = 0.2;
-        $output = $this->Receipt->tax($amount);
-        $this->assertEquals(
-            2,
-            $output,
-            'should equal 12 when testing tax'
-        );
-    }
+//    public function testTax() {
+//        $amount = 10;
+//        $this->Receipt->tax = 0.2;
+//        $output = $this->Receipt->tax($amount);
+//        $this->assertEquals(
+//            2,
+//            $output,
+//            'should equal 12 when testing tax'
+//        );
+//    }
 }
 

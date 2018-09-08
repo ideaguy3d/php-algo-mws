@@ -3,7 +3,6 @@
 namespace TDD;
 
 use \BadMethodCallException;
-use \TDD\Formatter;
 
 class Receipt
 {
@@ -29,7 +28,7 @@ class Receipt
         }
         return $sum;
     }
-
+    
     /**
      * @param float $amount
      * @return float|int
