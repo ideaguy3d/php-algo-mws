@@ -4,7 +4,6 @@
 
 (function ($) {
     $(document).ready(() => {
-
         console.log("Ello World ! ^_^/ jQuery is ready!!");
 
         const $menuButton = $('.menu-button');
