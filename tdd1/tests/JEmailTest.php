@@ -8,26 +8,26 @@
 
 declare(strict_types=1);
 
-use TDD\JhaEmail;
+use TDD\JEmail;
 use PHPUnit\Framework\TestCase;
 
-class EmailTest extends TestCase
+class JEmailTest extends TestCase
 {
     public function testCanBeCreatedFromValidEmailAddress(): void {
         $this->assertInstanceOf(
-            JhaEmail::class,
-            JhaEmail::fromString('julius@mail.com'));
+            JEmail::class,
+            JEmail::fromString('julius@mail.com'));
     }
 
     public function testCannotBeCreatedFromInvalidEmail(): void {
         $this->expectException(InvalidArgumentException::class);
-        JhaEmail::fromString('invalid');
+        JEmail::fromString('invalid');
     }
 
     public function testCanBeUsedAsString(): void {
         $this->assertEquals(
             'julius@mail.com',
-            JhaEmail::fromString('julius@mail.com')
+            JEmail::fromString('julius@mail.com')
         );
     }
 }

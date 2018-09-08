@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace TDD;
 
-class JhaEmail
+class JEmail
 {
     private $email;
     private function __construct(string $email) {
