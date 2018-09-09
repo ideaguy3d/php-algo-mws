@@ -42,4 +42,25 @@ class JStackTest extends TestCase
         $this->assertSame('red ninja', array_pop($stack));
         $this->assertSame(0, count($stack));
     }
+
+    #region multiple @depends practice
+    public function testProducerOne(): string {
+        $this->assertTrue(true);
+        return 'one';
+    }
+    public function testProducerTwo(): string {
+        $this->assertTrue(true);
+        return 'two';
+    }
+    /**
+     * @depends testProducerOne
+     * @depends testProducerTwo
+     * @param string $a
+     * @param string $b
+     */
+    public function testConsumer(string $a, string $b): void {
+        $this->assertSame('one', $a);
+        $this->assertSame('two', $b);
+    }
+    #endregion
 }
