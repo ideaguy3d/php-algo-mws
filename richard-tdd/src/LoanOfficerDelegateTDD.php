@@ -6,6 +6,8 @@
  * Time: 4:56 PM
  */
 
+namespace Ninja;
+
 // For client "Pacific Home Loans"
 class LoanOfficerDelegateTDD
 {

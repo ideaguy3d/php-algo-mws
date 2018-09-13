@@ -58,6 +58,7 @@ echo "<h1 class='text-center'> &nbsp;Richard Charlow tools</h1> <br>";
 
 <div class="container">
     <h3>Loan Officer Delegate</h3>
+    
     <form action="loanOfficer.php" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="loan_officers_info">Upload Loan Officers info</label>
