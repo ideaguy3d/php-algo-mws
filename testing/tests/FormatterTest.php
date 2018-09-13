@@ -15,6 +15,8 @@ use TDD\Formatter;
 
 class FormatterTest extends TestCase
 {
+    protected $Formatter;
+    
     public function setUp() {
         $this->Formatter = new Formatter();
     }

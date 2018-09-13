@@ -43,7 +43,8 @@ class LoanOfficerDelegateTDD
         
         // create the $loanOfficerArray from CSV
         if(($loanOfficerHandle = fopen($this->loanOfficerFile, 'r')) !== false) {
-            while(($loanOfficerData = fgetcsv($loanOfficerHandle, 8096, ",")) !== false) {
+            while(($loanOfficerData = fgetcsv($loanOfficerHandle, 8096, ","))
+                    !== false) {
                 $this->loanOfficerArr[$count] = $loanOfficerData;
                 $count++;
             }

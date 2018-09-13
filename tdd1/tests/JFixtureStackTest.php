@@ -7,6 +7,7 @@
  */
 
 use PHPUnit\Framework\TestCase;
+use TDD\JCsvFileIterator;
 
 class JFixtureStackTest extends TestCase
 {
@@ -32,7 +33,9 @@ class JFixtureStackTest extends TestCase
     
     public function testPush() {
         array_push($this->stack, 'ninja');
-        $this->assertSame('ninja', $this->stack[count($this->stack) - 1]);
+        $this->assertSame('ninja',
+            $this->stack[count($this->stack) - 1]
+        );
         $this->assertFalse(empty($this->stack));
     }
     
@@ -40,6 +43,45 @@ class JFixtureStackTest extends TestCase
         array_push($this->stack, 'ninja');
         $this->assertSame('ninja', array_pop($this->stack));
         $this->assertTrue(empty($this->stack));
+    }
+    
+    /**
+     * @dataProvider additionProvider
+     * @param int $a - an operand
+     * @param int $b - an operand
+     * @param int $expected - the expected result
+     */
+    public function testAdd(int $a, int $b, int $expected) {
+        $this->assertSame($expected, $a+$b);
+    }
+    
+    public function additionProvider() {
+        return new JCsvFileIterator('jData.csv');
+    }
+    
+    public function provider() {
+        return [
+            ['provider1'], ['provider2']
+        ];
+    }
+    
+    public function testProducerOne() {
+        $this->assertTrue(true);
+        return 'first';
+    }
+    
+    public function testProducerTwo() {
+        $this->assertTrue(true);
+        return 'second';
+    }
+    
+    /**
+     * @dataProvider provider
+     * @depends testProducerOne
+     * @depends testProducerTwo
+     */
+    public function testConsumer() {
+    
     }
     
     public static function tearDownAfterClass() {
