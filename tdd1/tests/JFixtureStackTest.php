@@ -41,7 +41,9 @@ class JFixtureStackTest extends TestCase
     
     public function testPop() {
         array_push($this->stack, 'ninja');
-        $this->assertSame('ninja', array_pop($this->stack));
+        $this->assertSame('ninja',
+            array_pop($this->stack)
+        );
         $this->assertTrue(empty($this->stack));
     }
     
@@ -52,7 +54,7 @@ class JFixtureStackTest extends TestCase
      * @param int $expected - the expected result
      */
     public function testAdd(int $a, int $b, int $expected) {
-        $this->assertSame($expected, $a+$b);
+        $this->assertSame($expected, $a + $b);
     }
     
     public function additionProvider() {
@@ -61,7 +63,7 @@ class JFixtureStackTest extends TestCase
     
     public function provider() {
         return [
-            ['provider1'], ['provider2']
+            ['provider1'],
         ];
     }
     
@@ -77,11 +79,41 @@ class JFixtureStackTest extends TestCase
     
     /**
      * @dataProvider provider
-     * @depends testProducerOne
-     * @depends testProducerTwo
+     * @depends      testProducerOne
+     * @depends      testProducerTwo
      */
     public function testConsumer() {
+        $this->assertSame(
+            ['provider1', 'first', 'second'],
+            func_get_args()
+        );
+    }
     
+    /**
+     * @dataProvider additionWithNegativeNumbers
+     * @dataProvider additionWithNonNegativeNumbers
+     * @param int $a
+     * @param int $b
+     * @param int $expected
+     */
+    public function testAddMultiple(int $a, int $b, int $expected) {
+        $this->assertSame($expected, $a + $b);
+    }
+    
+    public function additionWithNonNegativeNumbers() {
+        return [
+            [1, 41, 42],
+            [3, 9, 12],
+            [156, 50, 206],
+        ];
+    }
+    
+    public function additionWithNegativeNumbers() {
+        return [
+            [-89, -5, -94],
+            [-20, -9, -29],
+            [-1, 1, 0],
+        ];
     }
     
     public static function tearDownAfterClass() {

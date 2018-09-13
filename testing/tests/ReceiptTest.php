@@ -8,7 +8,8 @@
  */
 
 namespace TDD\Test;
-require dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+require dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'vendor'
+    . DIRECTORY_SEPARATOR . 'autoload.php';
 
 use PHPUnit\Framework\TestCase;
 use TDD\Receipt;
@@ -24,9 +25,9 @@ class ReceiptTest extends TestCase
                                 ->getMock();
         
         $this->Formatter->expects($this->any())
-            ->method('currencyAmount')
-            ->with($this->anything())
-            ->will($this->returnArgument(0));
+                        ->method('currencyAmount')
+                        ->with($this->anything())
+                        ->will($this->returnArgument(0));
         
         $this->Receipt = new Receipt($this->Formatter);
     }
@@ -107,7 +108,7 @@ class ReceiptTest extends TestCase
         $result = $this->Receipt->postTaxTotal([1, 2, 5, 8], null);
         $this->assertEquals(19.20, $result);
     }
-    
+
 //    public function testTax() {
 //        $amount = 10;
 //        $this->Receipt->tax = 0.2;
