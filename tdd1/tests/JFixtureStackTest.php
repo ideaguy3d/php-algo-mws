@@ -14,18 +14,15 @@ class JFixtureStackTest extends TestCase
     protected $stack;
     protected static $pdo;
     
-    public static function setUpBeforeClass() {
-        echo "\n\n\n-----------\n";
-        echo __DIR__ . '\..\config\settings.php';
-        print "\n-----------\n\n\n";
-        
-        $config = require __DIR__ . '\..\config\settings.php';
-        
-        $db = $config['dbNinja'];
-        self::$pdo = new PDO("sqlsrv:Database={$db['dbname']};server={$db['host']}",
-            $db['user'], $db['pass']);
-        
-    }
+//    public static function setUpBeforeClass() {
+//        $config = require __DIR__ . '\..\config\settings.php';
+//        $db = $config['dbNinja'];
+//
+//        self::$pdo = new PDO(
+//            "sqlsrv:Database={$db['dbname']};server={$db['host']}",
+//            $db['user'], $db['pass']
+//        );
+//    }
     
     public function setUp() {
         $this->stack = [];
@@ -116,7 +113,7 @@ class JFixtureStackTest extends TestCase
         ];
     }
     
-    public static function tearDownAfterClass() {
-        self::$pdo = null;
-    }
+//    public static function tearDownAfterClass() {
+//        self::$pdo = null;
+//    }
 }

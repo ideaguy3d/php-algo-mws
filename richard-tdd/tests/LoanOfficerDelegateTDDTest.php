@@ -9,7 +9,7 @@
 use Ninja\LoanOfficerDelegateTDD;
 use PHPUnit\Framework\TestCase;
 
-class LoadOfficerDelegateTDDTest extends TestCase
+class LoanOfficerDelegateTDDTest extends TestCase
 {
 
 }
