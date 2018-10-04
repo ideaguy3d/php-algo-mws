@@ -17,7 +17,7 @@
         </testsuite>
         <testsuite name="receipt">
             <directory>./tests</directory>
-            <exclude>./tests/ReceiptItems.php</exclude>
+            <!--<exclude>./tests/ReceiptItems.php</exclude>-->
         </testsuite>
     </testsuites>
 
@@ -44,6 +44,7 @@
         </whitelist>
     </filter>
     <logging>
+        <!--
         <log
                 type="coverage-html"
                 target="./tmp/coverage/html/"
@@ -56,5 +57,6 @@
                 type="coverage-clover"
                 target="./tmp/coverage/clover.xml"
         />
+        -->
     </logging>
 </phpunit>

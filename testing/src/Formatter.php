@@ -8,7 +8,6 @@
 
 namespace TDD;
 
-
 class Formatter
 {
     public function currencyAmount($input) {

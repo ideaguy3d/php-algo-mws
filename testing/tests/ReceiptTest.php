@@ -23,12 +23,12 @@ class ReceiptTest extends TestCase
         $this->Formatter = $this->getMockBuilder('TDD\Formatter')
                                 ->setMethods(['currencyAmount'])
                                 ->getMock();
-        
+                    
         $this->Formatter->expects($this->any())
                         ->method('currencyAmount')
                         ->with($this->anything())
                         ->will($this->returnArgument(0));
-        
+                        
         $this->Receipt = new Receipt($this->Formatter);
     }
     
@@ -55,13 +55,13 @@ class ReceiptTest extends TestCase
     public function provideSubtotal() {
         return [
             "ints totaling 16" => [
-                [1, 2, 5, 8], 16    // 2 params
+                [1, 2, 5, 8], 16
             ],
             "negative int" => [
-                [-1, 2, 5, 8], 14   // 2 params
+                [-1, 2, 5, 8], 14
             ],
             "3 ints totaling 11" => [
-                [1, 2, 8], 11       // 2 params
+                [1, 2, 8], 11
             ],
         ];
     }
