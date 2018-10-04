@@ -6,3 +6,4 @@ config.php
 **/vendor
 **/config
 coverage
+tmp

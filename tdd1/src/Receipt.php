@@ -9,7 +9,7 @@ class Receipt
     public $tax = 0.10;
     public $Formatter;
     
-    public function __construct($formatter) {
+    public function __construct(Formatter $formatter) {
         $this->Formatter = $formatter;
     }
     
