@@ -15,8 +15,9 @@ class LoanOfficerDelegateTdd
     private $dataArr;
     private $rawDataFile;
     private $loanOfficerFile;
-    private $exportFolder = 'C:\Users\julius\Desktop\ninja';
+    private $exportFolder;
     private $debugMode;
+    
     
     //TODO: check for misspelled words and make better use of strpos() for core wording e.g. any field that contains a phone number should always have "number" or "phone" somewhere in the field title name
     // possible field titles
@@ -36,21 +37,23 @@ class LoanOfficerDelegateTdd
     //TODO: try to use a generator instead
     
     /**
-     * LoanOfficerDelegateTdd constructor.
+     * LoanOfficerDelegateTdd constructor transforms raw CSV data to PHP 7 arrays.
      *
      * @param string $loanOfficerPath - this is the Loan Officer Info data, This data file contains
      *      how many states each loan officer gets
-     * @param string $dataPath - this is the raw data
+     * @param string $rawDataPath - this is the raw data
+     * @param string $exportFolderPath - folder to export to
      * @param bool $debugMode - output debug info for this class instance
      */
-    public function __construct(string $loanOfficerPath, string $dataPath, bool $debugMode) {
+    public function __construct(string $loanOfficerPath, string $rawDataPath,
+                                string $exportFolderPath, bool $debugMode) {
+        $this->exportFolder = $exportFolderPath;
         $this->loanOfficerArr = [];
         $this->dataArr = [];
         $count = 0;
         $this->debugMode = $debugMode;
-        
         $this->loanOfficerFile = glob($loanOfficerPath . '\*.csv', GLOB_NOCHECK)[0];
-        $this->rawDataFile = glob($dataPath . '\*.csv', GLOB_NOCHECK)[0];
+        $this->rawDataFile = glob($rawDataPath . '\*.csv', GLOB_NOCHECK)[0];
         
         // create the $loanOfficerArray from CSV
         if(($loanOfficerHandle = fopen($this->loanOfficerFile, 'r')) !== false) {
@@ -159,6 +162,7 @@ class LoanOfficerDelegateTdd
             // At this point $loanOfficers = [2 => 'foo', 7 => 'bar', 26 => 'baz']
             // so transform arr keys to be loan officer name
             $loanOfficersNew = array_flip($loanOfficers);
+            
             // now make key same as name
             foreach($loanOfficers as $key => $value) {
                 $loanOfficersNew[$value] = ['id' => $value];
@@ -167,7 +171,9 @@ class LoanOfficerDelegateTdd
             // now iterate over the 30+ recs (from orig "loan officer info" csv file)
             // start $i = 1 because 0 are column titles
             for($i = 1; $i < count($this->loanOfficerArr); $i++) {
-                $item = $this->loanOfficerArr[$i]; // $item will be a row
+                // $item will be a row
+                $item = $this->loanOfficerArr[$i];
+                
                 //TODO: Figure out how to NOT do this inner loop >:\
                 foreach($loanOfficersNew as $key => $value) {
                     $name = strstr($value['id'], "_", true);
@@ -186,6 +192,7 @@ class LoanOfficerDelegateTdd
                     }
                 }
             }
+            
             if($this->debugMode) {
                 echo "\n\rbreakpoint\n\r";
             }
@@ -250,4 +257,5 @@ class LoanOfficerDelegateTdd
         unlink($this->rawDataFile);
         unlink($this->loanOfficerFile);
     }
+    
 }

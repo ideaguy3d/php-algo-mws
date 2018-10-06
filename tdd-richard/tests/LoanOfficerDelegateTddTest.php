@@ -13,12 +13,14 @@ class LoanOfficerDelegateTddTest extends TestCase
 {
     private $absPathForTestLoanOfficerInfo = 'C:\xampp\htdocs\php-sql\tdd-richard\loanOfficersInfo';
     private $absPathForTestRawData = 'C:\xampp\htdocs\php-sql\tdd-richard\loanOfficersRawData';
+    private $absPathForExportFolder = 'C:\xampp\htdocs\php-sql\tdd-richard\loanOfficerComplete';
     private $LoanOfficerDelegate;
     
     public function setUp() {
         $this->LoanOfficerDelegate = new LoanOfficerDelegateTdd(
             $this->absPathForTestLoanOfficerInfo,
             $this->absPathForTestRawData,
+            $this->absPathForExportFolder,
             false
         );
     }
@@ -38,7 +40,7 @@ class LoanOfficerDelegateTddTest extends TestCase
     }
     
     public function testExportFolderExists() {
-        
+        $this->markTestIncomplete('incomplete');
     }
     
     public function testProgramHasStartedWithNoErrors() {
