@@ -6,9 +6,9 @@
  * Time: 4:56 PM
  */
 
+
 namespace Ninja;
 
-// For client "Pacific Home Loans"
 class LoanOfficerDelegateTdd
 {
     private $loanOfficerArr;
@@ -16,6 +16,7 @@ class LoanOfficerDelegateTdd
     private $rawDataFile;
     private $loanOfficerFile;
     private $exportFolder = 'C:\Users\julius\Desktop\ninja';
+    private $debugMode;
     
     //TODO: check for misspelled words and make better use of strpos() for core wording e.g. any field that contains a phone number should always have "number" or "phone" somewhere in the field title name
     // possible field titles
@@ -33,10 +34,20 @@ class LoanOfficerDelegateTdd
     private $loPhoneNumberTitles = ['phone_numbers', 'number', 'numbers', 'phone'];
     
     //TODO: try to use a generator instead
-    public function __construct(string $loanOfficerPath, string $dataPath) {
+    
+    /**
+     * LoanOfficerDelegateTdd constructor.
+     *
+     * @param string $loanOfficerPath - this is the Loan Officer Info data, This data file contains
+     *      how many states each loan officer gets
+     * @param string $dataPath - this is the raw data
+     * @param bool $debugMode - output debug info for this class instance
+     */
+    public function __construct(string $loanOfficerPath, string $dataPath, bool $debugMode) {
         $this->loanOfficerArr = [];
         $this->dataArr = [];
         $count = 0;
+        $this->debugMode = $debugMode;
         
         $this->loanOfficerFile = glob($loanOfficerPath . '\*.csv', GLOB_NOCHECK)[0];
         $this->rawDataFile = glob($dataPath . '\*.csv', GLOB_NOCHECK)[0];
@@ -44,7 +55,7 @@ class LoanOfficerDelegateTdd
         // create the $loanOfficerArray from CSV
         if(($loanOfficerHandle = fopen($this->loanOfficerFile, 'r')) !== false) {
             while(($loanOfficerData = fgetcsv($loanOfficerHandle, 8096, ","))
-                    !== false) {
+                !== false) {
                 $this->loanOfficerArr[$count] = $loanOfficerData;
                 $count++;
             }
@@ -63,11 +74,20 @@ class LoanOfficerDelegateTdd
         }
     }
     
-    // main container function
-    public function runLoanOfficerDelegate(): void {
+    //-- Main Container Function:
+    public function runLoanOfficerDelegate(): bool {
         $loanOfficerInfo = $this->createLoanOfficerInfoArr();
-        $this->rawDataIntegrate($loanOfficerInfo);
-        $this->export2csv();
+        try {
+            if(!is_array($loanOfficerInfo))
+                throw new \Exception("RSM_ERROR - var loanOfficerInfo is NOT an array,"
+                    . "\n\t- Something broke. \n\t- LoanOfficerDelegateTdd.php line 82 ish\n\n");
+            $this->rawDataIntegrate($loanOfficerInfo);
+            $this->export2csv();
+            return true;
+        } catch(\Exception $e) {
+            echo $e->getMessage();
+            return false;
+        }
     }
     
     //TODO: refactor this function into several smaller functions to write better unit tests
@@ -132,7 +152,7 @@ class LoanOfficerDelegateTdd
                 $loanOfficers[$i] = $itemName . "_" . $itemNumber;
             }
             
-            if(RSM_DEBUG_MODE) {
+            if($this->debugMode) {
                 echo "\n\rbreakpoint\n\r";
             }
             
@@ -161,12 +181,12 @@ class LoanOfficerDelegateTdd
                             'currentCount' => 0, // prep it for integration with actual raw data file
                         ];
                     }
-                    if(RSM_DEBUG_MODE) {
+                    if($this->debugMode) {
                         echo "\n\rbreakpoint\n\r";
                     }
                 }
             }
-            if(RSM_DEBUG_MODE) {
+            if($this->debugMode) {
                 echo "\n\rbreakpoint\n\r";
             }
         }
@@ -203,7 +223,7 @@ class LoanOfficerDelegateTdd
                     if(($loState === $rdState) && empty($rdLoanOfficer) && !$hitMaxCount) {
                         $this->dataArr[$row][$headerRowSize] = strstr($key, "_", true);
                         $loanOfficerInfo[$key][$i]['currentCount']++;
-                        if(RSM_DEBUG_MODE) {
+                        if($this->debugMode) {
                             echo "\nbreakpoint - LoanOfficerDelegate.php line 202, looping over loan officers' data structure\n";
                         }
                     }
@@ -211,7 +231,7 @@ class LoanOfficerDelegateTdd
                 
             } // END OF for() loop
             
-            if(RSM_DEBUG_MODE) {
+            if($this->debugMode) {
                 echo "\nbreakpoint - LoanOfficerDelegate.php line 210, transitioning to next loanOfficerInfo key\n";
             }
         } // END OF foreach() loop

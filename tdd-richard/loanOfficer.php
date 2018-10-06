@@ -8,7 +8,7 @@
 
 define('RSM_DEBUG_MODE', true);
 // invoke class and run algorithms
-require __DIR__ . '\src\LoanOfficerDelegateTDD.php';
+require __DIR__ . '\vendor\autoload.php';
 
 if(!RSM_DEBUG_MODE) {
     $loanOfficerFileName = basename($_FILES['loan_officers']['name'][0]);
@@ -35,7 +35,8 @@ if(!RSM_DEBUG_MODE) {
 $loanOfficersDir = '.\loanOfficersInfo';
 $dataDir = '.\loanOfficersData';
 
-$loDel = new LoanOfficerDelegateTDD($loanOfficersDir, $dataDir);
+$loDel = new LoanOfficerDelegateTDD($loanOfficersDir, $dataDir, RSM_DEBUG_MODE);
+
 $loDel->runLoanOfficerDelegate();
 
 // echo this after script is completely finished
