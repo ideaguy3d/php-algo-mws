@@ -76,7 +76,9 @@ class MoneyTest extends TestCase
      */
     public function testObjectCanBeConstructedFromStringValue() {
         $this->assertEquals(
+            // param  1
             new Money(1234, new Currency('EUR')),
+            // param 2
             Money::fromString('12.34', new Currency('EUR'))
         );
     }
