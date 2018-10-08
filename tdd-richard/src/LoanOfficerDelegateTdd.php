@@ -18,7 +18,6 @@ class LoanOfficerDelegateTdd
     private $exportFolder;
     private $debugMode;
     
-    
     //TODO: check for misspelled words and make better use of strpos() for core wording e.g. any field that contains a phone number should always have "number" or "phone" somewhere in the field title name
     // possible field titles
     private $loStateTitles = ['st', 'state', 'loan_officer_state'];
@@ -44,35 +43,45 @@ class LoanOfficerDelegateTdd
      * @param string $rawDataPath - this is the raw data
      * @param string $exportFolderPath - folder to export to
      * @param bool $debugMode - output debug info for this class instance
+     *
      */
     public function __construct(string $loanOfficerPath, string $rawDataPath,
                                 string $exportFolderPath, bool $debugMode) {
         $this->exportFolder = $exportFolderPath;
         $this->loanOfficerArr = [];
         $this->dataArr = [];
-        $count = 0;
         $this->debugMode = $debugMode;
         $this->loanOfficerFile = glob($loanOfficerPath . '\*.csv', GLOB_NOCHECK)[0];
         $this->rawDataFile = glob($rawDataPath . '\*.csv', GLOB_NOCHECK)[0];
         
-        // create the $loanOfficerArray from CSV
+//        $this->loanOfficerInfoCsvTransform();
+//        $this->rawDataCsvTransform();
+    }
+    
+    // create the $loanOfficerInfoAr from CSV
+    public function loanOfficerInfoCsvTransform(): void {
+        $count = 0;
+        
         if(($loanOfficerHandle = fopen($this->loanOfficerFile, 'r')) !== false) {
-            while(($loanOfficerData = fgetcsv($loanOfficerHandle, 8096, ","))
-                !== false) {
+            while(($loanOfficerData = fgetcsv($loanOfficerHandle, 8096, ",")) !== false) {
                 $this->loanOfficerArr[$count] = $loanOfficerData;
                 $count++;
             }
             fclose($loanOfficerHandle);
         }
-        
+    }
+    
+    // create $rawDataAr from CSV
+    public function rawDataCsvTransform(): void {
         $count = 0;
         
-        // create $dataArr from CSV
         if(($dataHandle = fopen($this->rawDataFile, 'r')) !== false) {
             while(($dataData = fgetcsv($dataHandle, 8096, ",")) !== false) {
                 $this->dataArr[$count] = $dataData;
                 $count++;
             }
+        
+            //-- Close file stream handle:
             fclose($dataHandle);
         }
     }
@@ -85,7 +94,10 @@ class LoanOfficerDelegateTdd
                 throw new \Exception("RSM_ERROR - var loanOfficerInfo is NOT an array,"
                     . "\n\t- Something broke. \n\t- LoanOfficerDelegateTdd.php line 82 ish\n\n");
             $this->rawDataIntegrate($loanOfficerInfo);
+            
+            // private function
             $this->export2csv();
+            
             return true;
         } catch(\Exception $e) {
             echo $e->getMessage();
@@ -201,7 +213,7 @@ class LoanOfficerDelegateTdd
         return $loanOfficersNew;
     }
     
-    // This is "HARDCODED" - it depends on a order column to be correct
+    // This is "HARDCODED" - it depends on order column to be correct
     private function rawDataIntegrate(array $loanOfficerInfo): void {
         // add a new field to header row
         $this->dataArr[0][count($this->dataArr[0])] = 'loan_officer';
@@ -251,11 +263,15 @@ class LoanOfficerDelegateTdd
             foreach($this->dataArr as $row) {
                 fputcsv($handle, $row);
             }
+            
+            //-- Close file stream:
             fclose($handle);
         }
+        
         echo "<h1>File located at </h1><p><code>{$path}</code></p>";
+        
         unlink($this->rawDataFile);
         unlink($this->loanOfficerFile);
     }
     
-}
+} // END OF: class LoadOfficerDelegateTdd {}

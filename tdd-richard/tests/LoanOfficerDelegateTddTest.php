@@ -16,39 +16,68 @@ class LoanOfficerDelegateTddTest extends TestCase
     private $absPathForExportFolder = 'C:\xampp\htdocs\php-sql\tdd-richard\loanOfficerComplete';
     private $LoanOfficerDelegate;
     
-    public function setUp() {
-        $this->LoanOfficerDelegate = new LoanOfficerDelegateTdd(
-            $this->absPathForTestLoanOfficerInfo,
-            $this->absPathForTestRawData,
-            $this->absPathForExportFolder,
-            false
-        );
+//    public function setUp() {
+//        $this->LoanOfficerDelegate = new LoanOfficerDelegateTdd(
+//            $this->absPathForTestLoanOfficerInfo,
+//            $this->absPathForTestRawData,
+//            $this->absPathForExportFolder,
+//            false
+//        );
+//    }
+    
+//    public function tearDown() {
+//        unset($this->LoanOfficerDelegate);
+//    }
+    
+    /**
+     * Call protected/private method of a class.
+     * Got this function from:
+     * https://jtreminio.com/blog/unit-testing-tutorial-part-iii-testing-protected-private-methods-coverage-reports-and-crap/
+     *
+     * @param object &$object    Instantiated object that we will run method on.
+     * @param string $methodName Method name to call
+     * @param array  $parameters Array of parameters to pass into method.
+     *
+     * @return mixed Method return.
+     */
+    public function invokeMethod(&$object, $methodName, array $parameters = []) {
+        $reflection = new \ReflectionClass(get_class($object));
+        $method = $reflection->getMethod($methodName);
+        $method->setAccessible(true);
+        return $method->invokeArgs($object, $parameters);
     }
     
-    public function tearDown() {
-        unset($this->LoanOfficerDelegate);
+    /**
+     * @covers \Ninja\LoanOfficerDelegateTdd->loanOfficerInfoCsvTransform
+     *
+     */
+    public function testLoanOfficerCsvGetsTransformedToAnArray() {
+    
     }
     
     /**
      * Don't really know how I should test this because loan officers' titles
      * are variables determined during the apps' runtime
      *
-     * @depends
+     *
      */
     public function testLoanOfficerTitlesAreCorrect() {
         $this->markTestIncomplete('incomplete');
     }
     
-    public function testExportFolderExists() {
+    /**
+     *
+     */
+    public function testExceptionIsRaisedIfExportFolderDoesNotExists() {
         $this->markTestIncomplete('incomplete');
     }
     
     public function testProgramHasStartedWithNoErrors() {
-        // $this->markTestIncomplete('incomplete');
+        $this->markTestIncomplete('incomplete');
         
-        $this->assertTrue($this->LoanOfficerDelegate->runLoanOfficerDelegate(),
-            "\n\n__>> The main container function for 'class LoanOfficerDelegate{}' failed.\n\n"
-        );
+//        $this->assertTrue($this->LoanOfficerDelegate->runLoanOfficerDelegate(),
+//            "\n\n__>> The main container function for 'class LoanOfficerDelegate{}' failed.\n\n"
+//        );
     }
     
     public function testFilesHaveBeenDeletedAfterProgramCompletion() {
@@ -62,7 +91,5 @@ class LoanOfficerDelegateTddTest extends TestCase
     public function testCsvHasBeenConvertedToAnArray() {
         $this->markTestIncomplete('incomplete');
     }
-    
-    
     
 } // END OF: class LoanOfficerDelegateTddTest{}
