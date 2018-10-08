@@ -9,12 +9,14 @@
 
 namespace Ninja;
 
+use PHPUnit\Runner\Exception;
+
 class LoanOfficerDelegateTdd
 {
     private $loanOfficerArr;
     private $dataArr;
     private $rawDataFile;
-    private $loanOfficerFile;
+    public $loanOfficerFile;
     private $exportFolder;
     private $debugMode;
     
@@ -51,23 +53,32 @@ class LoanOfficerDelegateTdd
         $this->loanOfficerArr = [];
         $this->dataArr = [];
         $this->debugMode = $debugMode;
+        // if glob is size 0 there was no file in the required loan officer info folder path
         $this->loanOfficerFile = glob($loanOfficerPath . '\*.csv', GLOB_NOCHECK)[0];
+        // if glob is size 0 there was no file in the required raw data folder path
         $this->rawDataFile = glob($rawDataPath . '\*.csv', GLOB_NOCHECK)[0];
-        
-//        $this->loanOfficerInfoCsvTransform();
-//        $this->rawDataCsvTransform();
     }
     
     // create the $loanOfficerInfoAr from CSV
-    public function loanOfficerInfoCsvTransform(): void {
+    public function loanOfficerInfoCsvTransform(): bool {
         $count = 0;
+    
+        echo "\n\n\n\n__>> loan officer file = {$this->loanOfficerFile}\n\n\n\n";
         
-        if(($loanOfficerHandle = fopen($this->loanOfficerFile, 'r')) !== false) {
+        $loanOfficerHandle = fopen($this->loanOfficerFile, 'r');
+        
+        if($loanOfficerHandle !== false) {
             while(($loanOfficerData = fgetcsv($loanOfficerHandle, 8096, ",")) !== false) {
                 $this->loanOfficerArr[$count] = $loanOfficerData;
                 $count++;
             }
+            
+            //-- Close file stream:
             fclose($loanOfficerHandle);
+            return true;
+        }
+        else {
+            return false;
         }
     }
     

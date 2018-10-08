@@ -16,18 +16,18 @@ class LoanOfficerDelegateTddTest extends TestCase
     private $absPathForExportFolder = 'C:\xampp\htdocs\php-sql\tdd-richard\loanOfficerComplete';
     private $LoanOfficerDelegate;
     
-//    public function setUp() {
-//        $this->LoanOfficerDelegate = new LoanOfficerDelegateTdd(
-//            $this->absPathForTestLoanOfficerInfo,
-//            $this->absPathForTestRawData,
-//            $this->absPathForExportFolder,
-//            false
-//        );
-//    }
+    public function setUp() {
+        $this->LoanOfficerDelegate = new LoanOfficerDelegateTdd(
+            $this->absPathForTestLoanOfficerInfo,
+            $this->absPathForTestRawData,
+            $this->absPathForExportFolder,
+            false
+        );
+    }
     
-//    public function tearDown() {
-//        unset($this->LoanOfficerDelegate);
-//    }
+    public function tearDown() {
+        unset($this->LoanOfficerDelegate);
+    }
     
     /**
      * Call protected/private method of a class.
@@ -48,11 +48,25 @@ class LoanOfficerDelegateTddTest extends TestCase
     }
     
     /**
-     * @covers \Ninja\LoanOfficerDelegateTdd->loanOfficerInfoCsvTransform
      *
      */
-    public function testLoanOfficerCsvGetsTransformedToAnArray() {
+    public function testCsvFileExistsInFolder() {
+        $this->assertStringMatchesFormat('%s', $this->LoanOfficerDelegate->loanOfficerFile,
+            "There is not a CSV file in {$this->absPathForTestLoanOfficerInfo}");
+        
+        return true;
+    }
     
+    /**
+     * @param bool $csvFile - bool value indicating there was a CSV file
+     * @covers \Ninja\LoanOfficerDelegateTdd->loanOfficerInfoCsvTransform
+     * @depends testCsvFileExistsInFolder - should return true if there was a file in the required directory
+     */
+    public function testLoanOfficerCsvGetsTransformedToAnArray(bool $csvFile) {
+        if($csvFile) {
+            $this->assertTrue($this->LoanOfficerDelegate->loanOfficerInfoCsvTransform(),
+                "The loan officer info CSV was not transformed to an array");
+        }
     }
     
     /**
