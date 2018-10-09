@@ -13,21 +13,21 @@ class LoanOfficerDelegateTddTest extends TestCase
 {
     private $testPathForLoanOfficerInfo = 'C:\xampp\htdocs\php-sql\tdd-richard\loanOfficersInfo';
     private $testPathForRawData = 'C:\xampp\htdocs\php-sql\tdd-richard\loanOfficersRawData';
-    private $absPathForExportFolder = 'C:\xampp\htdocs\php-sql\tdd-richard\loanOfficerComplete';
+    private $testPathForExportFolder = 'C:\xampp\htdocs\php-sql\tdd-richard\loanOfficerComplete';
     private $LoanOfficerDelegate;
-
-//    public function setUp() {
-//        $this->LoanOfficerDelegate = new LoanOfficerDelegateTdd(
-//            $this->testPathForLoanOfficerInfo,
-//            $this->testPathForRawData,
-//            $this->absPathForExportFolder,
-//            false
-//        );
-//    }
-
-//    public function tearDown() {
-//        unset($this->LoanOfficerDelegate);
-//    }
+    
+    public function setUp() {
+        $this->LoanOfficerDelegate = new LoanOfficerDelegateTdd(
+            $this->testPathForLoanOfficerInfo,
+            $this->testPathForRawData,
+            $this->testPathForExportFolder,
+            false
+        );
+    }
+    
+    public function tearDown() {
+        unset($this->LoanOfficerDelegate);
+    }
     
     /**
      * Call protected/private method of a class.
@@ -52,15 +52,21 @@ class LoanOfficerDelegateTddTest extends TestCase
      */
     public function testCsvFilesExistInFolders() {
         $fileRawData = glob($this->testPathForRawData . '\*.csv', GLOB_ERR);
-        if(isset($fileRawData) && count($fileRawData) > 0 && $fileRawData !== false) {
+        if(isset($fileRawData) && (count($fileRawData) > 0) && ($fileRawData !== false)) {
+            echo "\n\n__>> The fileRawData =\n";
+            var_dump($fileRawData);
+            echo "\n\n";
             $this->assertFileIsReadable(
-                $fileRawData,
+                $fileRawData[0],
                 "RSM_TEST - The test wasn't able to open the file at {$this->testPathForRawData}"
+                . "\n\t-LoanOfficerDelegateTddTest.php line 62 ish"
             );
             $this->assertStringMatchesFormat('%s.csv', $this->LoanOfficerDelegate->loanOfficerFile,
                 "RSM_TEST - There is not a CSV file in {$this->testPathForLoanOfficerInfo}");
             $this->assertStringMatchesFormat('%s.csv', $this->LoanOfficerDelegate->rawDataFile,
-                "There is not a CSV file in {$this->testPathForRawData}");
+                "There is not a CSV file in {$this->testPathForRawData}"
+                . "\n\t-LoanOfficerDelegateTddTest.php line 62 ish"
+            );
         }
         else {
             exit ("\n\n__>> RSM_ERROR - There is no CSV file to test. Will stop Unit Testing...\n\n");

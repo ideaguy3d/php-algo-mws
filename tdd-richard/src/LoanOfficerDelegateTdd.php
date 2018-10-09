@@ -50,13 +50,31 @@ class LoanOfficerDelegateTdd
     public function __construct(string $loanOfficerPath, string $rawDataPath,
                                 string $exportFolderPath, bool $debugMode) {
         $this->exportFolder = $exportFolderPath;
-        $this->loanOfficerArr = [];
-        $this->dataArr = [];
         $this->debugMode = $debugMode;
+        
         // if glob is size 0 there was no file in the required loan officer info folder path
-        $this->loanOfficerFile = glob($loanOfficerPath . '\*.csv', GLOB_ERR)[0];
-        // if glob is size 0 there was no file in the required raw data folder path
-        $this->rawDataFile = glob($rawDataPath . '\*.csv', GLOB_ERR)[0];
+        $loanOfficerInfoCsvFile = isset(glob($loanOfficerPath . '\*.csv', GLOB_ERR)[0])
+            ? glob($loanOfficerPath . '\*.csv', GLOB_ERR)[0] : null;
+        
+        if($loanOfficerInfoCsvFile) {
+            $this->loanOfficerFile = $loanOfficerInfoCsvFile;
+        }
+        else {
+            exit("\n\n__>> RSM_ERROR - There wasn't a loan officer info csv file, exiting program"
+                . "\n\t - LoanOfficerDelegateTdd.php line 64 ish\n\n");
+        }
+        
+        $rawDataCsvFile = isset(glob($rawDataPath . '\*.csv', GLOB_ERR)[0])
+            ? glob($rawDataPath . '\*.csv', GLOB_ERR)[0] : null;
+        
+        if($rawDataCsvFile) {
+            $this->rawDataFile = glob($rawDataPath . '\*.csv', GLOB_ERR)[0];
+        }
+        else {
+            exit("\n\n__>> RSM_ERROR - There wasn't a raw data csv file, exiting program"
+                . "\n\t - LoanOfficerDelegateTdd.php line 64 ish\n\n");
+        }
+        
     }
     
     // create the $loanOfficerInfoAr from CSV
@@ -89,7 +107,7 @@ class LoanOfficerDelegateTdd
                 $this->dataArr[$count] = $dataData;
                 $count++;
             }
-        
+            
             //-- Close file stream handle:
             fclose($dataHandle);
             return true;
