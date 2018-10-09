@@ -26,7 +26,7 @@ class FormatterTest extends TestCase
     }
     
     /**
-     * @dataProvider provideCurrencyAmount
+     * @dataProvider provideCurrencyAmount_DataProvider
      * @param mixed $input - will almost always be an int or float
      * @param float $expected
      * @param string $msg
@@ -40,7 +40,7 @@ class FormatterTest extends TestCase
         );
     }
     
-    public function provideCurrencyAmount() {
+    public function provideCurrencyAmount_DataProvider() {
         return [
             // 3 params
             [1, 1.00, '1 should be transformed to 1.00'],

@@ -13,8 +13,8 @@ use PHPUnit\Runner\Exception;
 
 class LoanOfficerDelegateTdd
 {
-    private $loanOfficerArr;
-    private $dataArr;
+    public $loanOfficerArr;
+    public $dataArr;
     public $rawDataFile;
     public $loanOfficerFile;
     private $exportFolder;
@@ -62,8 +62,6 @@ class LoanOfficerDelegateTdd
     // create the $loanOfficerInfoAr from CSV
     public function loanOfficerInfoCsvTransform(): bool {
         $count = 0;
-    
-        //echo "\n\n\n\n__>> loan officer file = {$this->loanOfficerFile}\n\n\n\n";
         
         $loanOfficerHandle = fopen($this->loanOfficerFile, 'r');
         
@@ -83,7 +81,7 @@ class LoanOfficerDelegateTdd
     }
     
     // create $rawDataAr from CSV
-    public function rawDataCsvTransform(): void {
+    public function rawDataCsvTransform(): bool {
         $count = 0;
         
         if(($dataHandle = fopen($this->rawDataFile, 'r')) !== false) {
@@ -94,6 +92,10 @@ class LoanOfficerDelegateTdd
         
             //-- Close file stream handle:
             fclose($dataHandle);
+            return true;
+        }
+        else {
+            return false;
         }
     }
     
