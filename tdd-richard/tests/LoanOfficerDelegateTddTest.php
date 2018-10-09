@@ -50,23 +50,20 @@ class LoanOfficerDelegateTddTest extends TestCase
     /**
      *
      */
-    public function testCsvFileExistsInFolder() {
+    public function testCsvFilesExistInFolders() {
         $this->assertStringMatchesFormat('%s', $this->LoanOfficerDelegate->loanOfficerFile,
             "There is not a CSV file in {$this->absPathForTestLoanOfficerInfo}");
-        
-        return true;
+        $this->assertStringMatchesFormat('%s', $this->LoanOfficerDelegate->rawDataFile,
+            "There is not a CSV file in {$this->absPathForTestRawData}");
     }
     
     /**
-     * @param bool $csvFile - bool value indicating there was a CSV file
-     * @covers \Ninja\LoanOfficerDelegateTdd->loanOfficerInfoCsvTransform
-     * @depends testCsvFileExistsInFolder - should return true if there was a file in the required directory
+     * 
      */
-    public function testLoanOfficerCsvGetsTransformedToAnArray(bool $csvFile) {
-        if($csvFile) {
-            $this->assertTrue($this->LoanOfficerDelegate->loanOfficerInfoCsvTransform(),
-                "The loan officer info CSV was not transformed to an array");
-        }
+    public function testLoanOfficerCsvGetsTransformedToAnArray() {
+        $this->assertTrue($this->LoanOfficerDelegate->loanOfficerInfoCsvTransform(),
+            "The loan officer info CSV was not transformed to an array"
+        );
     }
     
     /**
@@ -75,35 +72,35 @@ class LoanOfficerDelegateTddTest extends TestCase
      *
      *
      */
-    public function testLoanOfficerTitlesAreCorrect() {
-        $this->markTestIncomplete('incomplete');
-    }
+//    public function testLoanOfficerTitlesAreCorrect() {
+//        $this->markTestIncomplete('incomplete');
+//    }
     
     /**
      *
      */
-    public function testExceptionIsRaisedIfExportFolderDoesNotExists() {
-        $this->markTestIncomplete('incomplete');
-    }
+//    public function testExceptionIsRaisedIfExportFolderDoesNotExists() {
+//        $this->markTestIncomplete('incomplete');
+//    }
     
-    public function testProgramHasStartedWithNoErrors() {
-        $this->markTestIncomplete('incomplete');
-        
+//    public function testProgramHasStartedWithNoErrors() {
+//        $this->markTestIncomplete('incomplete');
+//
 //        $this->assertTrue($this->LoanOfficerDelegate->runLoanOfficerDelegate(),
 //            "\n\n__>> The main container function for 'class LoanOfficerDelegate{}' failed.\n\n"
 //        );
-    }
+//    }
     
-    public function testFilesHaveBeenDeletedAfterProgramCompletion() {
-        $this->markTestIncomplete('incomplete');
-    }
+//    public function testFilesHaveBeenDeletedAfterProgramCompletion() {
+//        $this->markTestIncomplete('incomplete');
+//    }
     
-    public function testArrayHasBeenConvertedToCsv() {
-        $this->markTestIncomplete('incomplete');
-    }
+//    public function testArrayHasBeenConvertedToCsv() {
+//        $this->markTestIncomplete('incomplete');
+//    }
     
-    public function testCsvHasBeenConvertedToAnArray() {
-        $this->markTestIncomplete('incomplete');
-    }
+//    public function testCsvHasBeenConvertedToAnArray() {
+//        $this->markTestIncomplete('incomplete');
+//    }
     
 } // END OF: class LoanOfficerDelegateTddTest{}

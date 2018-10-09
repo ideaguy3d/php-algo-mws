@@ -15,7 +15,7 @@ class LoanOfficerDelegateTdd
 {
     private $loanOfficerArr;
     private $dataArr;
-    private $rawDataFile;
+    public $rawDataFile;
     public $loanOfficerFile;
     private $exportFolder;
     private $debugMode;
@@ -54,16 +54,16 @@ class LoanOfficerDelegateTdd
         $this->dataArr = [];
         $this->debugMode = $debugMode;
         // if glob is size 0 there was no file in the required loan officer info folder path
-        $this->loanOfficerFile = glob($loanOfficerPath . '\*.csv', GLOB_NOCHECK)[0];
+        $this->loanOfficerFile = glob($loanOfficerPath . '\*.csv', GLOB_ERR)[0];
         // if glob is size 0 there was no file in the required raw data folder path
-        $this->rawDataFile = glob($rawDataPath . '\*.csv', GLOB_NOCHECK)[0];
+        $this->rawDataFile = glob($rawDataPath . '\*.csv', GLOB_ERR)[0];
     }
     
     // create the $loanOfficerInfoAr from CSV
     public function loanOfficerInfoCsvTransform(): bool {
         $count = 0;
     
-        echo "\n\n\n\n__>> loan officer file = {$this->loanOfficerFile}\n\n\n\n";
+        //echo "\n\n\n\n__>> loan officer file = {$this->loanOfficerFile}\n\n\n\n";
         
         $loanOfficerHandle = fopen($this->loanOfficerFile, 'r');
         
