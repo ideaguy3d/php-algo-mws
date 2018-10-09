@@ -11,23 +11,23 @@ use PHPUnit\Framework\TestCase;
 
 class LoanOfficerDelegateTddTest extends TestCase
 {
-    private $absPathForTestLoanOfficerInfo = 'C:\xampp\htdocs\php-sql\tdd-richard\loanOfficersInfo';
-    private $absPathForTestRawData = 'C:\xampp\htdocs\php-sql\tdd-richard\loanOfficersRawData';
+    private $testPathForLoanOfficerInfo = 'C:\xampp\htdocs\php-sql\tdd-richard\loanOfficersInfo';
+    private $testPathForRawData = 'C:\xampp\htdocs\php-sql\tdd-richard\loanOfficersRawData';
     private $absPathForExportFolder = 'C:\xampp\htdocs\php-sql\tdd-richard\loanOfficerComplete';
     private $LoanOfficerDelegate;
-    
-    public function setUp() {
-        $this->LoanOfficerDelegate = new LoanOfficerDelegateTdd(
-            $this->absPathForTestLoanOfficerInfo,
-            $this->absPathForTestRawData,
-            $this->absPathForExportFolder,
-            false
-        );
-    }
-    
-    public function tearDown() {
-        unset($this->LoanOfficerDelegate);
-    }
+
+//    public function setUp() {
+//        $this->LoanOfficerDelegate = new LoanOfficerDelegateTdd(
+//            $this->testPathForLoanOfficerInfo,
+//            $this->testPathForRawData,
+//            $this->absPathForExportFolder,
+//            false
+//        );
+//    }
+
+//    public function tearDown() {
+//        unset($this->LoanOfficerDelegate);
+//    }
     
     /**
      * Call protected/private method of a class.
@@ -51,10 +51,20 @@ class LoanOfficerDelegateTddTest extends TestCase
      * @covers \Ninja\LoanOfficerDelegateTdd::__construct
      */
     public function testCsvFilesExistInFolders() {
-        $this->assertStringMatchesFormat('%s.csv', $this->LoanOfficerDelegate->loanOfficerFile,
-            "There is not a CSV file in {$this->absPathForTestLoanOfficerInfo}");
-        $this->assertStringMatchesFormat('%s.csv', $this->LoanOfficerDelegate->rawDataFile,
-            "There is not a CSV file in {$this->absPathForTestRawData}");
+        $fileRawData = glob($this->testPathForRawData . '\*.csv', GLOB_ERR);
+        if(isset($fileRawData) && count($fileRawData) > 0 && $fileRawData !== false) {
+            $this->assertFileIsReadable(
+                $fileRawData,
+                "RSM_TEST - The test wasn't able to open the file at {$this->testPathForRawData}"
+            );
+            $this->assertStringMatchesFormat('%s.csv', $this->LoanOfficerDelegate->loanOfficerFile,
+                "RSM_TEST - There is not a CSV file in {$this->testPathForLoanOfficerInfo}");
+            $this->assertStringMatchesFormat('%s.csv', $this->LoanOfficerDelegate->rawDataFile,
+                "There is not a CSV file in {$this->testPathForRawData}");
+        }
+        else {
+            exit ("\n\n__>> RSM_ERROR - There is no CSV file to test. Will stop Unit Testing...\n\n");
+        }
     }
     
     /**
@@ -62,12 +72,12 @@ class LoanOfficerDelegateTddTest extends TestCase
      */
     public function testLoanOfficerInfoCsvGetsTransformedToAnArray() {
         $this->assertTrue($this->LoanOfficerDelegate->loanOfficerInfoCsvTransform(),
-            "The loan officer info CSV was not get transformed to an array"
+            "The loan officer info CSV was not transformed to an array"
         );
     }
     
     /**
-     * @covers \Ninja\LoanOfficerDelegateTdd::rawDataCsvTransform
+     * @covers  \Ninja\LoanOfficerDelegateTdd::rawDataCsvTransform
      * @depends testLoanOfficerInfoCsvGetsTransformedToAnArray
      */
     public function testRawDataCsvGetsTransformedToAnArray() {
@@ -92,7 +102,7 @@ class LoanOfficerDelegateTddTest extends TestCase
         $expected = ['1st Drop Date', 'state', 'Counts', 'Phone Numbers'];
         $firstDropDate = trim($this->LoanOfficerDelegate->loanOfficerArr[0][0]);
         $state = $this->LoanOfficerDelegate->loanOfficerArr[0][1];
-        $counts =  $this->LoanOfficerDelegate->loanOfficerArr[0][2];
+        $counts = $this->LoanOfficerDelegate->loanOfficerArr[0][2];
         $phoneNumbers = $this->LoanOfficerDelegate->loanOfficerArr[0][3];
         $actual = [$firstDropDate, $state, $counts, $phoneNumbers];
 //        echo "\n\n\n Header Row values =\n";
