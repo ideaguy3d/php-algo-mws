@@ -9,8 +9,11 @@ CREATE TABLE Student (
 	Score int DEFAULT 70
 );
 
-INSERT INTO Student (Last, First) VALUES
-('Hernandez', 'Jose'), ('Vu', 'Vince');
+INSERT INTO Student (Last, First) 
+VALUES
+	('Hernandez', 'Jose'), 
+	('Vu', 'Vince')
+GO
 
 SELECT * FROM Student;
 
