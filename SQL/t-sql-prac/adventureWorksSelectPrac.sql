@@ -1,3 +1,4 @@
+
 /****** Script for SelectTopNRows command from SSMS  ******/
 --SELECT TOP (1000) *
 --FROM [TutorialDB].[dbo].[mailing_list2]
