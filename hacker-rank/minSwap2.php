@@ -8,13 +8,24 @@
 
 // output number of swaps to sort arr
 
-$input1 = [1, 3, 5, 2, 4, 6, 8];
+$input1 = [10, 30, 50, 20, 40, 60, 80, 9];
 
 minimumSwap($input1);
 
+
+/*
+ 1 - get arr in asc order
+ 2 - figure out how to get arr in asc order by swapping 2 values
+ 3 - figure out how to get the LEAST amount of swaps
+    ... how many swapping combinations are there ?
+ 4 - return int that had the least swaps
+*/
 function minimumSwap (array $a): int {
     // get reference to how the sorted array should look
     $aCopy = $a;
+    $swapCount = 0;
+    $leastNumberOfSwaps = -1;
+
     sort($aCopy);
 
     for ($i = 0, $sortedIdx = 0; $i < count($a); $i++) {
@@ -25,6 +36,7 @@ function minimumSwap (array $a): int {
             $sortedIdx++;
             continue;
         }
+
         // INNER LOOP :(
         for($i2 = $i + 1; $i2 < (count($a) - $i); $i2++) {
             $rec2 = $a[$i2];
@@ -34,7 +46,7 @@ function minimumSwap (array $a): int {
         }
     }
 
-    return 1;
+    return $leastNumberOfSwaps;
 }
 
 
