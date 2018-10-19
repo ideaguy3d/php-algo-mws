@@ -6,8 +6,10 @@
  * Time: 11:17 AM
  */
 
+
 use Ninja\LoanOfficerDelegateTdd;
 use PHPUnit\Framework\TestCase;
+
 
 class LoanOfficerDelegateTddTest extends TestCase
 {
@@ -53,16 +55,16 @@ class LoanOfficerDelegateTddTest extends TestCase
     public function testCsvFilesExistInFolders() {
         $fileRawData = glob($this->testPathForRawData . '\*.csv', GLOB_ERR);
         if(isset($fileRawData) && (count($fileRawData) > 0) && ($fileRawData !== false)) {
-            echo "\n\n__>> The fileRawData =\n";
-            var_dump($fileRawData);
-            echo "\n\n";
             $this->assertFileIsReadable(
                 $fileRawData[0],
                 "RSM_TEST - The test wasn't able to open the file at {$this->testPathForRawData}"
                 . "\n\t-LoanOfficerDelegateTddTest.php line 62 ish"
             );
+            
             $this->assertStringMatchesFormat('%s.csv', $this->LoanOfficerDelegate->loanOfficerFile,
-                "RSM_TEST - There is not a CSV file in {$this->testPathForLoanOfficerInfo}");
+                "RSM_TEST - There is not a CSV file in {$this->testPathForLoanOfficerInfo}"
+            );
+            
             $this->assertStringMatchesFormat('%s.csv', $this->LoanOfficerDelegate->rawDataFile,
                 "There is not a CSV file in {$this->testPathForRawData}"
                 . "\n\t-LoanOfficerDelegateTddTest.php line 62 ish"

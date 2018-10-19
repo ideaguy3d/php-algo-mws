@@ -45,7 +45,7 @@ class Receipt
      * @param float $coupon
      * @return float|int
      */
-    public function postTaxTotal($items, $coupon) {
+    public function postTaxTotal(array $items, float $coupon): float {
         $subtotal = $this->subtotal($items, $coupon);
         return $subtotal + $this->tax($subtotal);
     }
