@@ -24,18 +24,7 @@ Had it not been for us whalemen, that
 tract of land would this day perhaps
 have been in as howling condition as the
 coast of Labrador.
-
 END_TEXT;
 
-$myText = str_replace("\r\n", "\n", $myText);
 
-$lineLength = 40;
-$numLines = substr_count($myText, "\n");
-$myJustifiedText = "";
-$startOfLine = 0;
-
-for ($i = 0; $i < $numLines; $i++) {
-    $originalLineLength = strpos($myText, "\n", $startOfLine) - $startOfLine;
-    $justifiedLine = substr($myText, $startOfLine, $originalLineLength);
-    $justifiedLineLength = $originalLineLength;
-}
+// end of php file :)
