@@ -1,0 +1,1 @@
+You have %d messages in your %s, of which %d are unread.
