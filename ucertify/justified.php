@@ -45,6 +45,7 @@ for ($i = 0; $i < $numLines; $i++) {
 
     // keep adding spaces between words until the desired line length is reached
     while( ($i < $numLines - 1) && ($justifiedLineLength < $lineLength) ) {
+        // iterate over every single char in the current line
         for($j = 0; $j < $justifiedLineLength; $j++) {
             if($justifiedLineLength < $lineLength && $justifiedLine[$j] == " ") {
                 $justifiedLine = substr_replace($justifiedLine, " ", $j, 0);
