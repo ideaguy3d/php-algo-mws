@@ -18,8 +18,20 @@ $sale = 200;
 $sale = $sale- + 1; // 199
 $a = 20%-8; // 4
 
+$addr = "1010 Nörth Mäintåin";
+$addr = strtr($addr, "äåö", "aao");
+
+$a = 'somevalue';
+$varArr = array("a" => "One","b" => "Two", "c" => "Three");
+extract($varArr);
+echo "\$a = $a; \$b = $b; \$c = $c";
+
+
+
+$my_array = array(1 => 'a', 2 => 'b');
+
 echo "\n\n";
-echo $a;
+echo $my_array;
 echo "\n\n";
 
 
