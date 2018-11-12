@@ -18,37 +18,31 @@
         }
     </style>
 </head>
+
+
 <body>
 
 <h2>Fibonacci sequence using recursion</h2>
 
-<table cellspacing="0" border="0" style="width: 20em; border: 1px solid #666;">
+<table cellspacing="0" border="0" style="width: 20em; border: 1px solid #80848c;">
     <tr>
         <th>Sequence #</th>
         <th>Value</th>
     </tr>
 
     <?php
-    /**
-     * Created by PhpStorm.
-     * User: Julius Alvarado
-     * Date: 10/26/2018
-     * Time: 1:43 AM
-     */
-
-    // good ol fibonacci
-    $recursions = 10;
-    function fibonacci(int $n): int {
-        if ($n === 0 || $n === 1) {
-            return $n;
+        $recursions = 10;
+        function fibonacci(int $n): int {
+            if ($n === 0 || $n === 1) {
+                return $n;
+            }
+            return fibonacci($n - 2) + fibonacci($n - 1);
         }
-        return fibonacci($n - 2) + fibonacci($n - 1);
-    }
 
-    for ($i = 0; $i < $recursions; $i++) {
-        ?>
-        <tr<?php if ($i % 2 != 0) echo ' class="alt"' ?>>
-            <td>F<sub><?php echo $i ?></sub></td>
+        for ($i = 0; $i < $recursions; $i++) {
+    ?>
+        <tr <?php if ($i % 2 != 0) echo ' class="alt"' ?>>
+            <td>F = <sub><?php echo $i ?></sub></td>
             <td><?php echo fibonacci($i) ?></td>
         </tr>
     <?php } ?>

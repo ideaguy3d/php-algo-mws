@@ -6,8 +6,6 @@
  * Time: 1:20 PM
  */
 
-
-
 $userinfo['username'] = "ninjaHacker";
 $firstLetter = $userinfo['username'][0];
 
@@ -15,18 +13,16 @@ $a = 210;
 $b = 'a';
 
 $sale = 200;
-$sale = $sale- + 1; // 199
-$a = 20%-8; // 4
+$sale = $sale - +1; // 199
+$a = 20 % -8; // 4
 
-$addr = "1010 Nörth Mäintåin";
+$addr = "1010 Nörth Mäintåin ave";
 $addr = strtr($addr, "äåö", "aao");
 
 $a = 'somevalue';
-$varArr = array("a" => "One","b" => "Two", "c" => "Three");
+$varArr = array("a2" => "One", "b2" => "Two", "c2" => "Three");
 extract($varArr);
-echo "\$a = $a; \$b = $b; \$c = $c";
-
-
+echo "\$a = $a2; \$b = $b2; \$c = $c2";
 
 $my_array = array(1 => 'a', 2 => 'b');
 

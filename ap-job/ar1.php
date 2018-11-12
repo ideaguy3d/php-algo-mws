@@ -6,12 +6,12 @@
  * Time: 11:44 AM
  */
 
-$a1 = ['one', 'two', 'three'];
-$a2 = ['three', 'four', 'five'];
+$arr1 = ['one', 'two', 'three'];
+$arr2 = ['three', 'four', 'five'];
 
 echo "\n breakpoint \n";
 
-$merge1 = array_merge($a1, $a2);
+$merge1 = array_merge($arr1, $arr2);
 $mergeUnique1 = array_unique($merge1);
 
 echo "\n breakpoint \n";
