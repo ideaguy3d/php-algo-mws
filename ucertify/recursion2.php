@@ -21,6 +21,7 @@
 
 
 <body>
+
 <h2>Fibonacci Recursion practice</h2>
 
 <table style="width: 20em; border: 1px solid #80848c;">
@@ -29,7 +30,7 @@
         <th>Value</th>
     </tr>
 <?php
-    $recursions = 10;
+    $recursions = 5;
     function Fibonacci (int $n): int {
         if($n === 0 || $n === 1) {
             return $n;
@@ -37,10 +38,10 @@
         return Fibonacci($n - 2) + Fibonacci($n - 1);
     }
 
-    for ($i = 0; $i < $recursions; $i++) {
+    for ($i = 1; $i <= $recursions; $i++) {
 ?>
     <tr <?php if($i % 2 != 0) echo 'class="alt"' ?>>
-        <td> Sequence = <?php echo $i ?> </td>
+        <td> f(<?php echo $i ?>) </td>
         <td> <?php echo Fibonacci($i) ?> </td>
     </tr>
 <?php } ?>
