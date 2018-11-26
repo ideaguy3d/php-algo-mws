@@ -17,13 +17,31 @@ class ItemsTableTest extends TestCase
 {
     private $PDO;
     private $ItemsTable;
+    private $testStatus;
     
     public function setUp() {
-        $this->PDO = $this->getConnection();
-        $this->createTable();
-        $this->populateTable();
-        
+        $this->testStatus = "Test Status was initialized in the fixture.";
+    }
+    
+    public function testDatabaseConnectionCanBeMade(): bool {
+        try {
+            $this->PDO = $this->getConnection();
+            $this->assertEquals(true, isset($this->PDO),
+                'A connection to the db should have been made');
+            $this->createTable();
+            $this->populateTable();
+            echo "\ntest status: {$this->testStatus}\n";
+            return true;
+        }
+        catch(\Exception $e) {
+            return false;
+        }
+    }
+    
+    public function testAnInstanceOfItemsTableWasCreated() {
         $this->ItemsTable = new ItemsTable($this->PDO);
+        $this->assertEquals(true, isset($this->ItemsTable),
+            'an ItemsTable instance should have been created');
     }
     
     public function tearDown() {
@@ -52,41 +70,48 @@ class ItemsTableTest extends TestCase
         );
     }
     
-    public function testFindForIdMock() {
+    /**
+     * @param bool $connectionSucceeded - simple boolean to make sure db connection was made from this functions dependency
+     *
+     * @depends testDatabaseConnectionCanBeMade
+     */
+    public function testFindForIdMock(bool $connectionSucceeded) {
         $id = 1;
         
-        $PDOStatement = $this->getMockBuilder('\PDOStatement')
-                             ->setMethods(['execute', 'fetch'])
-                             ->getMock();
-        
-        $PDOStatement->expects($this->once())
-                     ->method('execute')
-                     ->with([$id])
-                     ->will($this->returnSelf());
-        $PDOStatement->expects($this->once())
-                     ->method('fetch')
-                     ->with($this->anything())
-                     ->will($this->returnValue('canary'));
-        
-        $PDO = $this->getMockBuilder('\PDO')
-                    ->setMethods(['prepare'])
-                    ->disableOriginalConstructor()
-                    ->getMock();
-        
-        $PDO->expects($this->once())
-            ->method('prepare')
-            ->with($this->stringContains('SELECT * FROM'))
-            ->willReturn($PDOStatement);
-        
-        $ItemsTable = new ItemsTable($PDO);
-        
-        $output = $ItemsTable->findForId($id);
-        
-        $this->assertEquals(
-            'canary',
-            $output,
-            'The output for the mocked instance of the PDO and PDOStatment should produce the string `canary`.'
-        );
+        if($connectionSucceeded) {
+            $PDOStatement = $this->getMockBuilder('\PDOStatement')
+                                 ->setMethods(['execute', 'fetch'])
+                                 ->getMock();
+            
+            $PDOStatement->expects($this->once())
+                         ->method('execute')
+                         ->with([$id])
+                         ->will($this->returnSelf());
+            $PDOStatement->expects($this->once())
+                         ->method('fetch')
+                         ->with($this->anything())
+                         ->will($this->returnValue('canary'));
+            
+            $PDO = $this->getMockBuilder('\PDO')
+                        ->setMethods(['prepare'])
+                        ->disableOriginalConstructor()
+                        ->getMock();
+            
+            $PDO->expects($this->once())
+                ->method('prepare')
+                ->with($this->stringContains('SELECT * FROM'))
+                ->willReturn($PDOStatement);
+            
+            $ItemsTable = new ItemsTable($PDO);
+            
+            $output = $ItemsTable->findForId($id);
+            
+            $this->assertEquals(
+                'canary',
+                $output,
+                'The output for the mocked instance of the PDO and PDOStatment should produce the string `canary`.'
+            );
+        }
     }
     
     protected function getConnection() {
@@ -96,21 +121,23 @@ class ItemsTableTest extends TestCase
     }
     
     protected function createTable() {
-        $query = "
-		CREATE TABLE `items` (
-			`id`	INTEGER,
-			`name`	TEXT,
-			`price`	REAL,
-			PRIMARY KEY(`id`)
-		);
+        $query = /** @lang MySQL */
+            "
+            CREATE TABLE `items` (
+                `id`	INTEGER,
+                `name`	TEXT,
+                `price`	REAL,
+                PRIMARY KEY(`id`)
+            );
 		";
         $this->PDO->query($query);
     }
     
     protected function populateTable() {
-        $query = "
-		INSERT INTO `items` VALUES (1,'Candy',1.00);
-		INSERT INTO `items` VALUES (2,'TShirt',5.34);
+        $query = /** @lang MySQL */
+            "
+            INSERT INTO `items` VALUES (1,'Candy',1.00);
+            INSERT INTO `items` VALUES (2,'TShirt',5.34);
 		";
         $this->PDO->query($query);
     }
