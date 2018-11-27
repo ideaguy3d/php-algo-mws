@@ -7,4 +7,5 @@ config.php
 **/config
 coverage
 tmp
-tdd-inlearning
+tdd-inlearning/settings.php
+settings.php

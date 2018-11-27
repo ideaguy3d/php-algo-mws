@@ -27,9 +27,11 @@ class FormatterTest extends TestCase
     
     /**
      * @dataProvider provideCurrencyAmount_DataProvider
-     * @param mixed $input - will almost always be an int or float
-     * @param float $expected
-     * @param string $msg
+     *
+     * @param mixed  $input - fromDataProvider, will almost always be an int or float
+     * @param float  $expected - fromDataProvider, 2nd index
+     * @param string $msg - fromDataProvider, info of test input
+     *
      * @return void
      */
     public function testCurrencyAmount($input, $expected, $msg) {
@@ -49,7 +51,7 @@ class FormatterTest extends TestCase
             // 3 params
             [1.11, 1.11, '1.11 should stay as 1.11'],
             // 3 params
-            [1.111, 1.11, '1.111 should become 1.11']
+            [1.111, 1.11, '1.111 should become 1.11'],
         ];
     }
 }
