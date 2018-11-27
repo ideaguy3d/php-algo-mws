@@ -31,7 +31,7 @@ class ReceiptTest extends TestCase
         unset($this->Receipt);
     }
     
-    function testSubTotalSumsGivenDataSetCorrectly() {
+    function testSubTotalSumsCorrectlyWithTheGivenDataSet() {
     
     }
 }

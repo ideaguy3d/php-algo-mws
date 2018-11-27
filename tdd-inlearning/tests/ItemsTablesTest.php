@@ -26,10 +26,14 @@ class ItemsTableTest extends TestCase
     public function testDatabaseConnectionCanBeMade(): bool {
         try {
             $this->PDO = $this->getConnection();
-            $this->assertEquals(true, isset($this->PDO),
-                'A connection to the db should have been made');
-            $this->createTable();
-            $this->populateTable();
+            $pdoSet = isset($this->PDO);
+            $this->assertEquals(true, $pdoSet,
+                'A connection to the db should have been made'
+            );
+            if($pdoSet) {
+                $this->createTable();
+                $this->populateTable();
+            }
             echo "\ntest status: {$this->testStatus}\n";
             return true;
         }
@@ -38,10 +42,18 @@ class ItemsTableTest extends TestCase
         }
     }
     
-    public function testAnInstanceOfItemsTableWasCreated() {
-        $this->ItemsTable = new ItemsTable($this->PDO);
-        $this->assertEquals(true, isset($this->ItemsTable),
-            'an ItemsTable instance should have been created');
+    /**
+     * @depends testDatabaseConnectionCanBeMade
+     *
+     * @param bool $connectionSucceeded - comes from "testDatabaseConnectionCanBeMade" dependency
+     */
+    public function testAnInstanceOfItemsTableWasCreated(bool $connectionSucceeded) {
+        if($connectionSucceeded) {
+            $this->ItemsTable = new ItemsTable($this->PDO);
+            $this->assertEquals(true, isset($this->ItemsTable),
+                'an ItemsTable instance should have been created'
+            );
+        }
     }
     
     public function tearDown() {
@@ -49,25 +61,26 @@ class ItemsTableTest extends TestCase
         unset($this->PDO);
     }
     
-    public function testFindForId() {
+    /**
+     * @depends testDatabaseConnectionCanBeMade
+     *
+     * @param bool $connectionSucceeded - from "testDatabaseConnectionCanBeMade" dependency
+     */
+    public function testFindForId(bool $connectionSucceeded) {
         $id = 1;
         
-        $result = $this->ItemsTable->findForId($id);
-        $this->assertInternalType(
-            'array',
-            $result,
-            'The result should always be an array.'
-        );
-        $this->assertEquals(
-            $id,
-            $result['id'],
-            'The id key/value of the result for id should be equal to the id.'
-        );
-        $this->assertEquals(
-            'Candy',
-            $result['name'],
-            'The id key/value of the result for name should be equal to `Candy`.'
-        );
+        if($connectionSucceeded) {
+            $result = $this->ItemsTable->findForId($id);
+            $this->assertInternalType('array', $result,
+                'The result should always be an array.'
+            );
+            $this->assertEquals($id, $result['id'],
+                'The id key/value of the result for id should be equal to the id.'
+            );
+            $this->assertEquals('Candy', $result['name'],
+                'The id key/value of the result for name should be equal to `Candy`.'
+            );
+        }
     }
     
     /**
@@ -106,16 +119,14 @@ class ItemsTableTest extends TestCase
             
             $output = $ItemsTable->findForId($id);
             
-            $this->assertEquals(
-                'canary',
-                $output,
+            $this->assertEquals('canary', $output,
                 'The output for the mocked instance of the PDO and PDOStatment should produce the string `canary`.'
             );
         }
     }
     
     protected function getConnection() {
-        return new PDO('sqlsrv:Database=NINJA;server=192.168.6.26\MHDATA',
+        return new PDO('sqlsrv:server=192.168.6.26\MHDATA;Database=NINJA;',
             'mhetaV1', 'mhetaV!'
         );
     }

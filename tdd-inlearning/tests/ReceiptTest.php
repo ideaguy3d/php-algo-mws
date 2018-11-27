@@ -8,6 +8,7 @@
  */
 
 namespace TDD\Test;
+
 require dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 use PHPUnit\Framework\TestCase;
@@ -37,8 +38,9 @@ class ReceiptTest extends TestCase
     
     /**
      * @dataProvider provideSubtotal
+     *
      * @param array $items - 1st idx in dp arr
-     * @param int $expected
+     * @param int   $expected
      */
     public function testSubtotal($items, $expected) {
         $coupon = null;
@@ -93,7 +95,7 @@ class ReceiptTest extends TestCase
                         ->setMethods(['tax', 'subtotal'])
                         ->setConstructorArgs([$this->Formatter])
                         ->getMock();
-        // Invoke the total method
+        // Invoke the subtotal method
         $Receipt->expects($this->once())
                 ->method('subtotal')
                 ->with($items, $coupon)
