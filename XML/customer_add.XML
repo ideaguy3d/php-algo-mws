@@ -146,6 +146,7 @@
                     <FullName>STRTYPE</FullName> <!-- optional -->
                 </CurrencyRef>
             </CustomerAdd>
+            
             <IncludeRetElement>STRTYPE</IncludeRetElement> <!-- optional, may repeat -->
         </CustomerAddRq>
 
@@ -327,6 +328,7 @@
                     <DataExtValue>STRTYPE</DataExtValue> <!-- required -->
                 </DataExtRet>
             </CustomerRet>
+
             <ErrorRecovery> <!-- optional -->
                 <!-- BEGIN OR -->
                 <ListID>IDTYPE</ListID> <!-- optional -->
