@@ -6,12 +6,13 @@
  * Time: 11:17 AM
  */
 
+require __DIR__ . DIRECTORY_SEPARATOR . '..\vendor\autoload.php';
 
-use Ninja\LoanOfficerDelegateTdd;
+use Ninja\LoanOfficerDelegate;
 use PHPUnit\Framework\TestCase;
 
 
-class LoanOfficerDelegateTddTest extends TestCase
+class LoanOfficerDelegateTest extends TestCase
 {
     private $testPathForLoanOfficerInfo = 'C:\xampp\htdocs\php-sql\tdd-richard\loanOfficersInfo';
     private $testPathForRawData = 'C:\xampp\htdocs\php-sql\tdd-richard\loanOfficersRawData';
@@ -19,7 +20,7 @@ class LoanOfficerDelegateTddTest extends TestCase
     private $LoanOfficerDelegate;
     
     public function setUp() {
-        $this->LoanOfficerDelegate = new LoanOfficerDelegateTdd(
+        $this->LoanOfficerDelegate = new LoanOfficerDelegate(
             $this->testPathForLoanOfficerInfo,
             $this->testPathForRawData,
             $this->testPathForExportFolder,
@@ -50,7 +51,7 @@ class LoanOfficerDelegateTddTest extends TestCase
     }
     
     /**
-     * @covers \Ninja\LoanOfficerDelegateTdd::__construct
+     * @covers \Ninja\LoanOfficerDelegate::__construct
      */
     public function testCsvFilesExistInFolders() {
         $fileRawData = glob($this->testPathForRawData . '\*.csv', GLOB_ERR);
@@ -58,7 +59,7 @@ class LoanOfficerDelegateTddTest extends TestCase
             $this->assertFileIsReadable(
                 $fileRawData[0],
                 "RSM_TEST - The test wasn't able to open the file at {$this->testPathForRawData}"
-                . "\n\t-LoanOfficerDelegateTddTest.php line 62 ish"
+                . "\n\t-LoanOfficerDelegateTest.php line 62 ish"
             );
             
             $this->assertStringMatchesFormat('%s.csv', $this->LoanOfficerDelegate->loanOfficerFile,

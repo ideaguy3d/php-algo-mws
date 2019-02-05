@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="5.0"?>
+<QBXML>
+    <QBXMLSubscriptionMsgsRq>
+        <DataEventSubscriptionAddRq>
+
+        </DataEventSubscriptionAddRq>
+    </QBXMLSubscriptionMsgsRq>
+
+    <QBXMLMsgsRq onError="stopOnError">
+        <PurchaseOrderAddRq>
+            <PurchaseOrderAdd defMacro="MACROTYPE"> </PurchaseOrderAdd> <!-- required -->
+        </PurchaseOrderAddRq>
+    </QBXMLMsgsRq>
+</QBXML>

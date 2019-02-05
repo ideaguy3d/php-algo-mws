@@ -4,10 +4,12 @@
     <QBXMLMsgsRq onError="stopOnError">
         <PurchaseOrderAddRq>
             <PurchaseOrderAdd defMacro="MACROTYPE"> <!-- required -->
+
                 <VendorRef> <!-- optional -->
                     <ListID>IDTYPE</ListID> <!-- optional -->
                     <FullName>STRTYPE</FullName> <!-- optional -->
                 </VendorRef>
+
                 <ClassRef> <!-- optional -->
                     <ListID>IDTYPE</ListID> <!-- optional -->
                     <FullName>STRTYPE</FullName> <!-- optional -->
@@ -29,6 +31,7 @@
                 </TemplateRef>
                 <TxnDate>DATETYPE</TxnDate> <!-- optional -->
                 <RefNumber>STRTYPE</RefNumber> <!-- optional -->
+
                 <VendorAddress> <!-- optional -->
                     <Addr1>STRTYPE</Addr1> <!-- optional -->
                     <Addr2>STRTYPE</Addr2> <!-- optional -->
@@ -41,6 +44,7 @@
                     <Country>STRTYPE</Country> <!-- optional -->
                     <Note>STRTYPE</Note> <!-- optional -->
                 </VendorAddress>
+
                 <ShipAddress> <!-- optional -->
                     <Addr1>STRTYPE</Addr1> <!-- optional -->
                     <Addr2>STRTYPE</Addr2> <!-- optional -->
@@ -57,7 +61,9 @@
                     <ListID>IDTYPE</ListID> <!-- optional -->
                     <FullName>STRTYPE</FullName> <!-- optional -->
                 </TermsRef>
+
                 <DueDate>DATETYPE</DueDate> <!-- optional -->
+
                 <ExpectedDate>DATETYPE</ExpectedDate> <!-- optional -->
                 <ShipMethodRef> <!-- optional -->
                     <ListID>IDTYPE</ListID> <!-- optional -->
@@ -141,7 +147,8 @@
             <IncludeRetElement>STRTYPE</IncludeRetElement> <!-- optional, may repeat -->
         </PurchaseOrderAddRq>
 
-        <PurchaseOrderAddRs statusCode="INTTYPE" statusSeverity="STRTYPE" statusMessage="STRTYPE">
+        <PurchaseOrderAddRs statusCode="INTTYPE" statusSeverity="STRTYPE"
+                            statusMessage="STRTYPE">
             <PurchaseOrderRet> <!-- optional -->
                 <TxnID>IDTYPE</TxnID> <!-- required -->
                 <TimeCreated>DATETIMETYPE</TimeCreated> <!-- required -->

@@ -11,7 +11,7 @@ namespace Ninja;
 
 use PHPUnit\Runner\Exception;
 
-class LoanOfficerDelegateTdd
+class LoanOfficerDelegate
 {
     public $loanOfficerArr;
     public $dataArr;
@@ -47,8 +47,7 @@ class LoanOfficerDelegateTdd
      * @param bool $debugMode - output debug info for this class instance
      *
      */
-    public function __construct(string $loanOfficerPath, string $rawDataPath,
-                                string $exportFolderPath, bool $debugMode) {
+    public function __construct(string $loanOfficerPath, string $rawDataPath, string $exportFolderPath, bool $debugMode) {
         $this->exportFolder = $exportFolderPath;
         $this->debugMode = $debugMode;
         
@@ -74,7 +73,6 @@ class LoanOfficerDelegateTdd
             exit("\n\n__>> RSM_ERROR - There wasn't a raw data csv file, exiting program"
                 . "\n\t - LoanOfficerDelegateTdd.php line 64 ish\n\n");
         }
-        
     }
     
     // create the $loanOfficerInfoAr from CSV
