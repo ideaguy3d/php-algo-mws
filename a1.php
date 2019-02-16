@@ -6,6 +6,38 @@
  * Time: 1:20 PM
  */
 
+// test for correctly adding additional insert cost
+$pricePerClick = 0.06;
+$numInserts = 4;
+$additionalInsertCost = 0.005;
+if($numInserts > 1) {
+    for($i = 1; $i < $numInserts; $i++) {
+        $pricePerClick += $additionalInsertCost;
+    }
+}
+echo "\n\n__>> price per click with $numInserts inserts = $pricePerClick\n\n";
+
+$break = 'point';
+
+
+// test parsing for stand envelopes from a raw string
+$envelopePaperArr = [
+    '#10 White', '#10 Brown Kraft', 'Brown Kraft', ' White #10 ', 'Monster White #10 '
+];
+foreach($envelopePaperArr as $key => $value) {
+    $result = strpos(strtolower($value), '#10');
+    
+    $break = 'point';
+}
+
+
+$mockData = [['company_name', 'total'], ['Spicers LLC', '3800']];
+$mockDataJson = json_encode($mockData);
+
+var_export($mockDataJson);
+
+$break = 'point';
+
 $userinfo['username'] = "ninjaHacker";
 $firstLetter = $userinfo['username'][0];
 

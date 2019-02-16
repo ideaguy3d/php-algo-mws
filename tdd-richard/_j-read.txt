@@ -6,6 +6,8 @@ tool I built for Richard.
 ~ 2/4/2019 ~
 To invoke a test from the command line:
 .\vendor\bin\phpunit --verbose .\tests\LoanOfficerDelegateTest.php
+or
+.\vendor\bin\phpunit --verbose .\tests\LoanOfficerDelegateTest.php --colors=always
 
 
 
