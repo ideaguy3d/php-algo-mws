@@ -4,7 +4,18 @@
  * User: Julius Alvarado
  * Date: 8/19/2018
  * Time: 1:20 PM
+ *
  */
+
+$myHost = gethostname();
+$break = 'point';
+
+$newLines = "\n\r\n\r";
+$info = "The accounting and coordinator data are different sizes ~routes.php line 333 ish";
+$info = substr_replace($info, $newLines, 0, 0);
+$info = substr_replace($info, $newLines, strlen($info), 0);
+
+$break = 'point';
 
 // test for correctly adding additional insert cost
 $pricePerClick = 0.06;
@@ -15,14 +26,12 @@ if($numInserts > 1) {
         $pricePerClick += $additionalInsertCost;
     }
 }
+
 echo "\n\n__>> price per click with $numInserts inserts = $pricePerClick\n\n";
-
-$break = 'point';
-
 
 // test parsing for stand envelopes from a raw string
 $envelopePaperArr = [
-    '#10 White', '#10 Brown Kraft', 'Brown Kraft', ' White #10 ', 'Monster White #10 '
+    '#10 White', '#10 Brown Kraft', 'Brown Kraft', ' White #10 ', 'Monster White #10 ',
 ];
 foreach($envelopePaperArr as $key => $value) {
     $result = strpos(strtolower($value), '#10');
@@ -52,11 +61,11 @@ $addr = "1010 Nörth Mäintåin ave";
 $addr = strtr($addr, "äåö", "aao");
 
 $a = 'somevalue';
-$varArr = array("a2" => "One", "b2" => "Two", "c2" => "Three");
+$varArr = ["a2" => "One", "b2" => "Two", "c2" => "Three"];
 extract($varArr);
 echo "\$a = $a2; \$b = $b2; \$c = $c2";
 
-$my_array = array(1 => 'a', 2 => 'b');
+$my_array = [1 => 'a', 2 => 'b'];
 
 echo "\n\n";
 echo $my_array;
