@@ -16,6 +16,30 @@ use GuzzleHttp\Psr7\Request;
 
 class GuzzlePrac
 {
+ 
+    private $defPath = 'firebase/example';
+    
+//    public function websocketTest() {
+//        $defUrl = $this->defUrl;
+//
+//        $firebase = new \Firebase\FirebaseLib($defUrl, $this->defToken);
+//
+//        $test = [
+//            'foo' => 'bar',
+//            'i_love' => 'lamp',
+//            'id' => 42
+//        ];
+//
+//        $dateTime = date_create();
+//        $firebase->set($defUrl . '/' . $dateTime->format('c'), $test);
+//
+//        // --- storing a string ---
+//        $firebase->set($defUrl . '/name/contact001', 'John Doe');
+//        // --- reading the stored string ---
+//        $name = $firebase->get($defUrl . '/name/contact001');
+//
+//        return $name;
+//    }
     
     public function guzzleStart() {
         $client = new Client();
@@ -26,6 +50,8 @@ class GuzzlePrac
                 yield new Request('GET', $uri);
             }
         };
+        
+        $break = 'point';
         
         $pool = new Pool($client, $requests(2), [
             'concurrency' => 5,
@@ -38,11 +64,18 @@ class GuzzlePrac
                 $break = 'point';
             }
         ]);
+        
+        $promise = $pool->promise();
+        $break = 'Asynchronous';
+        
+        $promise->wait();
+        $break = 'Synchronous';
     }
     
     public function logGuzzleRejection($reason, $index, string $passType): string {
         $errorMessage = "\n\r __>> ERROR in $passType: \n\r ";
         $space = "\n\r\n\r-------------------------------------------------------------------------\n\r\n\r";
+        
         // Write error to local disk
         $randomNumber = rand(0, 90000000);
         $errorHandle = fopen(".\\errors\ERROR$randomNumber.txt", 'w');
@@ -50,18 +83,19 @@ class GuzzlePrac
         if ($reason instanceof \GuzzleHttp\Exception\ClientException) {
             $errorMessage = $reason->getResponse()->getBody();
             $errorMessage = $errorMessage . $space . $errorMessage;
-            
             fwrite($errorHandle, $errorMessage);
         }
         else if ($reason instanceof \GuzzleHttp\Exception\RequestException) {
             $reqError = $reason->getRequest();
+            $reqError = \GuzzleHttp\Psr7\str($reqError);
             $resError = '';
             
             if ($reason->hasResponse()) {
                 $resError = $reason->getResponse();
+                $resError = \GuzzleHttp\Psr7\str($resError);
             }
             
-            $errorMessage = $errorMessage . $space . (string)$reqError . $space . (string)$resError;
+            $errorMessage = $errorMessage . $space . $reqError . $space . (string)$resError;
             fwrite($errorHandle, $errorMessage);
         }
         else {
@@ -72,7 +106,7 @@ class GuzzlePrac
             fwrite($errorHandle, $errorMessage);
         }
         
-        fclose($this->errorHandle);
+        fclose($errorHandle);
         return $errorMessage;
     }
     

@@ -10,8 +10,13 @@
 
 require 'vendor\autoload.php';
 
+// gp = guzzle practice
+$gp = new \MhetaClient\GuzzlePrac();
+
+//$gp->guzzleStart();
 
 
+var_dump($gp->websocketTest());
 
 
 
