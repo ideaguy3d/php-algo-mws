@@ -2,18 +2,30 @@
 declare(strict_types=1);
 
 $iterations = 10;
+$recurses = 0;
+$recurseArray = [];
 
-function fibonacci1(int $n, string $order) {
-    $break = 'point';
+//
+function fibonacci1(
+    int $n, string $order, int &$recurses, array &$recurseArray
+): int {
+    $recurses++;
     if($n === 1 || $n === 0) {
+        $recurseArray [] = $n;
         return $n;
     }
-    return fibonacci1($n - 2, '1st') + fibonacci1($n - 1, '2nd');
+    $sum = array_sum($recurseArray);
+    echo " \n__>> {order: [$order], sum: $sum} recursion start __>> ";
+    $break = 'point';
+    return fibonacci1($n - 2, '1st', $recurses, $recurseArray)
+        + fibonacci1($n - 1, '2nd', $recurses, $recurseArray);
 }
 
 for($i = 0; $i < $iterations; $i++) {
-    echo "\n\nincrementer = $i, fibonacci return:\n";
-    echo fibonacci1($i, 'origin');
+    echo "\n\n\nincrementer = $i, fibonacci return:";
+    echo fibonacci1($i, 'origin', $recurses, $recurseArray) . " ~in $recurses recurses";
+    $recurses = 0;
+    $recurseArray = [];
 }
 
 
