@@ -6,26 +6,28 @@ $recurses = 0;
 $recurseArray = [];
 
 //
-function fibonacci1(
-    int $n, string $order, int &$recurses, array &$recurseArray
-): int {
+function fibonacci1(int $n, string $order, int &$recurses, array &$recurseArray): int {
     $recurses++;
-    if($n === 1 || $n === 0) {
+    
+    if($n === 1 || $n === 2) {
         $recurseArray [] = $n;
-        return $n;
+        return 1;
     }
+    
     $sum = array_sum($recurseArray);
-    echo " \n__>> {order: [$order], sum: $sum, n: $n} recursion start __>> ";
+    echo " __>> {o: [$order], sum: $sum, n: $n} recursion start __>> \n";
+    
     $break = 'point';
-    return fibonacci1($n - 2, '1st', $recurses, $recurseArray)
-        + fibonacci1($n - 1, '2nd', $recurses, $recurseArray);
+    
+    return fibonacci1($n - 1, '1st', $recurses, $recurseArray)
+        + fibonacci1($n - 2, '2nd', $recurses, $recurseArray);
 }
 
-for($i = 0; $i < $iterations; $i++) {
-    echo "\n\n\nincrementer = $i, fibonacci return:";
+for($i = 1; $i < $iterations; $i++) {
+    echo "\n\n\ni = $i | fibonacci return:\n";
     echo(
         fibonacci1($i, 'origin', $recurses, $recurseArray)
-        . " ~in $recurses recurses"
+        . " ($recurses recurses)"
     );
     
     //-- reset:
