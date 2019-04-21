@@ -32,9 +32,9 @@ SELECT * FROM Customer;
 
 -- "FOREIGN KEY constraint"
 CREATE TABLE Bridge2 (
-	BridgeID int UNIQUE,
-	First varchar(30),
-	Last varchar(50)
+	BridgeID INT UNIQUE,
+	First VARCHAR(30),
+	Last VARCHAR(50)
 );
 
 CREATE TABLE BridgeBuilders (

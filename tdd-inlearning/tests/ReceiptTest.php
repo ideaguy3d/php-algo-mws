@@ -8,8 +8,8 @@
  */
 
 namespace TDD\Test;
-require dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'vendor'
-    . DIRECTORY_SEPARATOR . 'autoload.php';
+
+require dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 use PHPUnit\Framework\TestCase;
 use TDD\Receipt;
@@ -23,12 +23,12 @@ class ReceiptTest extends TestCase
         $this->Formatter = $this->getMockBuilder('TDD\Formatter')
                                 ->setMethods(['currencyAmount'])
                                 ->getMock();
-                    
+        
         $this->Formatter->expects($this->any())
                         ->method('currencyAmount')
                         ->with($this->anything())
                         ->will($this->returnArgument(0));
-                        
+        
         $this->Receipt = new Receipt($this->Formatter);
     }
     
@@ -38,8 +38,9 @@ class ReceiptTest extends TestCase
     
     /**
      * @dataProvider provideSubtotal
+     *
      * @param array $items - 1st idx in dp arr
-     * @param int $expected
+     * @param int   $expected
      */
     public function testSubtotal($items, $expected) {
         $coupon = null;
@@ -55,13 +56,13 @@ class ReceiptTest extends TestCase
     public function provideSubtotal() {
         return [
             "ints totaling 16" => [
-                [1, 2, 5, 8], 16
+                [1, 2, 5, 8], 16,
             ],
             "negative int" => [
-                [-1, 2, 5, 8], 14
+                [-1, 2, 5, 8], 14,
             ],
             "3 ints totaling 11" => [
-                [1, 2, 8], 11
+                [1, 2, 8], 11,
             ],
         ];
     }
@@ -94,7 +95,7 @@ class ReceiptTest extends TestCase
                         ->setMethods(['tax', 'subtotal'])
                         ->setConstructorArgs([$this->Formatter])
                         ->getMock();
-        // Invoke the total method
+        // Invoke the subtotal method
         $Receipt->expects($this->once())
                 ->method('subtotal')
                 ->with($items, $coupon)
@@ -109,7 +110,7 @@ class ReceiptTest extends TestCase
         $result = $this->Receipt->postTaxTotal([1, 2, 5, 8], null);
         $this->assertEquals(19.20, $result);
     }
-
+    
     public function testTax() {
         $amount = 10;
         $this->Receipt->tax = 0.2;

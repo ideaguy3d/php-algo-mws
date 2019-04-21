@@ -1,30 +1,36 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Julius Alvarado
- * Date: 3/6/2019
- * Time: 3:03 AM
- */
+declare(strict_types=1);
 
+$iterations = 10;
+$recurses = 0;
+$recurseArray = [];
 
-$recursions = 10;
-function fibonacci(int $n, string $order): int {
-    if ($n === 0 || $n === 1) {
-        return $n;
+function fibonacci1(int $n, string $order, int &$recurses, array &$recurseArray): int {
+    $recurses++;
+    
+    if($n === 1 || $n === 2) {
+        $recurseArray [] = $n;
+        return 1;
     }
-    echo $order;
+    
+    $sum = array_sum($recurseArray);
+    echo " __>> {o: [$order], sum: $sum, n: $n} recursion start __>> \n";
+    
     $break = 'point';
-    return fibonacci($n - 2, 'first') + fibonacci($n - 1, 'second');
+    
+    return fibonacci1($n - 1, '1st', $recurses, $recurseArray)
+        + fibonacci1($n - 2, '2nd', $recurses, $recurseArray);
 }
 
-for ($i = 10; $i > 0; $i--) {
-    echo $i;
-    fibonacci($i, 'invoke');
+for($i = 1; $i < $iterations; $i++) {
+    echo "\n\n\ni = $i | fibonacci return:\n";
+    echo(
+        fibonacci1($i, 'origin', $recurses, $recurseArray)
+        . " ($recurses recurses)"
+    );
+    
+    //-- reset:
+    $recurses = 0;
+    $recurseArray = [];
 }
 
-
-
-
-
-
-//
