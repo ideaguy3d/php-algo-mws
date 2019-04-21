@@ -77,6 +77,7 @@ class LoanOfficerDelegateTddTest extends TestCase
     
     /**
      * @covers \Ninja\LoanOfficerDelegateTdd::loanOfficerInfoCsvTransform
+     *
      */
     public function testLoanOfficerInfoCsvGetsTransformedToAnArray() {
         $this->assertTrue($this->LoanOfficerDelegate->loanOfficerInfoCsvTransform(),

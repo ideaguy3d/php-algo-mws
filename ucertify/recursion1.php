@@ -32,18 +32,19 @@
 
     <?php
         $recursions = 10;
-        function fibonacci(int $n): int {
+        function fibonacci(int $n, string $order): int {
             if ($n === 0 || $n === 1) {
                 return $n;
             }
-            return fibonacci($n - 2) + fibonacci($n - 1);
+            echo $order;
+            return fibonacci($n - 2, 'first') + fibonacci($n - 1, 'second');
         }
 
         for ($i = 0; $i < $recursions; $i++) {
     ?>
         <tr <?php if ($i % 2 != 0) echo ' class="alt"' ?>>
             <td>F = <sub><?php echo $i ?></sub></td>
-            <td><?php echo fibonacci($i) ?></td>
+            <td><?php echo fibonacci($i, 'invoke') ?></td>
         </tr>
     <?php } ?>
 </table>
