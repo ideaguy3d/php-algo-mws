@@ -7,6 +7,10 @@
  *
  */
 
+// ep = end point
+$ep = "http://192.168.7.17/ninja/app/commission/test/com-auto/start?precision=exact";
+$data = json_decode(file_get_contents($ep));
+
 $myHost = gethostname();
 $break = 'point';
 
@@ -76,6 +80,8 @@ $letterUserName = strtoupper(str_split($userinfo['username'])[0]);
 $letterUserName2 = strtoupper($userinfo['username'][0]);
 
 echo "letter = $letterUserName";
+
+
 
 
 
