@@ -5,7 +5,6 @@ $iterations = 10;
 $recurses = 0;
 $recurseArray = [];
 
-//
 function fibonacci1(int $n, string $order, int &$recurses, array &$recurseArray): int {
     $recurses++;
     
@@ -34,16 +33,4 @@ for($i = 1; $i < $iterations; $i++) {
     $recurses = 0;
     $recurseArray = [];
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
