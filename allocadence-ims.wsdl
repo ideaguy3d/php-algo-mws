@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://www.ubiquia.com/zenventory/services/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ubiquia"
+                  targetNamespace="http://www.ubiquia.com/zenventory/services/">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.ubiquia.com/zenventory/services/">
+            <xsd:complexType name="Request">
+                <xsd:sequence>
+                    <xsd:element name="session" type="tns:Session"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Response">
+                <xsd:sequence>
+                    <xsd:element name="error" type="tns:Error"/>
+                </xsd:sequence>
+                <xsd:attribute name="status" use="required">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="Failure"/>
+                            <xsd:enumeration value="Success"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:attribute>
+            </xsd:complexType>
+            <xsd:complexType name="Error">
+                <xsd:attribute name="code" type="xsd:int"/>
+                <xsd:attribute name="message" type="xsd:string"/>
+            </xsd:complexType>
+            <xsd:complexType name="Session">
+                <xsd:sequence>
+                    <xsd:element name="user" type="tns:User"/>
+                </xsd:sequence>
+                <xsd:attribute name="id" type="xsd:string"/>
+            </xsd:complexType>
+            <xsd:complexType name="User">
+                <xsd:attribute name="key" type="xsd:string"/>
+            </xsd:complexType>
+            <xsd:complexType name="PurchaseOrder">
+                <xsd:sequence>
+                    <xsd:element name="supplier" type="tns:Supplier"/>
+                    <xsd:element name="items" type="tns:PurchaseOrderItem" minOccurs="1" maxOccurs="unbounded"/>
+                </xsd:sequence>
+                <xsd:attribute name="warehouse" type="xsd:string"/>
+                <xsd:attribute name="number" type="xsd:string"/>
+                <xsd:attribute name="requiredBy" type="xsd:dateTime"/>
+                <xsd:attribute name="shippingMethod" type="xsd:string"/>
+                <xsd:attribute name="supplierTerms" type="xsd:string"/>
+                <xsd:attribute name="projectNo" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="updateExisting" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="notes" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="userfield1" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="userfield2" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="userfield3" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="mylist1" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="mylist2" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            </xsd:complexType>
+            <xsd:complexType name="Supplier">
+                <xsd:attribute name="name" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="address1" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="address2" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="city" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="state" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="zip" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="officephone" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="officefax" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="website" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="contactname1" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="contactphone1" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="contactemail1" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="contactname2" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="contactphone2" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="contactemail2" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="accountno" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="accountterms" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            </xsd:complexType>
+            <xsd:complexType name="PurchaseOrderItem">
+                <xsd:sequence>
+                    <xsd:element name="item" type="tns:Item"/>
+                </xsd:sequence>
+                <xsd:attribute name="quantity" type="xsd:int"/>
+            </xsd:complexType>
+            <xsd:complexType name="Item">
+                <xsd:attribute name="sku" type="xsd:string"/>
+                <xsd:attribute name="desc" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="category" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="uom" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="price" type="xsd:float" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="baseprice" type="xsd:float" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="weight" type="xsd:float" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="econorder" type="xsd:float" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="leadtime" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="parlevel" type="xsd:float" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="kit" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="assembly" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="dropship" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="serialized" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="perishable" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="tracklot" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="leakageriskid" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="ccfrequencyid" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="minccfrequencyid" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="finishedgood" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="rawmaterial" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="nonmaterial" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="reorderlvl" type="xsd:float" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="warehouse" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            </xsd:complexType>
+
+            <xsd:complexType name="CustomerOrder">
+                <xsd:sequence>
+                    <xsd:element name="items" type="tns:CustomerOrderItem" minOccurs="1" maxOccurs="unbounded"/>
+                    <xsd:element name="customer" type="tns:Customer"/>
+                </xsd:sequence>
+                <xsd:attribute name="status">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:int">
+                            <xsd:enumeration value="0"/>
+                            <xsd:enumeration value="1"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:attribute>
+                <xsd:attribute name="sourceReference" type="xsd:string"/>
+                <xsd:attribute name="orderNumber" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="orderReference" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="customerNotificationEmail" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="placed" type="xsd:boolean"/>
+                <xsd:attribute name="placedOn" type="xsd:dateTime"/>
+                <xsd:attribute name="completed" type="xsd:boolean"/>
+                <xsd:attribute name="completedOn" type="xsd:dateTime"/>
+                <xsd:attribute name="clientid" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="shipvia" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="shipfrom" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="note" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="userfield1" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="userfield2" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="userfield3" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="mylist1" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="mylist2" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            </xsd:complexType>
+            <xsd:complexType name="CustomerOrderItem">
+                <xsd:sequence>
+                    <xsd:element name="item" type="tns:Item"/>
+                    <xsd:element name="picker" type="tns:User"/>
+                </xsd:sequence>
+                <xsd:attribute name="quantity" type="xsd:int"/>
+                <xsd:attribute name="completed" type="xsd:boolean"/>
+                <xsd:attribute name="pickedDate" type="xsd:dateTime"/>
+            </xsd:complexType>
+            <xsd:complexType name="Customer">
+                <xsd:attribute name="title" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="name" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="surname" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="addresscompany" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="addressname" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="address1" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="address2" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="address3" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="city" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="state" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="phone" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="countrycode" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="zip" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="billingaddresscompany" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="billingaddressname" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="billingaddress1" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="billingaddress2" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="billingaddress3" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="billingcity" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="billingstate" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="billingphone" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="billingcountrycode" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="billingzip" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="emailaddress" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="accountno" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="companyname" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:attribute name="clientid" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+            </xsd:complexType>
+
+            <xsd:element name="SavePurchaseOrderRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="tns:Request">
+                            <xsd:sequence>
+                                <xsd:element name="purchaseOrder" type="tns:PurchaseOrder"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="SavePurchaseOrderResponse">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="tns:Response">
+                            <!-- extension content goes here -->
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SaveCustomerOrderRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="tns:Request">
+                            <xsd:sequence>
+                                <xsd:element name="customerOrder" type="tns:CustomerOrder"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="SaveCustomerOrderResponse">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="tns:Response">
+                            <!-- extension content goes here -->
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="SavePurchaseOrderInput">
+        <wsdl:part element="tns:SavePurchaseOrderRequest" name="request"/>
+    </wsdl:message>
+    <wsdl:message name="SavePurchaseOrderOutput">
+        <wsdl:part element="tns:SavePurchaseOrderResponse" name="response"/>
+    </wsdl:message>
+
+    <wsdl:message name="SaveCustomerOrderInput">
+        <wsdl:part name="request" element="tns:SaveCustomerOrderRequest"/>
+    </wsdl:message>
+    <wsdl:message name="SaveCustomerOrderOutput">
+        <wsdl:part name="response" element="tns:SaveCustomerOrderResponse"/>
+    </wsdl:message>
+
+    <wsdl:portType name="ims">
+        <wsdl:operation name="SavePurchaseOrder">
+            <wsdl:input message="tns:SavePurchaseOrderInput"/>
+            <wsdl:output message="tns:SavePurchaseOrderOutput"/>
+        </wsdl:operation>
+        <wsdl:operation name="SaveCustomerOrder">
+            <wsdl:input message="tns:SaveCustomerOrderInput"/>
+            <wsdl:output message="tns:SaveCustomerOrderOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ims" type="tns:ims">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="SavePurchaseOrder">
+            <soap:operation soapAction="http://www.ubiquia.com/zenventory/services/SavePurchaseOrder"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SaveCustomerOrder">
+            <soap:operation soapAction="http://www.ubiquia.com/zenventory/services/SaveCustomerOrder"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ims_service">
+        <wsdl:port binding="tns:ims" name="imsSOAP">
+            <soap:address location="http://app.allocadence.com/services/ims.php"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
