@@ -93,7 +93,8 @@ $location = isset($_COOKIE['location']) ? $_COOKIE['location'] : '';
         sequi sint soluta tempora veritatis!
     </p>
     <p><a href="jcookie1.php?action=forget">Erase Cookie</a></p>
-<?php } else { ?>
+<?php }
+else { ?>
     <form action="jcookie1.php" method="post">
         <div style="width: 40em;">
             <label for="username">Username:</label><br>
@@ -113,6 +114,7 @@ $location = isset($_COOKIE['location']) ? $_COOKIE['location'] : '';
 <?php } ?>
 
 <br><br><br><br>
+
 <h4>PHP 7 Software Application</h4>
 
 </body>
