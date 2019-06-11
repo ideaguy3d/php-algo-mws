@@ -100,7 +100,7 @@ function displayCart() {
 
     <body>
     <div class="ja-shopping-cart-container">
-        <div style="width: 60%; text-align: left; margin: auto;">
+        <div style="width: 50%; margin: auto;">
             <h1>Your Shopping Cart</h1>
 
             <dl class="ja-session-shipping-car">
