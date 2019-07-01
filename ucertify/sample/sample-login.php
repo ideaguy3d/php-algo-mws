@@ -6,10 +6,10 @@ define("PASSWORD", "secret");
 if (isset($_POST["login"])) {
     login();
 }
-elseif (isset($_GET["action"]) and $_GET["action"] == "logout") {
+else if (isset($_GET["action"]) and $_GET["action"] == "logout") {
     logout();
 }
-elseif (isset($_SESSION["username"])) {
+else if (isset($_SESSION["username"])) {
     displayPage();
 }
 else {
@@ -24,9 +24,9 @@ function login() {
             header("Location: login.php");
         }
         else {
-            displayLoginForm("Sorry, that username/password could not be found.
-Please
-try again.");
+            displayLoginForm(
+                "Sorry, that username/password could not be found. Please try again."
+            );
         }
     }
 }
@@ -38,19 +38,26 @@ function logout() {
 }
 
 function displayPage() {
-    displayPageHeader();
-    ?>
-    <p>Welcome, <strong><?php echo $_SESSION["username"] ?></strong>! You are
-        currently logged in.</p>
-    <p><a href="login.php?action=logout">Logout</a></p>
+    displayPageHeader(); ?>
+
+    <p>
+        Welcome, <b><?= $_SESSION["username"] ?></b>!
+        You are currently logged in.
+    </p>
+
+    <p>
+        <a href="login.php?action=logout">Logout</a>
+    </p>
+
     </body>
     </html>
-    <?php
-}
+
+<?php }
 
 function displayLoginForm($message = "") {
-    displayPageHeader();
-    ?>
+    // Output HTML
+    displayPageHeader(); ?>
+
     <?php if ($message) echo '<p class="error">' . $message . '</p>' ?>
 
     <form action="login.php" method="post">
@@ -66,13 +73,12 @@ function displayLoginForm($message = "") {
     </form>
     </body>
     </html>
-    <?php
-}
 
-function displayPageHeader() {
-    ?>
-    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?php }
+
+function displayPageHeader() { ?>
+
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <title>A login/logout system</title>
@@ -85,9 +91,10 @@ function displayPageHeader() {
             }
         </style>
     </head>
-    <body>
-    <h1>A login/logout system</h1>
-    <?php
-}
 
-?>
+    <body>
+
+    <h1>A login/logout system</h1>
+
+<?php }
+
