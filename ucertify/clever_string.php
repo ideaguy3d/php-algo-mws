@@ -4,8 +4,10 @@
  * User: Julius Alvarado
  * Date: 6/2/2019
  * Time: 10:41 PM
+ *
+ * Practicing magic method __call()
+ *
  */
-
 
 class CleverString
 {
@@ -30,6 +32,12 @@ class CleverString
         }
     }
 }
+
+echo "\n-------------------\n";
+
+echo 14 | 3;
+
+echo "\n-------------------\n";
 
 $myString = new CleverString();
 $myString->setString('ello ^_^');
