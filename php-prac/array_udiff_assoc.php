@@ -15,7 +15,7 @@ class cr
     }
 
     public static function comp_func_cr($a, $b): int {
-        return $a <=> $b; 
+        return $a <=> $b;
     }
 
     public static function comp_func_cr2($a, $b): int {
