@@ -11,6 +11,10 @@
 //-- sample input 1:
 queensAttack(5, 3, 4, 3, [[5, 5], [4, 2], [2, 3]]);
 
+function queensAttack (int $n, int $k, $r_q, $c_q, array $obstacles): void {
+
+}
+
 /**
  * @param $n
  * @param $k
@@ -18,7 +22,7 @@ queensAttack(5, 3, 4, 3, [[5, 5], [4, 2], [2, 3]]);
  * @param $c_q
  * @param array $obstacles
  */
-function queensAttack(int $n, int $k, $r_q, $c_q, array $obstacles) {
+function queensAttackV1(int $n, int $k, $r_q, $c_q, array $obstacles): void {
     var_dump($obstacles);
     $board = [];
     // construct the board
