@@ -1,9 +1,5 @@
 
-This folder is to practice writing unit tests for a real
-tool I built for Richard.
 
-
-~ 2/28/2019 ~
 To invoke a test from the command line:
 
 $ .\vendor\bin\phpunit --bootstrap .\vendor\autoload.php --verbose .\tests\LoanOfficerDelegateTest.php --colors=always
@@ -11,6 +7,32 @@ $ .\vendor\bin\phpunit --bootstrap .\vendor\autoload.php --verbose .\tests\LoanO
 OR "w/ --testdox"
 
 $ .\vendor\bin\phpunit --bootstrap .\vendor\autoload.php --testdox tests
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

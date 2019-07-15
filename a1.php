@@ -9,7 +9,26 @@
 
 // ep = end point
 $ep = "http://192.168.7.17/ninja/app/commission/test/com-auto/start?precision=exact";
-$data = json_decode(file_get_contents($ep));
+// $data = json_decode(file_get_contents($ep));
+
+function testRegex1() {
+    $re = '/(10.*?#|#.*?10)+/m';
+    $str = 'some 10 # _ # white envelope
+another #10 envelope
+third # space 10 envelope
+simple 10# envelope
+
+';
+    
+    preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
+
+    // Print the entire match result
+    var_dump($matches);
+    
+    $break = 'point';
+}
+
+testRegex1();
 
 $myHost = gethostname();
 $break = 'point';
