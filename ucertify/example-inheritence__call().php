@@ -34,6 +34,8 @@ class Calculator1
 
 class CalcAdvanced extends Calculator1
 {
+    const BAR = 'ELLO THERE';
+
     // the int value is how many params the function needs
     private static $_allowedFunctions = array("pow" => 2, "sqrt" => 1, "exp" => 1);
 
@@ -59,6 +61,11 @@ class CalcAdvanced extends Calculator1
 
 $ca = new CalcAdvanced(3, 4);
 
+echo "\n\n";
+
+echo $ca::BAR;
+
+echo "\n\n\n\n";
 echo "<p>3 + 4 = " . $ca->add() . "</p>";
 echo "<p>3 - 4 = " . $ca->subtract() . "</p>";
 echo "<p>3 * 4 = " . $ca->multiply() . "</p>";
