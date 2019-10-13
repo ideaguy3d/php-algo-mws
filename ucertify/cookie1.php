@@ -30,8 +30,8 @@ function storeInfo() {
     };
 
     if ($username !== null) {
-        setcookie('username', $username, time() + $days(365),
-            '', '', false, true
+        setcookie(
+            'username', $username, time() + $days(365), '', '', false, true
         );
     }
     else {
@@ -39,8 +39,8 @@ function storeInfo() {
     }
 
     if ($location !== null) {
-        setcookie('location', $location, time() + $days(365),
-            '', '', false, true
+        setcookie(
+            'location', $location, time() + $days(365), '', '', false, true
         );
     }
     else {
@@ -61,12 +61,13 @@ function forgetInfo() {
 function displayPage() {
 
 $username = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
-$location = isset($_COOKIE['location']) ? $_COOKIE['location'] : '';
-
+$location = isset($_COOKIE['location']) ? $_COOKIE['location'] : ''; 
 
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
+
 <head xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <title>Preserving State With Cookies</title>
 </head>
@@ -93,8 +94,8 @@ $location = isset($_COOKIE['location']) ? $_COOKIE['location'] : '';
         sequi sint soluta tempora veritatis!
     </p>
     <p><a href="jcookie1.php?action=forget">Erase Cookie</a></p>
-<?php }
-else { ?>
+
+<?php } else { ?>
     <form action="jcookie1.php" method="post">
         <div style="width: 40em;">
             <label for="username">Username:</label><br>
@@ -111,11 +112,12 @@ else { ?>
     </form>
 <?php } ?>
 
-<?php } ?>
-
 <br><br><br><br>
 
 <h4>PHP 7 Software Application</h4>
 
 </body>
 </html>
+
+<?php } // END OF: displayPage()
+

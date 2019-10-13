@@ -13,18 +13,21 @@ $s = "some string";
 $early = function() use ($s) {
     echo $s;
 };
-$s = "\nearly binding\n";
+
+$s = "\n early binding \n";
+
 $early();
 
 // late binding
 $late = function() use (&$s) {
     echo $s;
 };
+
 $s = "\nlate binding\n";
+
 $late();
 
-
-
+$break = 'point';
 
 
 

@@ -25,6 +25,7 @@ function queensAttack (int $n, int $k, $r_q, $c_q, array $obstacles): void {
 function queensAttackV1(int $n, int $k, $r_q, $c_q, array $obstacles): void {
     var_dump($obstacles);
     $board = [];
+
     // construct the board
     for($i=0; $i<$n; $i++) {
         $board[$i] = [];
