@@ -23,6 +23,7 @@ $late = function() use (&$s) {
     echo $s;
 };
 
+
 $s = "\nlate binding\n";
 
 $late();
