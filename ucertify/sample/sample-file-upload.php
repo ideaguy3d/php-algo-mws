@@ -54,6 +54,7 @@ function processForm() {
 function displayForm() { ?>
     <h1>Uploading a Photo</h1>
     <p>Please enter your name and choose a photo to upload, then click Send Photo.</p>
+
     <form action="sample-file-upload.php" method="post" enctype="multipart/form-data">
         <div style="width: 30em;">
             <input type="hidden" name="MAX_FILE_SIZE" value="50000"/>

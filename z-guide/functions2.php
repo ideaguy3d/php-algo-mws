@@ -114,8 +114,6 @@ echo $closure() . $n; // alpha... _bound...
 $closure = $closure->bindTo(new omicronBind());
 echo $closure() . $n; // omicron... _bound...
 
-$break = 'point';
-
 
 
 // END OF FILE
