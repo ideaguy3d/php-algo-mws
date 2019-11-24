@@ -1,0 +1,16 @@
+
+
+// stop git from tracking a file or folder 
+$ git rm --cache <file>
+$ git rm -r --cache <folder>  
+
+
+
+
+
+
+
+
+
+
+//
